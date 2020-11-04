@@ -5,12 +5,11 @@ const Checkbox = (props) => {
   return (
     <>
       <CheckBox
-
         checked={props.isChecked}
         onPress={() =>
           props.handleCheckboxElement({
             checked: !props.isChecked,
-            value: props.value,
+            name: props.name,
           })
         }
       />

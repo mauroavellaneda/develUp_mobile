@@ -1,54 +1,70 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Checkbox from "./Checkbox";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text } from "react-native";
 import {
   Container,
   Button,
   Content,
   Form,
   Item,
-  ListItem,
   Input,
   Label,
   Textarea,
-  Body,
-  CheckBox,
 } from "native-base";
 
 const AssignmentForm = () => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [timeframe, setTimeframe] = useState("");
+  const [timeframe, setTimeframe] = useState(1);
   const [budget, setBudget] = useState("");
+
+  const [skillSelection, setSkillSelection] = useState([]);
+  const [pointsSum, setPointsSum] = useState(0);
+  const [assignmentPoints, setassignmentPoints] = useState(0);
+
+  useEffect(() => {
+    const calculatePoints = () => {
+      let algorithmResult = pointsSum * timeframe;
+      setassignmentPoints(algorithmResult);
+    };
+    calculatePoints();
+  }, [pointsSum, timeframe]);
 
   const [skills, setSkills] = useState([
     {
-      value: "Ruby",
-      isChecked: true,
+      name: "Fullstack",
+      isChecked: false,
+      points: 10,
     },
     {
-      value: "HTML-CSS",
+      name: "Ruby",
       isChecked: false,
+      points: 5,
     },
     {
-      value: "Node JS",
+      name: "HTML-CSS",
       isChecked: false,
+      points: 1,
     },
     {
-      value: "React",
+      name: "Node JS",
       isChecked: false,
+      points: 5,
     },
     {
-      value: "Angular",
+      name: "React",
       isChecked: false,
+      points: 5,
     },
     {
-      value: "React Native",
+      name: "Angular",
       isChecked: false,
+      points: 5,
     },
     {
-      value: "Fullstack",
+      name: "React Native",
       isChecked: false,
+      points: 7,
     },
   ]);
 
@@ -56,23 +72,30 @@ const AssignmentForm = () => {
     const selectedSkills = [];
     skills.forEach((skill) => {
       if (skill.isChecked) {
-        selectedSkills.push(skill.value);
+        selectedSkills.push(skill.name);
       }
     });
+    setSkillSelection(selectedSkills);
   };
 
   const handleCheckboxElement = (event) => {
     let pickedSkills = skills;
-    pickedSkills.forEach(skill => {
-      if (skill.value === event.value) 
+    pickedSkills.forEach((skill) => {
+      if (skill.name === event.name) {
         skill.isChecked = event.checked;
-      
+        if (event.checked) {
+          setPointsSum(pointsSum + skill.points);
+        } else {
+          setPointsSum(pointsSum - skill.points);
+        }
+      }
     });
     setSkills(pickedSkills);
   };
 
   return (
     <Container>
+      <Text>{skillSelection.toString()}</Text>
       <Content>
         <Form>
           <Item fixedLabel>
@@ -103,11 +126,11 @@ const AssignmentForm = () => {
             />
           </Item>
 
-          {skills.map(skill => {
+          {skills.map((skill) => {
             return (
               <Item style={styles.checkbox}>
-                <Label style={styles.label}>{skill.value}</Label>
-                <CheckBox
+                <Label style={styles.label}>{skill.name}</Label>
+                <Checkbox
                   handleCheckboxElement={handleCheckboxElement}
                   {...skill}
                 />
@@ -116,6 +139,8 @@ const AssignmentForm = () => {
           })}
         </Form>
       </Content>
+      <Text>Assignment points: {assignmentPoints}</Text>
+
       <Button block onPress={() => publishAssignment()}>
         <Text>Publish</Text>
       </Button>
