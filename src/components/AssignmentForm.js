@@ -10,6 +10,7 @@ import {
   Input,
   Label,
   Textarea,
+  ListItem,
 } from "native-base";
 
 const AssignmentForm = () => {
@@ -98,15 +99,14 @@ const AssignmentForm = () => {
       <Text>{skillSelection.toString()}</Text>
       <Content>
         <Form>
+          <Label style={styles.title}>Assignment</Label>
           <Item fixedLabel>
-            <Label style={styles.label}>Assignment</Label>
             <Input
               onChangeText={(text) => setTitle(text)}
-              placeholder="Titel"
+              placeholder="Title"
               style={styles.input}
             />
           </Item>
-
           <Item fixedLabel>
             <Textarea
               rowSpan={5}
@@ -114,33 +114,43 @@ const AssignmentForm = () => {
               placeholder="Short description of your assignment"
               onChangeText={(text) => setDescription(text)}
             />
-
-            <Input placeholder="" />
           </Item>
 
           <Item fixedLabel>
             <Label style={styles.label}>Timeframe</Label>
             <Input
               onChangeText={(text) => setTimeframe(text)}
-              placeholder="days"
+              placeholder="Number of days"
             />
           </Item>
 
+          <ListItem>
+            <Label style={styles.label}>Required skillset:</Label>
+            <Text style={styles.placeholder}>Select all skills required </Text>
+          </ListItem>
           {skills.map((skill) => {
             return (
-              <Item style={styles.checkbox}>
-                <Label style={styles.label}>{skill.name}</Label>
-                <Checkbox
-                  handleCheckboxElement={handleCheckboxElement}
-                  {...skill}
-                />
-              </Item>
+              <>
+                <Item>
+                  <Checkbox
+                    keyExtractor={skill.name}
+                    handleCheckboxElement={handleCheckboxElement}
+                    {...skill}
+                    style={styles.checkbox}
+                  />
+                  <Label style={styles.skills}>{skill.name}</Label>
+                </Item>
+              </>
             );
           })}
         </Form>
       </Content>
-      <Text>Assignment points: {assignmentPoints}</Text>
-
+      <Item>
+        <Text style={styles.points}>
+          {" "}
+          Assignment points: {assignmentPoints}
+        </Text>
+      </Item>
       <Button block onPress={() => publishAssignment()}>
         <Text>Publish</Text>
       </Button>
@@ -151,13 +161,26 @@ const AssignmentForm = () => {
 export default AssignmentForm;
 
 const styles = StyleSheet.create({
+  title: {
+    color: "blue",
+    textAlign: "center",
+    fontSize: 30,
+  },
+  points: {
+    color: "blue",
+    fontSize: 20,
+  },
   label: {
     color: "blue",
   },
-  checkbox: {
-    height: 60,
+  skills: {
+    color: "#002266",
+    marginLeft: 20,
   },
-  angularCheckbox: {
-    marginLeft: 145,
+
+  placeholder: {
+    marginLeft: 20,
+    color: "grey",
+    fontSize: 18,
   },
 });

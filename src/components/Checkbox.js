@@ -1,10 +1,11 @@
 import React from "react";
-import { CheckBox, Body, Text } from "native-base";
-
+import { CheckBox, } from "native-base";
+import { StyleSheet  } from "react-native";
 const Checkbox = (props) => {
   return (
     <>
       <CheckBox
+      style={styles.checkbox}
         checked={props.isChecked}
         onPress={() =>
           props.handleCheckboxElement({
@@ -17,3 +18,11 @@ const Checkbox = (props) => {
   );
 };
 export default Checkbox;
+
+const styles = StyleSheet.create({
+  checkbox: {
+    margin: 20,
+   
+ 
+  }
+})
