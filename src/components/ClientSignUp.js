@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import Auth from "../modules/authentication";
 import { StyleSheet } from "react-native";
 import { useDispatch } from "react-redux";
-import { useSelector } from "react-redux";
 import {
   Container,
   Button,
@@ -15,7 +14,6 @@ import {
 } from "native-base";
 
 const ClientSignUp = (props) => {
-  const authenticated = useSelector((state) => state.authenticated);
   const dispatch = useDispatch();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -24,7 +22,7 @@ const ClientSignUp = (props) => {
   const [companyUrl, setCompanyUrl] = useState("");
   const [message, setMessage] = useState();
 
-  const auth = new Auth({ host: "http://localhost:3000/api" });
+  const auth = new Auth({ host: "http://f326df54b4d7.ngrok.io/api" });
 
   const signUpHandler = async () => {
     let response;
@@ -57,8 +55,6 @@ const ClientSignUp = (props) => {
   return (
     <Container>
       <Content>
-        <Text>{authenticated.toString()}</Text>
-
         <Form>
           <Item floatingLabel>
             <Label>Email</Label>
