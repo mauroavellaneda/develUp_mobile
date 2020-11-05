@@ -70,28 +70,41 @@ const AssignmentForm = () => {
     },
   ]);
 
-  const publishAssignment = async (e) => {
-    const selectedSkills = [];
-    skills.forEach((skill) => {
-      if (skill.isChecked) {
-        selectedSkills.push(skill.name);
-      }
-    });
-    setSkillSelection(selectedSkills);
+  const publishAssignment = async () => {
+    let skillsSetter
+    await skillsSetter = (
+      const selectedSkills = [];
+      skills.forEach((skill) => {
+        if (skill.isChecked) {
+          selectedSkills.push(skill.name);
+        }
+      });
+      return selectedSkills
+    );
+    setSkillSelection(skillsSetter);
+    // await skillsSetter();
     let response;
 
     try {
-      response = await Assignments.create({
-        title: title,
-        description: description,
-        timeframe: timeframe,
-        budget: budget,
-        skills: skillSelection,
-        points: assignmentPoints,
-      });
-     /*  props.navigation.navigate("clientPage", {
+      response = await Assignments.create(
+        title,
+        description,
+        timeframe,
+        budget,
+        skillSelection,
+        assignmentPoints
+      );
+      //   title: title,
+      //   description: description,
+      //   timeframe: timeframe,
+      //   budget: budget,
+      //   skills: skillSelection,
+      //   points: assignmentPoints,
+      // });
+
+      props.navigation.navigate("clientPage", {
         assignmentCreateMessage: `Assignment successfully created! What happens now? Applicants will be listed below. Once you have decided on best candidate, you find the assign button on the applicants profile page`,
-      }); */
+      });
     } catch (error) {
       console.log(error);
       /*       setMessage(response.toString()); */
@@ -117,6 +130,7 @@ const AssignmentForm = () => {
     <Container>
       <Content>
         <Form id="create-assignment">
+          <Text>{}</Text>
           <Label style={styles.title}>Assignment</Label>
           {/*      <Text style={styles.errorMessage}>{message}</Text> */}
           <Item fixedLabel>
@@ -150,6 +164,7 @@ const AssignmentForm = () => {
             <Label style={styles.label}>Required skillset:</Label>
             <Text style={styles.placeholder}>Select all skills required </Text>
           </ListItem>
+          <Text>{skillSelection.toString()}</Text>
           {skills.map((skill) => {
             return (
               <>

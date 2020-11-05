@@ -13,7 +13,7 @@ const AssignmentsIndex = ({ navigation }) => {
       setAssignments(response);
     };
     getAssignmentsIndex();
-  }, []);
+  }, []); 
 
   return (
     <Container style={styles.container}>

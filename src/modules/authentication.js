@@ -11,7 +11,7 @@ const defaultOptions = {
 };
 
 const storage = AsyncStorage;
-const storageKey = "auth";
+const storageKey = "auth-storage";
 const storageRoleKey = "auth-roles";
 class Auth {
   constructor(options) {
