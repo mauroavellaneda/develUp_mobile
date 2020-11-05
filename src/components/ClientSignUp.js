@@ -34,7 +34,7 @@ const ClientSignUp = (props) => {
         role: "client",
       });
       props.navigation.navigate("clientPage", {
-        customParameter: `Thanks for joining develUp ${response.data.data.uid}!`,
+        clientSignUpMessage: `Thanks for joining develUp ${response.data.data.uid}!`,
       });
     } catch (error) {
       setMessage(response.toString());

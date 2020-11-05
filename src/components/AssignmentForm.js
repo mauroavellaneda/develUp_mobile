@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Checkbox from "./Checkbox";
+import Assignments from "../modules/assignments";
 import { StyleSheet, Text } from "react-native";
 import {
   Container,
@@ -18,10 +19,10 @@ const AssignmentForm = () => {
   const [description, setDescription] = useState("");
   const [timeframe, setTimeframe] = useState(1);
   const [budget, setBudget] = useState("");
-
   const [skillSelection, setSkillSelection] = useState([]);
   const [pointsSum, setPointsSum] = useState(0);
   const [assignmentPoints, setassignmentPoints] = useState(0);
+  const [message, setMessage] = useState("");
 
   useEffect(() => {
     const calculatePoints = () => {
@@ -69,7 +70,7 @@ const AssignmentForm = () => {
     },
   ]);
 
-  const publishAssignment = () => {
+  const publishAssignment = async (e) => {
     const selectedSkills = [];
     skills.forEach((skill) => {
       if (skill.isChecked) {
@@ -77,6 +78,23 @@ const AssignmentForm = () => {
       }
     });
     setSkillSelection(selectedSkills);
+    let response
+    let {title, description, timeframe, budget, skills, points} = e.target
+    try {
+        response = await Assignments.create({
+        title: title,
+        description: description,
+        timeframe: timeframe,
+        budget: budget,
+        skills: skillSelection,
+        points: assignmentPoints,
+      });
+      props.navigation.navigate("clientPage", {
+        assignmentCreateMessage: `Assignment successfully created! What happens now? Applicants will be listed below. Once you have decided on best candidate, you find the assign button on the applicants profile page`,
+      });
+    } catch (error) {
+      setMessage(response.toString());
+    }
   };
 
   const handleCheckboxElement = (event) => {
@@ -96,10 +114,10 @@ const AssignmentForm = () => {
 
   return (
     <Container>
-      <Text>{skillSelection.toString()}</Text>
       <Content>
-        <Form>
+        <Form id="create-assignment">
           <Label style={styles.title}>Assignment</Label>
+          <Text style={styles.errorMessage}>{message}</Text>
           <Item fixedLabel>
             <Input
               onChangeText={(text) => setTitle(text)}
@@ -115,13 +133,16 @@ const AssignmentForm = () => {
               onChangeText={(text) => setDescription(text)}
             />
           </Item>
-
           <Item fixedLabel>
             <Label style={styles.label}>Timeframe</Label>
             <Input
               onChangeText={(text) => setTimeframe(text)}
               placeholder="Number of days"
             />
+          </Item>
+          <Item fixedLabel>
+            <Label style={styles.label}>Budget</Label>
+            <Input onChangeText={(text) => setBudget(text)} placeholder="$" />
           </Item>
 
           <ListItem>
@@ -146,10 +167,7 @@ const AssignmentForm = () => {
         </Form>
       </Content>
       <Item>
-        <Text style={styles.points}>
-          {" "}
-          Assignment points: {assignmentPoints}
-        </Text>
+        <Text style={styles.points}>Assignment points: {assignmentPoints}</Text>
       </Item>
       <Button block onPress={() => publishAssignment()}>
         <Text>Publish</Text>
@@ -165,6 +183,7 @@ const styles = StyleSheet.create({
     color: "blue",
     textAlign: "center",
     fontSize: 30,
+    marginTop: 3
   },
   points: {
     color: "blue",
