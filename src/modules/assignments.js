@@ -16,8 +16,7 @@ const Assignments = {
   async create(title, description, timeframe, budget, skills, points) {
     
     let headers = JSON.parse(await storage.getItem("auth-storage"));
-    try {
-      debugger
+    try { 
       const response = await axios.post(
         "/assignments",
         {
@@ -34,7 +33,7 @@ const Assignments = {
           headers: headers,
 
         }
-      );
+      );debugger
       return response.data.message;
     } catch (error) {}
   },

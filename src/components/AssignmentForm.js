@@ -14,7 +14,7 @@ import {
   ListItem,
 } from "native-base";
 
-const AssignmentForm = () => {
+const AssignmentForm = (props) => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [timeframe, setTimeframe] = useState(1);
@@ -22,15 +22,39 @@ const AssignmentForm = () => {
   const [skillSelection, setSkillSelection] = useState([]);
   const [pointsSum, setPointsSum] = useState(0);
   const [assignmentPoints, setassignmentPoints] = useState(0);
-  const [message, setMessage] = useState("");
 
   useEffect(() => {
     const calculatePoints = () => {
       let algorithmResult = pointsSum * timeframe;
       setassignmentPoints(algorithmResult);
     };
+    const selectedSkills = [];
+    const arraySetter = () => {
+
+      skills.forEach((skill) => {
+        if (skill.isChecked) {
+          selectedSkills.push(skill.name);
+        }
+      });
+      setSkillSelection(selectedSkills);
+    }
+    arraySetter()
     calculatePoints();
   }, [pointsSum, timeframe]);
+
+  // useEffect(() => {
+  //   const selectedSkills = [];
+  //   const arraySetter = () => {
+
+  //     skills.forEach((skill) => {
+  //       if (skill.isChecked) {
+  //         selectedSkills.push(skill.name);
+  //       }
+  //     });
+  //     setSkillSelection(selectedSkills);
+  //   }
+  //   arraySetter()
+  // }, [pointsSum]);
 
   const [skills, setSkills] = useState([
     {
@@ -71,18 +95,14 @@ const AssignmentForm = () => {
   ]);
 
   const publishAssignment = async () => {
-    let skillsSetter
-    await skillsSetter = (
-      const selectedSkills = [];
-      skills.forEach((skill) => {
-        if (skill.isChecked) {
-          selectedSkills.push(skill.name);
-        }
-      });
-      return selectedSkills
-    );
-    setSkillSelection(skillsSetter);
-    // await skillsSetter();
+    // const selectedSkills = [];
+    // skills.forEach((skill) => {
+    //   if (skill.isChecked) {
+    //     selectedSkills.push(skill.name);
+    //   }
+    // });
+    // setSkillSelection(selectedSkills);
+
     let response;
 
     try {
