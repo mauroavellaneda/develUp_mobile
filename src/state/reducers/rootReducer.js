@@ -8,6 +8,8 @@ const rootReducer = (state = initialState, action) => {
         authenticated: action.payload.authenticated,
         currentUser: action.payload.currentUser,
       };
+    default:
+      return state;
   }
 };
 
