@@ -4,21 +4,31 @@ import AssignmentCard from "./AssignmentCard";
 import Assignments from "../modules/assignments";
 import { Button, Container, Text } from "native-base";
 
+import { useSelector } from "react-redux";
+
 const AssignmentsIndex = ({ navigation }) => {
+  const authenticated = useSelector((state) => state.authenticated);
   const [assignments, setAssignments] = useState([]);
 
-  useEffect(() => { 
+  useEffect(() => {
     const getAssignmentsIndex = async () => {
       const response = await Assignments.index();
       setAssignments(response);
     };
     getAssignmentsIndex();
-  }, []); 
+  }, []);
+
+  let redirect;
+  if (authenticated) {
+    redirect = "assignmentForm";
+  } else {
+    redirect = "clientSignUp";
+  }
 
   return (
     <Container style={styles.container}>
-      <Button onPress={() => navigation.navigate("clientSignUp")}>
-        <Text>I want to publish Assignments for free!</Text>
+      <Button onPress={() => navigation.navigate(redirect)}>
+        <Text>{authenticated ?  "Publish Assignments" : "Publish Assignments for free!"}</Text>
       </Button>
       <FlatList
         data={assignments}

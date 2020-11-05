@@ -34,7 +34,9 @@ const Assignments = {
         }
       );
       return response.data.message;
-    } catch (error) {}
+    } catch (error) {
+      console.log(error)
+    }
   },
 };
 export default Assignments;

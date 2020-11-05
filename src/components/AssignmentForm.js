@@ -146,13 +146,18 @@ const AssignmentForm = (props) => {
           <Item fixedLabel>
             <Label style={styles.label}>Timeframe</Label>
             <Input
-              onChangeText={(text) => setTimeframe(text)}
+              keyboardType="numeric"
+              onChangeText={(text) => setTimeframe(text.replace(/[^0-9]/g, ""))}
               placeholder="Number of days"
             />
           </Item>
           <Item fixedLabel>
             <Label style={styles.label}>Budget</Label>
-            <Input onChangeText={(text) => setBudget(text)} placeholder="$" />
+            <Input
+              keyboardType="numeric"
+              onChangeText={(text) => setBudget(text.replace(/[^0-9]/g, ""))}
+              placeholder="$"
+            />
           </Item>
           <ListItem>
             <Label style={styles.label}>Required skillset:</Label>
