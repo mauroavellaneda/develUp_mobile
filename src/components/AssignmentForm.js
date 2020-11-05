@@ -30,6 +30,7 @@ const AssignmentForm = () => {
       setassignmentPoints(algorithmResult);
     };
     calculatePoints();
+    debugger
   }, [pointsSum, timeframe]);
 
   const [skills, setSkills] = useState([

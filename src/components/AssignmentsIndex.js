@@ -7,12 +7,13 @@ import { Button, Container, Text } from "native-base";
 const AssignmentsIndex = ({ navigation }) => {
   const [assignments, setAssignments] = useState([]);
 
-  useEffect(() => {
+  useEffect(() => { debugger
     const getAssignmentsIndex = async () => {
       const response = await Assignments.index();
       setAssignments(response);
     };
     getAssignmentsIndex();
+    debugger
   }, []);
 
   return (

@@ -5,19 +5,25 @@ import AssignmentsIndex from "./src/components/AssignmentsIndex";
 import ClientSignUp from "./src/components/ClientSignUp";
 import ClientPage from "./src/components/ClientPage";
 import AssignmentForm from "./src/components/AssignmentForm";
+import { Provider } from "react-redux";
+import configureStore from "./src/state/store/configureStore";
+
+const store = configureStore();
 
 const Stack = createStackNavigator();
 
 const App = () => {
   return (
-    <NavigationContainer>
-      <Stack.Navigator screenOptions={myOptions}>
-        <Stack.Screen name="clientPage" component={ClientPage} />
-        <Stack.Screen name="develUp" component={AssignmentsIndex} />
-        <Stack.Screen name="clientSignUp" component={ClientSignUp} />
-        <Stack.Screen name="assignmentForm" component={AssignmentForm} />
-      </Stack.Navigator>
-    </NavigationContainer>
+      <NavigationContainer>
+        <Provider store={store}>
+          <Stack.Navigator screenOptions={myOptions}>
+            <Stack.Screen name="clientPage" component={ClientPage} />
+            <Stack.Screen name="develUp" component={AssignmentsIndex} />
+            <Stack.Screen name="assignmentForm" component={AssignmentForm} />
+            <Stack.Screen name="clientSignUp" component={ClientSignUp} />
+          </Stack.Navigator>
+        </Provider>
+      </NavigationContainer>
   );
 };
 
