@@ -23,8 +23,8 @@ const ClientSignUp = (props) => {
   const [companyUrl, setCompanyUrl] = useState("");
   const [message, setMessage] = useState();
 
-  // const auth = new Auth({ host: "http://f326df54b4d7.ngrok.io/api" });
-  const auth = new Auth({ host: "http://localhost:3000/api" });
+  const auth = new Auth({ host: "http://b4ab6d6c8f4b.ngrok.io/api" });
+/*   const auth = new Auth({ host: "http://localhost:3000/api" }); */
 
   const storage = AsyncStorage;
 

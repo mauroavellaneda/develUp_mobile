@@ -6,10 +6,10 @@ import { Provider } from "react-redux";
 import configureStore from "./src/state/store/configureStore";
 
 // axios.defaults.baseURL = "https://develup-2020.herokuapp.com/api"; 
-axios.defaults.baseURL = "http://localhost:3000/api"; 
+/* axios.defaults.baseURL = "http://localhost:3000/api";  */
 
 
-// axios.defaults.baseURL = "http://f326df54b4d7.ngrok.io/api";
+ axios.defaults.baseURL = "http://b4ab6d6c8f4b.ngrok.io/api";
 
 const store = configureStore();
 

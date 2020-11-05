@@ -9,9 +9,9 @@ const ClientPage = (props) => {
         {props.route.params.clientSignUpMessage}
       </Text>
 
-      {/* <Text style={styles.welcomeText}>
+       <Text style={styles.welcomeText}>
         {props.route.params.assignmentCreateMessage}
-      </Text> */}
+      </Text> 
       <Button onPress={() => props.navigation.navigate("assignmentForm")}>
         <Text>Create Assignment</Text>
       </Button>

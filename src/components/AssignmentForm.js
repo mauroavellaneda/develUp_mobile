@@ -30,7 +30,6 @@ const AssignmentForm = (props) => {
     };
     const selectedSkills = [];
     const arraySetter = () => {
-
       skills.forEach((skill) => {
         if (skill.isChecked) {
           selectedSkills.push(skill.name);
@@ -41,20 +40,6 @@ const AssignmentForm = (props) => {
     arraySetter()
     calculatePoints();
   }, [pointsSum, timeframe]);
-
-  // useEffect(() => {
-  //   const selectedSkills = [];
-  //   const arraySetter = () => {
-
-  //     skills.forEach((skill) => {
-  //       if (skill.isChecked) {
-  //         selectedSkills.push(skill.name);
-  //       }
-  //     });
-  //     setSkillSelection(selectedSkills);
-  //   }
-  //   arraySetter()
-  // }, [pointsSum]);
 
   const [skills, setSkills] = useState([
     {
@@ -95,16 +80,7 @@ const AssignmentForm = (props) => {
   ]);
 
   const publishAssignment = async () => {
-    // const selectedSkills = [];
-    // skills.forEach((skill) => {
-    //   if (skill.isChecked) {
-    //     selectedSkills.push(skill.name);
-    //   }
-    // });
-    // setSkillSelection(selectedSkills);
-
     let response;
-
     try {
       response = await Assignments.create(
         title,
@@ -114,14 +90,6 @@ const AssignmentForm = (props) => {
         skillSelection,
         assignmentPoints
       );
-      //   title: title,
-      //   description: description,
-      //   timeframe: timeframe,
-      //   budget: budget,
-      //   skills: skillSelection,
-      //   points: assignmentPoints,
-      // });
-
       props.navigation.navigate("clientPage", {
         assignmentCreateMessage: `Assignment successfully created! What happens now? Applicants will be listed below. Once you have decided on best candidate, you find the assign button on the applicants profile page`,
       });
