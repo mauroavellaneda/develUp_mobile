@@ -30,10 +30,9 @@ const Assignments = {
           },
         },
         {
-          headers: headers,
-
+          headers: headers
         }
-      );debugger
+      );
       return response.data.message;
     } catch (error) {}
   },

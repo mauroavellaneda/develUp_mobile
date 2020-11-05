@@ -12,6 +12,8 @@ import {
   Label,
   Textarea,
   ListItem,
+  Icon,
+  Badge,
 } from "native-base";
 
 const AssignmentForm = (props) => {
@@ -21,23 +23,24 @@ const AssignmentForm = (props) => {
   const [budget, setBudget] = useState("");
   const [skillSelection, setSkillSelection] = useState([]);
   const [pointsSum, setPointsSum] = useState(0);
-  const [assignmentPoints, setassignmentPoints] = useState(0);
+  const [assignmentPoints, setAssignmentPoints] = useState(0);
+  const [errorMessage, setErrorMessage] = useState("");
 
   useEffect(() => {
     const calculatePoints = () => {
       let algorithmResult = pointsSum * timeframe;
-      setassignmentPoints(algorithmResult);
+      setAssignmentPoints(algorithmResult);
     };
     const selectedSkills = [];
-    const arraySetter = () => {
+    const skillsUpdater = () => {
       skills.forEach((skill) => {
         if (skill.isChecked) {
           selectedSkills.push(skill.name);
         }
       });
       setSkillSelection(selectedSkills);
-    }
-    arraySetter()
+    };
+    skillsUpdater();
     calculatePoints();
   }, [pointsSum, timeframe]);
 
@@ -80,22 +83,20 @@ const AssignmentForm = (props) => {
   ]);
 
   const publishAssignment = async () => {
-    let response;
-    try {
-      response = await Assignments.create(
-        title,
-        description,
-        timeframe,
-        budget,
-        skillSelection,
-        assignmentPoints
-      );
+    let response = await Assignments.create(
+      title,
+      description,
+      timeframe,
+      budget,
+      skillSelection,
+      assignmentPoints
+    );
+    if (response === "successfully saved") {
       props.navigation.navigate("clientPage", {
-        assignmentCreateMessage: `Assignment successfully created! What happens now? Applicants will be listed below. Once you have decided on best candidate, you find the assign button on the applicants profile page`,
+        assignmentCreateMessage: `Assignment successfully created! Applicants will be listed below. Once you have decided on best candidate, you find the assign button on the applicants profile page`,
       });
-    } catch (error) {
-      console.log(error);
-      /*       setMessage(response.toString()); */
+    } else {
+      setErrorMessage("All fields are required");
     }
   };
 
@@ -117,10 +118,16 @@ const AssignmentForm = (props) => {
   return (
     <Container>
       <Content>
+        <Text>
+          {errorMessage && (
+            <Item style={styles.errorItem}>
+              <Icon name="warning" style={styles.errorIcon} />
+              <Text style={styles.errorMessage}>{errorMessage}</Text>
+            </Item>
+          )}
+        </Text>
         <Form id="create-assignment">
-          <Text>{}</Text>
           <Label style={styles.title}>Assignment</Label>
-          {/*      <Text style={styles.errorMessage}>{message}</Text> */}
           <Item fixedLabel>
             <Input
               onChangeText={(text) => setTitle(text)}
@@ -147,12 +154,10 @@ const AssignmentForm = (props) => {
             <Label style={styles.label}>Budget</Label>
             <Input onChangeText={(text) => setBudget(text)} placeholder="$" />
           </Item>
-
           <ListItem>
             <Label style={styles.label}>Required skillset:</Label>
             <Text style={styles.placeholder}>Select all skills required </Text>
           </ListItem>
-          <Text>{skillSelection.toString()}</Text>
           {skills.map((skill) => {
             return (
               <>
@@ -170,8 +175,11 @@ const AssignmentForm = (props) => {
           })}
         </Form>
       </Content>
-      <Item>
-        <Text style={styles.points}>Assignment points: {assignmentPoints}</Text>
+      <Item style={styles.pointsContainer}>
+        <Text style={styles.points}>Assignment points:</Text>
+        <Badge style={styles.badge} primary>
+          <Text>{assignmentPoints}</Text>
+        </Badge>
       </Item>
       <Button block onPress={() => publishAssignment()}>
         <Text>Publish</Text>
@@ -189,9 +197,17 @@ const styles = StyleSheet.create({
     fontSize: 30,
     marginTop: 3,
   },
+  badge: {
+    marginTop: 4,
+  },
+  pointsContainer: {
+    backgroundColor: "#4A6572",
+    height: 40,
+  },
   points: {
-    color: "blue",
+    color: "black",
     fontSize: 20,
+    marginRight: 10,
   },
   label: {
     color: "blue",
@@ -200,10 +216,24 @@ const styles = StyleSheet.create({
     color: "#002266",
     marginLeft: 20,
   },
-
   placeholder: {
     marginLeft: 20,
     color: "grey",
     fontSize: 18,
+  },
+  errorItem: {
+    height: 40,
+    backgroundColor: "red",
+    marginLeft: 30,
+  },
+  errorMessage: {
+    marginLeft: 25,
+    fontSize: 25,
+    marginRight: 10,
+  },
+  errorIcon: {
+    fontSize: 30,
+    marginLeft: 10,
+    paddingLeft: 10,
   },
 });

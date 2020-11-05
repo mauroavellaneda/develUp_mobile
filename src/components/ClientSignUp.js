@@ -23,11 +23,10 @@ const ClientSignUp = (props) => {
   const [companyUrl, setCompanyUrl] = useState("");
   const [message, setMessage] = useState();
 
-  const auth = new Auth({ host: "http://b4ab6d6c8f4b.ngrok.io/api" });
-/*   const auth = new Auth({ host: "http://localhost:3000/api" }); */
+  const auth = new Auth({ host: "http://cbf80599e6ab.ngrok.io/api" });
+  /*   const auth = new Auth({ host: "http://localhost:3000/api" }); */
 
   const storage = AsyncStorage;
-
 
   const signUpHandler = async () => {
     let response;
@@ -50,7 +49,7 @@ const ClientSignUp = (props) => {
           },
         });
         props.navigation.navigate("clientPage", {
-          clientSignUpMessage: `Thanks for joining develUp ${response.data.data.uid}!`,
+          clientSignUpMessage: `You are logged in with: ${response.data.data.company_name}!`,
         });
       }
     } catch (error) {
@@ -66,12 +65,10 @@ const ClientSignUp = (props) => {
             <Label>Email</Label>
             <Input onChangeText={(text) => setEmail(text)} />
           </Item>
-
           <Item floatingLabel last>
             <Label>Password</Label>
             <Input onChangeText={(text) => setPassword(text)} secureTextEntry />
           </Item>
-
           <Item floatingLabel last>
             <Label>Password Confirmation</Label>
             <Input
@@ -79,18 +76,15 @@ const ClientSignUp = (props) => {
               secureTextEntry
             />
           </Item>
-
           <Item floatingLabel last>
             <Label>Company Name</Label>
             <Input onChangeText={(text) => setCompany(text)} />
           </Item>
-
           <Item floatingLabel last>
             <Label>Company URL</Label>
             <Input onChangeText={(text) => setCompanyUrl(text)} />
           </Item>
         </Form>
-
         <Text style={styles.errorMessage}>{message}</Text>
       </Content>
       <Button block onPress={() => signUpHandler()}>
