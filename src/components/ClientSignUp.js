@@ -12,7 +12,10 @@ import {
   Text,
 } from "native-base";
 
+import { useDispatch } from "react-redux";
+
 const ClientSignUp = (props) => {
+  const dispatch = useDispatch();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [passwordConfirmation, setPasswordConfirmation] = useState("");
@@ -24,7 +27,7 @@ const ClientSignUp = (props) => {
 
   const signUpHandler = async () => {
     let response;
-    try {
+    try {debugger
       response = await auth.signUp({
         email: email,
         password: password,
@@ -32,7 +35,19 @@ const ClientSignUp = (props) => {
         company_name: company,
         company_url: companyUrl,
         role: "client",
-      });
+      });debugger
+
+      if (response.status == 200) {
+        debugger;
+        dispatch({
+          type: "SIGNUP",
+          payload: {
+            authenticated: true,
+            currentUser: response.data.data,
+          },
+        });
+      }
+      debugger
       props.navigation.navigate("clientPage", {
         customParameter: `Thanks for joining develUp ${response.data.data.uid}!`,
       });
