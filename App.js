@@ -16,9 +16,10 @@ const App = () => {
   return (
       <NavigationContainer>
         <Provider store={store}>
-          <Stack.Navigator screenOptions={myOptions}>
+          <Stack.Navigator screenOptions={myOptions}>  
+          <Stack.Screen name="develUp" component={AssignmentsIndex} />
             <Stack.Screen name="clientPage" component={ClientPage} />
-            <Stack.Screen name="develUp" component={AssignmentsIndex} />
+          
             <Stack.Screen name="assignmentForm" component={AssignmentForm} />
             <Stack.Screen name="clientSignUp" component={ClientSignUp} />
           </Stack.Navigator>

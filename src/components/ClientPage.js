@@ -1,10 +1,14 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { Button } from "native-base";
+import { useSelector } from "react-redux";
 
 
 const ClientPage = (props) => {
+  const authenticated = useSelector((state) => state.authenticated);
   return (
+    <>
+    <Text>{authenticated.toString()}</Text>
     <View>
      {/*  <Text style={styles.welcomeText}>
         {props.route.params.clientSignUpMessage}
@@ -17,6 +21,7 @@ const ClientPage = (props) => {
         <Text>Create Assignment</Text>
       </Button>
     </View>
+    </>
   );
 };
 

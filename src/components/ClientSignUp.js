@@ -23,11 +23,11 @@ const ClientSignUp = (props) => {
   const [companyUrl, setCompanyUrl] = useState("");
   const [message, setMessage] = useState();
 
-  const auth = new Auth({ host: "http://localhost:3000/api" });
+  const auth = new Auth({ host: "http://d4fe9f6e9ea8.ngrok.io/api" });
 
   const signUpHandler = async () => {
     let response;
-    try {debugger
+    try {
       response = await auth.signUp({
         email: email,
         password: password,
@@ -35,19 +35,15 @@ const ClientSignUp = (props) => {
         company_name: company,
         company_url: companyUrl,
         role: "client",
-      });debugger
+      });
 
-      if (response.status == 200) {
-        debugger;
-        dispatch({
-          type: "SIGNUP",
-          payload: {
-            authenticated: true,
-            currentUser: response.data.data,
-          },
-        });
-      }
-      debugger
+      dispatch({
+        type: "SIGNUP",
+        payload: {
+          authenticated: response.data.status,
+          currentUser: response.data.data,
+        },
+      });
       props.navigation.navigate("clientPage", {
         clientSignUpMessage: `Thanks for joining develUp ${response.data.data.uid}!`,
       });
