@@ -79,7 +79,7 @@ const AssignmentForm = () => {
     });
     setSkillSelection(selectedSkills);
     let response
-    let {title, description, timeframe, budget, skills, points} = e.target
+  
     try {
         response = await Assignments.create({
         title: title,

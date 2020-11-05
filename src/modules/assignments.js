@@ -11,17 +11,17 @@ const Assignments = {
   },
 
   async create( title, description, timeframe, budget, skills, points ) {
-   let headers 
+   let headers
     try {
-      let response = await axios.post("/assignments", 
+      const response = await axios.post("/assignments", 
       {
         assignment: {
-          title: title.value,
-          description: description.value,
-          timeframe: timeframe.value,
-          budget: budget.value,
-          skills: skills.value,
-          points: points.value
+          title: title,
+          description: description,
+          timeframe: timeframe,
+          budget: budget,
+          skills: skills,
+          points: points,
         },
       },
       {
