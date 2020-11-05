@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Auth from "../modules/authentication";
 import { StyleSheet } from "react-native";
 import { useDispatch } from "react-redux";
+import AsyncStorage from "@react-native-community/async-storage";
 import {
   Container,
   Button,
@@ -23,6 +24,8 @@ const ClientSignUp = (props) => {
   const [message, setMessage] = useState();
 
   const auth = new Auth({ host: "http://f326df54b4d7.ngrok.io/api" });
+  const storage = AsyncStorage;
+
 
   const signUpHandler = async () => {
     let response;
@@ -36,6 +39,7 @@ const ClientSignUp = (props) => {
         role: "client",
       });
       if (response.data.status === "success") {
+        await storage.setItem("auth-storage", JSON.stringify(response.headers));
         dispatch({
           type: "SIGNUP",
           payload: {

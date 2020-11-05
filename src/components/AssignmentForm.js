@@ -78,10 +78,10 @@ const AssignmentForm = () => {
       }
     });
     setSkillSelection(selectedSkills);
-    let response
-  
+    let response;
+
     try {
-        response = await Assignments.create({
+      response = await Assignments.create({
         title: title,
         description: description,
         timeframe: timeframe,
@@ -89,11 +89,12 @@ const AssignmentForm = () => {
         skills: skillSelection,
         points: assignmentPoints,
       });
-      props.navigation.navigate("clientPage", {
+     /*  props.navigation.navigate("clientPage", {
         assignmentCreateMessage: `Assignment successfully created! What happens now? Applicants will be listed below. Once you have decided on best candidate, you find the assign button on the applicants profile page`,
-      });
+      }); */
     } catch (error) {
-      setMessage(response.toString());
+      console.log(error);
+      /*       setMessage(response.toString()); */
     }
   };
 
@@ -117,7 +118,7 @@ const AssignmentForm = () => {
       <Content>
         <Form id="create-assignment">
           <Label style={styles.title}>Assignment</Label>
-          <Text style={styles.errorMessage}>{message}</Text>
+          {/*      <Text style={styles.errorMessage}>{message}</Text> */}
           <Item fixedLabel>
             <Input
               onChangeText={(text) => setTitle(text)}
@@ -183,7 +184,7 @@ const styles = StyleSheet.create({
     color: "blue",
     textAlign: "center",
     fontSize: 30,
-    marginTop: 3
+    marginTop: 3,
   },
   points: {
     color: "blue",
