@@ -13,29 +13,24 @@ const Assignments = {
     }
   },
 
-  async create(title, description, timeframe, budget, skills, points) {
-    
+  // async create(title, description, timeframe, budget, skills, points) {
+  async create(assignment) {
     let headers = JSON.parse(await storage.getItem("auth-storage"));
-    try { 
+    try {
       const response = await axios.post(
         "/assignments",
         {
-          assignment: {
-            title: title,
-            description: description,
-            timeframe: timeframe,
-            budget: budget,
-            skills: skills,
-            points: points,
-          },
+          assignment: assignment,
         },
         {
-          headers: headers
+          headers: { ...headers, "Content-Type": "application/json" },
         }
       );
+      debugger
       return response.data.message;
     } catch (error) {
-      console.log(error)
+      debugger;
+      console.log(error);
     }
   },
 };

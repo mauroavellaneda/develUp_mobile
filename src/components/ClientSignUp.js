@@ -23,15 +23,15 @@ const ClientSignUp = (props) => {
   const [companyUrl, setCompanyUrl] = useState("");
   const [message, setMessage] = useState();
 
-  const auth = new Auth({ host: "http://cbf80599e6ab.ngrok.io/api" });
-  /*   const auth = new Auth({ host: "http://localhost:3000/api" }); */
+  // const auth = new Auth({ host: "http://cbf80599e6ab.ngrok.io/api" });
+  const auth = new Auth({ host: "http://localhost:3000/api" });
+  // const auth = new Auth({ host: "https://develup-2020.herokuapp.com/api" });
 
   const storage = AsyncStorage;
 
   const signUpHandler = async () => {
-    let response;
     try {
-      response = await auth.signUp({
+      let response = await auth.signUp({
         email: email,
         password: password,
         password_confirmation: passwordConfirmation,
@@ -39,7 +39,8 @@ const ClientSignUp = (props) => {
         company_url: companyUrl,
         role: "client",
       });
-      if (response.data.status === "success") {
+      // debugger
+      // if (response.data.status === "success") {
         await storage.setItem("auth-storage", JSON.stringify(response.headers));
         dispatch({
           type: "SIGNUP",
@@ -51,9 +52,13 @@ const ClientSignUp = (props) => {
         props.navigation.navigate("clientPage", {
           clientSignUpMessage: `You are logged in with: ${response.data.data.company_name}!`,
         });
-      }
+      // }
     } catch (error) {
-      setMessage(response.toString());
+      // console.log(error)
+      // debugger
+      let errorMessage = error.response.data.errors.toString()
+      setMessage(errorMessage)
+      // setMessage(response.toString());
     }
   };
 

@@ -15,6 +15,7 @@ import {
   Icon,
   Badge,
 } from "native-base";
+import { TouchableOpacity } from "react-native-gesture-handler";
 
 const AssignmentForm = (props) => {
   const [title, setTitle] = useState("");
@@ -49,53 +50,64 @@ const AssignmentForm = (props) => {
       name: "Fullstack",
       isChecked: false,
       points: 10,
+      id: 1,
     },
     {
       name: "Ruby",
       isChecked: false,
       points: 5,
+      id: 2,
     },
     {
       name: "HTML-CSS",
       isChecked: false,
       points: 1,
+      id: 3,
     },
     {
       name: "Node JS",
       isChecked: false,
       points: 5,
+      id: 4,
     },
     {
       name: "React",
       isChecked: false,
       points: 5,
+      id: 5,
     },
     {
       name: "Angular",
       isChecked: false,
       points: 5,
+      id: 6,
     },
     {
       name: "React Native",
       isChecked: false,
       points: 7,
+      id: 7,
     },
   ]);
 
   const publishAssignment = async () => {
-    let response = await Assignments.create(
-      title,
-      description,
-      timeframe,
-      budget,
-      skillSelection,
-      assignmentPoints
-    );
-    if (response === "successfully saved") {
+    try {
+      let response = await Assignments.create({
+        title: title,
+        description: description,
+        timeframe: timeframe,
+        budget: budget,
+        skills: skillSelection,
+        points: assignmentPoints,
+      });
+      // debugger;
+
+      // if (response === "successfully saved") {
       props.navigation.navigate("clientPage", {
         assignmentCreateMessage: `Assignment successfully created! Applicants will be listed below. Once you have decided on best candidate, you find the assign button on the applicants profile page`,
       });
-    } else {
+    } catch (error) {
+      // debugger;
       setErrorMessage("All fields are required");
     }
   };
@@ -165,17 +177,31 @@ const AssignmentForm = (props) => {
           </ListItem>
           {skills.map((skill) => {
             return (
-              <>
+              // touchableOpacity with a test id . tap on it.
+
+              <TouchableOpacity
+                key={skill.id}
+                onPress={() =>
+                  handleCheckboxElement({
+                    checked: !skill.isChecked,
+                    name: skill.name,
+                  })
+                }
+                // testID
+              >
                 <Item>
                   <Checkbox
-                    keyExtractor={skill.name}
-                    handleCheckboxElement={handleCheckboxElement}
+                    // onPress={handleCheckboxElement}
+                    // title={skill.name}
+                    // handleCheckboxElement={handleCheckboxElement}
                     {...skill}
                     style={styles.checkbox}
                   />
                   <Label style={styles.skills}>{skill.name}</Label>
+              <Text>{skill.id}</Text>
+              <Text>{skill.isChecked.toString()}</Text>
                 </Item>
-              </>
+              </TouchableOpacity>
             );
           })}
         </Form>
