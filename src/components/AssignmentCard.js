@@ -13,7 +13,6 @@ const AssignmentCard = ({ assignment }) => {
             <Text note testID={"budget-" + assignment.id}>
               $ {assignment.budget}
             </Text>
-            <Text note>$ {assignment.id}</Text>
           </Body>
         </Left>
       </CardItem>
