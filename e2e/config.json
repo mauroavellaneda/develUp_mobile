@@ -1,0 +1,7 @@
+{
+  "preset": "jest-expo",
+  "testEnvironment": "node",
+  "setupFilesAfterEnv": ["./environment.js"],
+  "testRegex": "\\.e2e\\.js$",
+  "verbose": true
+}

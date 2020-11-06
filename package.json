@@ -5,7 +5,8 @@
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
-    "eject": "expo eject"
+    "eject": "expo eject",
+    "test": "node_modules/.bin/jest test/**/*.spec.js"
   },
   "dependencies": {
     "@react-native-community/async-storage": "^1.12.1",
@@ -29,7 +30,16 @@
     "redux": "^4.0.5"
   },
   "devDependencies": {
-    "@babel/core": "~7.9.0"
+    "@babel/core": "~7.9.0",
+    "detox": "^17.11.0",
+    "detox-expo-helpers": "^0.6.0",
+    "expo-detox-hook": "^1.0.10",
+    "jest-expo": "^39.0.0",
+    "react-native-testing-library": "^6.0.0",
+    "react-test-renderer": "^17.0.1"
+  },
+  "jest": {
+    "preset": "jest-expo"
   },
   "private": true
 }
