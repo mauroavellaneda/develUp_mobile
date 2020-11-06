@@ -4,18 +4,20 @@ import { Card, CardItem, Text, Icon, Left, Body, Badge } from "native-base";
 
 const AssignmentCard = ({ assignment }) => {
   return (
-    <Card>
+    <Card testID={"assignment-" + assignment.id}>
       <CardItem header bordered>
         <Left>
           <Icon name="laptop" />
           <Body>
-            <Text>{assignment.title}</Text>
-            <Text note>$ {assignment.budget}</Text>
+            <Text testID={"title-" + assignment.id}>{assignment.title}</Text>
+            <Text note testID={"budget-" + assignment.id}>
+              $ {assignment.budget}
+            </Text>
           </Body>
         </Left>
       </CardItem>
       <CardItem footer bordered style={styles.container}>
-        <Left>
+        <Left testID={"points-" + assignment.id}>
           <Text note style={styles.container2}>
             Points:
           </Text>
@@ -24,7 +26,7 @@ const AssignmentCard = ({ assignment }) => {
           </Badge>
         </Left>
         <Body>
-          <Text note style={styles.cardSkills}>
+          <Text testID={"skills-" + assignment.id} note style={styles.cardSkills}>
             Skills: {assignment.skills.map((word) => word).join(" ")}
           </Text>
         </Body>
