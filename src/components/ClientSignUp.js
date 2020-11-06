@@ -12,6 +12,7 @@ import {
   Input,
   Label,
   Text,
+  View,
 } from "native-base";
 
 const ClientSignUp = (props) => {
@@ -58,36 +59,52 @@ const ClientSignUp = (props) => {
 
   return (
     <Container>
-      <Content>
+      <Content testID="mainContainer">
         <Form>
           <Item floatingLabel>
-            <Label>Email</Label>
-            <Input onChangeText={(text) => setEmail(text)} />
-          </Item>
-          <Item floatingLabel last>
-            <Label>Password</Label>
-            <Input onChangeText={(text) => setPassword(text)} secureTextEntry />
-          </Item>
-          <Item floatingLabel last>
-            <Label>Password Confirmation</Label>
+            <Label testID="emailInput">Email</Label>
             <Input
+              testID="emailField"
+              onChangeText={(text) => setEmail(text)}
+            />
+          </Item>
+          <Item floatingLabel last>
+            <Label testID="passwordLabel">Password</Label>
+            <Input
+              testID="passwordInput"
+              onChangeText={(text) => setPassword(text)}
+              secureTextEntry
+            />
+          </Item>
+          <Item floatingLabel last>
+            <Label testID="passwordConfirmationLabel">
+              Password Confirmation
+            </Label>
+            <Input
+              testID="passwordConfirmationInput"
               onChangeText={(text) => setPasswordConfirmation(text)}
               secureTextEntry
             />
           </Item>
           <Item floatingLabel last>
-            <Label>Company Name</Label>
-            <Input onChangeText={(text) => setCompany(text)} />
+            <Label testID="companyNameLabel">Company Name</Label>
+            <Input
+              testID="companyNameInput"
+              onChangeText={(text) => setCompany(text)}
+            />
           </Item>
           <Item floatingLabel last>
-            <Label>Company URL</Label>
-            <Input onChangeText={(text) => setCompanyUrl(text)} />
+            <Label testID="companyUrlLabel">Company URL</Label>
+            <Input
+              testID="companyUrlInput"
+              onChangeText={(text) => setCompanyUrl(text)}
+            />
           </Item>
         </Form>
         <Text style={styles.errorMessage}>{message}</Text>
       </Content>
-      <Button block onPress={() => signUpHandler()}>
-        <Text>Submit</Text>
+      <Button testID="submitButton" block  onPress={() => signUpHandler()}>
+        <Text >Submit</Text>
       </Button>
     </Container>
   );
