@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet, FlatList } from "react-native";
+import { StyleSheet, FlatList, View } from "react-native";
 import AssignmentCard from "./AssignmentCard";
 import Assignments from "../modules/assignments";
 import { Container } from "native-base";
@@ -17,13 +17,16 @@ const AssignmentsIndex = () => {
 
   return (
     <Container style={styles.container}>
-      <FlatList
-        data={assignments}
-        keyExtractor={(assignment) => assignment.id.toString()}
-        renderItem={({ item }) => {
-          return <AssignmentCard assignment={item} />;
-        }}
-      />
+      <View>
+        <FlatList
+          testID="scroll"
+          data={assignments}
+          keyExtractor={(assignment) => assignment.id.toString()}
+          renderItem={({ item }) => {
+            return <AssignmentCard assignment={item} />;
+          }}
+        />
+      </View>
     </Container>
   );
 };
