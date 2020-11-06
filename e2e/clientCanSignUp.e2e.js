@@ -24,8 +24,18 @@ describe("App", () => {
     await element(by.id("companyNameInput")).typeText("develup");
     await element(by.id("companyUrlLabel")).tap();
     await element(by.id("companyUrlInput")).typeText("develup.com");
+    await element(by.id("mainContainer")).tap();
     await expect(element(by.id("submitButton"))).toBeVisible();
+    await element(by.id("submitButton")).tap();
+
     // await element(by.id("submitButton")).tap();
   });
+  it('should show "first button" at the beggingweweewqweweeqw', async () => {
+  });
+  it('should show "first button" at the beggingweweewqweweeqw', async () => {
+    await expect(element(by.id("submitButton"))).toExist();
+  });
+
+
 });
 

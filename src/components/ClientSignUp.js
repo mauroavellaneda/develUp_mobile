@@ -65,7 +65,7 @@ const ClientSignUp = (props) => {
 
   return (
     <Container>
-      <Content>
+      <Content testID="mainContainer">
         <Form>
           <Item floatingLabel>
             <Label testID="emailInput">Email</Label>
@@ -109,8 +109,8 @@ const ClientSignUp = (props) => {
         </Form>
         <Text style={styles.errorMessage}>{message}</Text>
       </Content>
-      <Button block  onPress={() => signUpHandler()}>
-        <Text testID="submitButton">Submit</Text>
+      <Button testID="submitButton" block  onPress={() => signUpHandler()}>
+        <Text >Submit</Text>
       </Button>
     </Container>
   );
