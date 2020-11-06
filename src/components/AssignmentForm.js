@@ -91,24 +91,21 @@ const AssignmentForm = (props) => {
   ]);
 
   const publishAssignment = async () => {
-    try {
-      let response = await Assignments.create({
-        title: title,
-        description: description,
-        timeframe: timeframe,
-        budget: budget,
-        skills: skillSelection,
-        points: assignmentPoints,
-      });
-      // debugger;
+    let response = await Assignments.create({
+      title: title,
+      description: description,
+      timeframe: timeframe,
+      budget: budget,
+      skills: skillSelection,
+      points: assignmentPoints,
+    });
 
-      // if (response === "successfully saved") {
+    if (response === "successfully saved") {
       props.navigation.navigate("clientPage", {
         assignmentCreateMessage: `Assignment successfully created! Applicants will be listed below. Once you have decided on best candidate, you find the assign button on the applicants profile page`,
       });
-    } catch (error) {
-      // debugger;
-      setErrorMessage("All fields are required");
+    } else {
+      setErrorMessage(response);
     }
   };
 
@@ -187,7 +184,6 @@ const AssignmentForm = (props) => {
                     name: skill.name,
                   })
                 }
-                // testID
               >
                 <Item>
                   <Checkbox
@@ -198,8 +194,6 @@ const AssignmentForm = (props) => {
                     style={styles.checkbox}
                   />
                   <Label style={styles.skills}>{skill.name}</Label>
-              <Text>{skill.id}</Text>
-              <Text>{skill.isChecked.toString()}</Text>
                 </Item>
               </TouchableOpacity>
             );
@@ -253,17 +247,17 @@ const styles = StyleSheet.create({
     fontSize: 18,
   },
   errorItem: {
-    height: 40,
+    height: 35,
     backgroundColor: "red",
     marginLeft: 30,
   },
   errorMessage: {
     marginLeft: 25,
-    fontSize: 25,
+    fontSize: 12,
     marginRight: 10,
   },
   errorIcon: {
-    fontSize: 30,
+    fontSize: 20,
     marginLeft: 10,
     paddingLeft: 10,
   },

@@ -24,8 +24,8 @@ const ClientSignUp = (props) => {
   const [message, setMessage] = useState();
 
   // const auth = new Auth({ host: "http://cbf80599e6ab.ngrok.io/api" });
-  const auth = new Auth({ host: "http://localhost:3000/api" });
-  // const auth = new Auth({ host: "https://develup-2020.herokuapp.com/api" });
+  // const auth = new Auth({ host: "http://localhost:3000/api" });
+  const auth = new Auth({ host: "https://develup-2020.herokuapp.com/api" });
 
   const storage = AsyncStorage;
 
@@ -39,8 +39,6 @@ const ClientSignUp = (props) => {
         company_url: companyUrl,
         role: "client",
       });
-      // debugger
-      // if (response.data.status === "success") {
         await storage.setItem("auth-storage", JSON.stringify(response.headers));
         dispatch({
           type: "SIGNUP",
@@ -52,13 +50,9 @@ const ClientSignUp = (props) => {
         props.navigation.navigate("clientPage", {
           clientSignUpMessage: `You are logged in with: ${response.data.data.company_name}!`,
         });
-      // }
-    } catch (error) {
-      // console.log(error)
-      // debugger
-      let errorMessage = error.response.data.errors.toString()
+    } catch (error) { 
+      let errorMessage = error.response.data.errors.full_messages
       setMessage(errorMessage)
-      // setMessage(response.toString());
     }
   };
 
@@ -102,5 +96,5 @@ const ClientSignUp = (props) => {
 export default ClientSignUp;
 
 const styles = StyleSheet.create({
-  errorMessage: { color: "red", fontSize: 20 },
+  errorMessage: { color: "red", fontSize: 18 },
 });
