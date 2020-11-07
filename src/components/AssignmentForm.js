@@ -131,7 +131,9 @@ const AssignmentForm = (props) => {
           {errorMessage && (
             <Item style={styles.errorItem}>
               <Icon name="warning" style={styles.errorIcon} />
-              <Text style={styles.errorMessage}>{errorMessage}</Text>
+              <Text testID="createErrorMessage" style={styles.errorMessage}>
+                {errorMessage}
+              </Text>
             </Item>
           )}
         </Text>

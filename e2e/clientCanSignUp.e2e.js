@@ -5,8 +5,8 @@ describe("App", () => {
   });
 
   it("successfully sign up", async () => {
-    await expect(element(by.id("firstButton"))).toBeVisible();
-    await element(by.id("firstButton")).tap();
+    await expect(element(by.id("wantToPublishButton"))).toBeVisible();
+    await element(by.id("wantToPublishButton")).tap();
     await element(by.id("emailInput")).tap();
     await element(by.id("emailField")).typeText("user43535433ee7777@gmail.com");
     await element(by.id("passwordLabel")).tap();
@@ -24,8 +24,8 @@ describe("App", () => {
     await expect(element(by.id("createAssignmentButton"))).toBeVisible();
   });
   it("unsuccessfully sign up", async () => {
-    await expect(element(by.id("firstButton"))).toBeVisible();
-    await element(by.id("firstButton")).tap();
+    await expect(element(by.id("wantToPublishButton"))).toBeVisible();
+    await element(by.id("wantToPublishButton")).tap();
     await element(by.id("emailInput")).tap();
     await element(by.id("emailField")).typeText("user435354@gmail.com");
     await element(by.id("passwordLabel")).tap();

@@ -27,7 +27,7 @@ const AssignmentsIndex = ({ navigation }) => {
 
   return (
     <Container style={styles.container}>
-      <Button testID="firstButton" onPress={() => navigation.navigate(redirect)}>
+      <Button testID="wantToPublishButton" onPress={() => navigation.navigate(redirect)}>
         <Text>
           {authenticated
             ? "Publish Assignments"
