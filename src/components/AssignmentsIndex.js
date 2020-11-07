@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet, FlatList, View } from "react-native";
+import { StyleSheet, FlatList } from "react-native";
 import AssignmentCard from "./AssignmentCard";
 import Assignments from "../modules/assignments";
-import { Container } from "native-base";
+import { Button, Container, Text } from "native-base";
 
-const AssignmentsIndex = () => {
+import { useSelector } from "react-redux";
+
+const AssignmentsIndex = ({ navigation }) => {
+  const authenticated = useSelector((state) => state.authenticated);
   const [assignments, setAssignments] = useState([]);
 
   useEffect(() => {
@@ -15,18 +18,33 @@ const AssignmentsIndex = () => {
     getAssignmentsIndex();
   }, []);
 
+  let redirect;
+  if (authenticated) {
+    redirect = "assignmentForm";
+  } else {
+    redirect = "clientSignUp";
+  }
+
   return (
     <Container style={styles.container}>
-      <View>
-        <FlatList
-          testID="scroll"
-          data={assignments}
-          keyExtractor={(assignment) => assignment.id.toString()}
-          renderItem={({ item }) => {
-            return <AssignmentCard assignment={item} />;
-          }}
-        />
-      </View>
+      <Button
+        testID="wantToPublishButton"
+        onPress={() => navigation.navigate(redirect)}
+      >
+        <Text>
+          {authenticated
+            ? "Publish Assignments"
+            : "Publish Assignments for free!"}
+        </Text>
+      </Button>
+      <FlatList
+        testID="scroll"
+        data={assignments}
+        keyExtractor={(assignment) => assignment.id.toString()}
+        renderItem={({ item }) => {
+          return <AssignmentCard assignment={item} />;
+        }}
+      />
     </Container>
   );
 };
