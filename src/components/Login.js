@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { StyleSheet } from "react-native";
 import Auth from "../modules/authentication";
+import { useDispatch } from "react-redux";
+import AsyncStorage from "@react-native-community/async-storage";
 import {
   Container,
   Button,
@@ -10,26 +12,41 @@ import {
   Input,
   Label,
   Text,
+  Icon,
 } from "native-base";
 
 const Login = (props) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
+  const dispatch = useDispatch();
 
-  const auth = new Auth({ host: "http://localhost:3000" });
+  const storage = AsyncStorage;
+
+  const auth = new Auth({ host: "http://localhost:3000/api" });
 
   const loginHandler = async () => {
     try {
-      let response = await auth.signIn({
-        email,
-        password,
+      let response = await auth.signIn(email, password);
+      await storage.getItem("auth-storage", JSON.stringify(response.headers));
+
+      dispatch({
+        type: "SIGNUP",
+        payload: {
+          authenticated: true,
+          currentUser: response.data,
+        },
       });
-      props.navigation.navigate("clientPage", {
-        loginMessage: `You are logged in with: ${response.data.data.email}!`,
-      });
+
+      response.data.role === "client"
+        ? props.navigation.navigate("clientPage", {
+          clientSignUpMessage: `You are logged in with: ${response.data.email}!`,
+          })
+        : props.navigation.navigate("develUp", {
+            loginMessage: `You are logged in with: ${response.data.email}!`,
+          });
     } catch (error) {
-      let errorMessage = error.response.data.errors.full_messages;
+      let errorMessage = error.response.data.errors;
       setErrorMessage(errorMessage);
     }
   };
@@ -37,7 +54,16 @@ const Login = (props) => {
   return (
     <Container>
       <Content testID="loginContainer">
-        <Text>{errorMessage && <Text>{errorMessage}</Text>}</Text>
+        <Text>
+          {errorMessage && (
+            <Item style={styles.errorItem}>
+              <Icon name="warning" style={styles.errorIcon} />
+              <Text testID="createErrorMessage" style={styles.errorMessage}>
+                {errorMessage}
+              </Text>
+            </Item>
+          )}
+        </Text>
         <Form>
           <Item floatingLabel>
             <Label testID="emailLabel">Email</Label>
@@ -65,4 +91,20 @@ const Login = (props) => {
 
 export default Login;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  errorItem: {
+    height: 35,
+    backgroundColor: "red",
+    marginLeft: 30,
+  },
+  errorMessage: {
+    marginLeft: 25,
+    fontSize: 12,
+    marginRight: 10,
+  },
+  errorIcon: {
+    fontSize: 20,
+    marginLeft: 10,
+    paddingLeft: 10,
+  },
+});
