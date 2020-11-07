@@ -6,6 +6,7 @@ import SingleAssignment from "./src/components/SingleAssignment";
 import ClientSignUp from "./src/components/ClientSignUp";
 import ClientPage from "./src/components/ClientPage";
 import AssignmentForm from "./src/components/AssignmentForm";
+import Login from './src/components/Login'
 import { useSelector } from "react-redux";
 
 const Stack = createStackNavigator();
@@ -14,8 +15,11 @@ const App = () => {
   const authenticated = useSelector((state) => state.authenticated);
   return (
     <NavigationContainer>
-      <Stack.Navigator screenOptions={myOptions}>
+      <Stack.Navigator 
+      screenOptions={myOptions}
+      >
         <Stack.Screen name="develUp" component={AssignmentsIndex} />
+        <Stack.Screen name="login" component={Login} />
         <Stack.Screen name="singleAssignment" component={SingleAssignment} />
         {authenticated ? (
           <>

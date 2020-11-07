@@ -27,6 +27,11 @@ const AssignmentsIndex = ({ navigation }) => {
 
   return (
     <Container style={styles.container}>
+         <Button
+        testID="wantToPublishButton"
+        onPress={() => navigation.navigate("login")}
+      ><Text>Login</Text></Button>
+
       <Button
         testID="wantToPublishButton"
         onPress={() => navigation.navigate(redirect)}
