@@ -4,7 +4,7 @@ import AssignmentCard from "./AssignmentCard";
 import Assignments from "../modules/assignments";
 import { Container } from "native-base";
 
-const AssignmentsIndex = ({navigation}) => {
+const AssignmentsIndex = ({ navigation }) => {
   const [assignments, setAssignments] = useState([]);
 
   useEffect(() => {

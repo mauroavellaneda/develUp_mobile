@@ -15,7 +15,8 @@ const Assignments = {
       const response = await axios.get(`/assignments/${assignmentId}`);
       return response.data.assignment;
     } catch (error) {
-      console.log(error);
+      console.log(error.response);
+      return error.response.data.errors;
     }
   },
 };
