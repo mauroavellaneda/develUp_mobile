@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Checkbox from "./Checkbox";
+import { CheckBox } from "native-base";
 import Assignments from "../modules/assignments";
 import { StyleSheet, Text, View } from "react-native";
 import {
@@ -195,7 +195,10 @@ const AssignmentForm = (props) => {
                   }
                 >
                   <Item>
-                    <Checkbox {...skill} style={styles.checkbox} />
+                    <CheckBox
+                      style={styles.checkbox}
+                      checked={skill.isChecked}
+                    />
                     <Label style={styles.skills}>{skill.name}</Label>
                   </Item>
                 </TouchableOpacity>
@@ -264,5 +267,8 @@ const styles = StyleSheet.create({
     fontSize: 20,
     marginLeft: 10,
     paddingLeft: 10,
+  },
+  checkbox: {
+    margin: 20,
   },
 });
