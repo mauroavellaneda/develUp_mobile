@@ -4,7 +4,7 @@ import AssignmentCard from "./AssignmentCard";
 import Assignments from "../modules/assignments";
 import { Container } from "native-base";
 
-const AssignmentsIndex = () => {
+const AssignmentsIndex = ({navigation}) => {
   const [assignments, setAssignments] = useState([]);
 
   useEffect(() => {
@@ -23,7 +23,7 @@ const AssignmentsIndex = () => {
           data={assignments}
           keyExtractor={(assignment) => assignment.id.toString()}
           renderItem={({ item }) => {
-            return <AssignmentCard assignment={item} />;
+            return <AssignmentCard navigation={navigation} assignment={item} />;
           }}
         />
       </View>
