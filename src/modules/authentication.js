@@ -23,7 +23,7 @@ class Auth {
     this.apiAuthUrl = `${this.apiUrl}${
       options.authUrl ? options.authUrl : "/auth"
     }`;
-    this.emailField = options.emailField ? options.emailField : "email";
+    this.emailInput = options.emailInput ? options.emailInput : "email";
     this.passwordField = options.passwordField
       ? options.passwordField
       : "password";
@@ -92,7 +92,7 @@ class Auth {
     return new Promise(async (resolve, reject) => {
       try {
         const signInResponse = await axios.post(this.signInUrl, {
-          [this.emailField]: email,
+          [this.emailInput]: email,
           [this.passwordField]: password,
         });
         this.setSession(signInResponse.headers);

@@ -8,8 +8,8 @@ describe("Client can sign up", () => {
   it("successfully ", async () => {
     await expect(element(by.id("wantToPublishButton"))).toBeVisible();
     await element(by.id("wantToPublishButton")).tap();
-    await element(by.id("emailInput")).tap();
-    await element(by.id("emailField")).typeText(`user${randomize}@gmail.com`);
+    await element(by.id("emailLabel")).tap();
+    await element(by.id("emailInput")).typeText(`user${randomize}@gmail.com`);
     await element(by.id("passwordLabel")).tap();
     await element(by.id("passwordInput")).typeText("password");
     await element(by.id("passwordConfirmationLabel")).tap();
@@ -27,8 +27,8 @@ describe("Client can sign up", () => {
   it("unsuccessfully with wrong password and existing email", async () => {
     await expect(element(by.id("wantToPublishButton"))).toBeVisible();
     await element(by.id("wantToPublishButton")).tap();
-    await element(by.id("emailInput")).tap();
-    await element(by.id("emailField")).typeText(`user${randomize}@gmail.com`);
+    await element(by.id("emailLabel")).tap();
+    await element(by.id("emailInput")).typeText(`user${randomize}@gmail.com`);
     await element(by.id("passwordLabel")).tap();
     await element(by.id("passwordInput")).typeText("password");
     await element(by.id("passwordConfirmationLabel")).tap();

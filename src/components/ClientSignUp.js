@@ -58,9 +58,9 @@ const ClientSignUp = (props) => {
       <Content testID="mainContainer">
         <Form>
           <Item floatingLabel>
-            <Label testID="emailInput">Email</Label>
+            <Label testID="emailLabel">Email</Label>
             <Input
-              testID="emailField"
+              testID="emailInput"
               onChangeText={(text) => setEmail(text)}
             />
           </Item>
