@@ -26,7 +26,11 @@ const AssignmentCard = ({ assignment }) => {
           </Badge>
         </Left>
         <Body>
-          <Text testID={"skills-" + assignment.id} note style={styles.cardSkills}>
+          <Text
+            testID={"skills-" + assignment.id}
+            note
+            style={styles.cardSkills}
+          >
             Skills: {assignment.skills.map((word) => word).join(" ")}
           </Text>
         </Body>

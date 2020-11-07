@@ -12,7 +12,6 @@ import {
   Input,
   Label,
   Text,
-  View,
 } from "native-base";
 
 const ClientSignUp = (props) => {
@@ -23,9 +22,6 @@ const ClientSignUp = (props) => {
   const [company, setCompany] = useState("");
   const [companyUrl, setCompanyUrl] = useState("");
   const [message, setMessage] = useState();
-
-  // const auth = new Auth({ host: "http://cbf80599e6ab.ngrok.io/api" });
-  // const auth = new Auth({ host: "http://localhost:3000/api" });
   const auth = new Auth({ host: "https://develup-2020.herokuapp.com/api" });
 
   const storage = AsyncStorage;
@@ -40,20 +36,20 @@ const ClientSignUp = (props) => {
         company_url: companyUrl,
         role: "client",
       });
-        await storage.setItem("auth-storage", JSON.stringify(response.headers));
-        dispatch({
-          type: "SIGNUP",
-          payload: {
-            authenticated: true,
-            currentUser: response.data.data,
-          },
-        });
-        props.navigation.navigate("clientPage", {
-          clientSignUpMessage: `You are logged in with: ${response.data.data.company_name}!`,
-        });
-    } catch (error) { 
-      let errorMessage = error.response.data.errors.full_messages
-      setMessage(errorMessage)
+      await storage.setItem("auth-storage", JSON.stringify(response.headers));
+      dispatch({
+        type: "SIGNUP",
+        payload: {
+          authenticated: true,
+          currentUser: response.data.data,
+        },
+      });
+      props.navigation.navigate("clientPage", {
+        clientSignUpMessage: `You are logged in with: ${response.data.data.company_name}!`,
+      });
+    } catch (error) {
+      let errorMessage = error.response.data.errors.full_messages;
+      setMessage(errorMessage);
     }
   };
 
@@ -101,10 +97,12 @@ const ClientSignUp = (props) => {
             />
           </Item>
         </Form>
-        <Text testID='errorMessageSubmit'style={styles.errorMessage}>{message}</Text>
+        <Text testID="errorMessageSubmit" style={styles.errorMessage}>
+          {message}
+        </Text>
       </Content>
-      <Button testID="submitButton" block  onPress={() => signUpHandler()}>
-        <Text >Submit</Text>
+      <Button testID="submitButton" block onPress={() => signUpHandler()}>
+        <Text>Submit</Text>
       </Button>
     </Container>
   );

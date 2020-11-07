@@ -1,14 +1,15 @@
 const { reloadApp } = require("detox-expo-helpers");
-describe("App", () => {
+const randomize = Math.floor(Math.random() * 10000);
+describe("Client can sign up", () => {
   beforeEach(async () => {
     await reloadApp();
   });
 
-  it("successfully sign up", async () => {
+  it("successfully", async () => {
     await expect(element(by.id("wantToPublishButton"))).toBeVisible();
     await element(by.id("wantToPublishButton")).tap();
     await element(by.id("emailInput")).tap();
-    await element(by.id("emailField")).typeText("user43535433ee7777@gmail.com");
+    await element(by.id("emailField")).typeText(`user${randomize}@gmail.com`);
     await element(by.id("passwordLabel")).tap();
     await element(by.id("passwordInput")).typeText("password");
     await element(by.id("passwordConfirmationLabel")).tap();
@@ -23,11 +24,11 @@ describe("App", () => {
     await expect(element(by.id("welcomeMessage"))).toBeVisible();
     await expect(element(by.id("createAssignmentButton"))).toBeVisible();
   });
-  it("unsuccessfully sign up", async () => {
+  it("unsuccessfully", async () => {
     await expect(element(by.id("wantToPublishButton"))).toBeVisible();
     await element(by.id("wantToPublishButton")).tap();
     await element(by.id("emailInput")).tap();
-    await element(by.id("emailField")).typeText("user435354@gmail.com");
+    await element(by.id("emailField")).typeText(`user${randomize}@gmail.com`);
     await element(by.id("passwordLabel")).tap();
     await element(by.id("passwordInput")).typeText("password");
     await element(by.id("passwordConfirmationLabel")).tap();

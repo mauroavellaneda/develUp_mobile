@@ -184,7 +184,6 @@ const AssignmentForm = (props) => {
           </ListItem>
           {skills.map((skill) => {
             return (
-              // touchableOpacity with a test id . tap on it.
               <View key={skill.id}>
                 <TouchableOpacity
                   testID={"skills-" + skill.id}
@@ -196,14 +195,7 @@ const AssignmentForm = (props) => {
                   }
                 >
                   <Item>
-                    <Checkbox
-                      // onPress={handleCheckboxElement}
-                      // title={skill.name}
-                      // handleCheckboxElement={handleCheckboxElement}
-                      {...skill}
-                      style={styles.checkbox}
-                    />
-
+                    <Checkbox {...skill} style={styles.checkbox} />
                     <Label style={styles.skills}>{skill.name}</Label>
                   </Item>
                 </TouchableOpacity>

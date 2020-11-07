@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet, FlatList, View } from "react-native";
+import { StyleSheet, FlatList } from "react-native";
 import AssignmentCard from "./AssignmentCard";
 import Assignments from "../modules/assignments";
 import { Button, Container, Text } from "native-base";
@@ -27,7 +27,10 @@ const AssignmentsIndex = ({ navigation }) => {
 
   return (
     <Container style={styles.container}>
-      <Button testID="wantToPublishButton" onPress={() => navigation.navigate(redirect)}>
+      <Button
+        testID="wantToPublishButton"
+        onPress={() => navigation.navigate(redirect)}
+      >
         <Text>
           {authenticated
             ? "Publish Assignments"

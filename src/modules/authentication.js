@@ -38,7 +38,6 @@ class Auth {
         ? this.options.authUrl.validateToken
         : "/validate_token"
     }`;
-    // this.setLastSession();
     axios.interceptors.response.use(
       (response) => {
         if (Array.isArray(response.data)) {
@@ -103,7 +102,6 @@ class Auth {
         this.setRoles(validateResponse);
         resolve(validateResponse);
       } catch (err) {
-        // this.debugIfActive(err.response);
         reject(err);
       }
     });
@@ -119,10 +117,8 @@ class Auth {
         const logOutResponse = await axios.delete(this.signOutUrl, {
           headers: { ...lastSession },
         });
-        // this.debugIfActive(logOutResponse);
         resolve(logOutResponse.data);
       } catch (err) {
-        // this.debugIfActive(err.response);
         resolve("Error when delete server session but local was deleted");
       }
     });
@@ -134,10 +130,8 @@ class Auth {
         const logOutResponse = await axios.delete(this.apiAuthUrl, {
           headers: { ...this.session },
         });
-        // this.debugIfActive(logOutResponse);
         resolve(logOutResponse.data);
       } catch (err) {
-        // this.debugIfActive(err.response);
         reject(err);
       }
     });
@@ -173,11 +167,9 @@ class Auth {
             headers: { ...this.session },
           }
         );
-        // this.debugIfActive(changePasswordResponse);
         this.setSession(changePasswordResponse.headers);
         resolve(changePasswordResponse);
       } catch (err) {
-        // this.debugIfActive(err.response);
         if (err.response.headers["access-token"]) {
           this.setSession(err.response.headers);
         }
@@ -209,10 +201,8 @@ class Auth {
             params: { reset_password_token: token, redirect_url: redirectUrl },
           }
         );
-        // this.debugIfActive(updatePassword);
         resolve(updatePassword);
       } catch (err) {
-        // this.debugIfActive(err.response);
         reject(err);
       }
     });
@@ -233,11 +223,9 @@ class Auth {
             ...this.session,
           },
         });
-        // this.debugIfActive(reponse);
         this.setSession(reponse.headers);
         resolve(reponse);
       } catch (err) {
-        // this.debugIfActive(err.response);
         if (err.response.headers["access-token"]) {
           this.setSession(err.response.headers);
         }
