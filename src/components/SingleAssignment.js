@@ -19,27 +19,30 @@ const SingleAssignment = ({ route }) => {
   }, [route]);
 
   return (
-    <Card testID={"assignment-" + assignment.id}>
+    <Card>
       <CardItem header bordered style={styles.titleCard}>
         <Left>
           <Icon name="laptop" />
           <Body>
-            <Text style={styles.title} testID={"title-" + assignment.id}>
-              {assignment.title}{" "}
+            <Text testID="title" style={styles.title} >
+              {assignment.title}
             </Text>
-            <Text style={styles.budget} note testID={"budget-" + assignment.id}>
+            <Text testID="budget" style={styles.budget} note >
               $ {assignment.budget}
             </Text>
+            <Text>{assignment.id}</Text>
           </Body>
         </Left>
       </CardItem>
       <CardItem style={styles.descriptionCard}>
         <Body>
-          <Text style={styles.description}>{assignment.description}</Text>
+          <Text testID="description" style={styles.description}>
+            {assignment.description}
+          </Text>
         </Body>
       </CardItem>
       <CardItem footer bordered style={styles.container}>
-        <Left testID={"points-" + assignment.id}>
+        <Left testID="points">
           <Text note style={styles.container2}>
             Points:
           </Text>
@@ -48,11 +51,7 @@ const SingleAssignment = ({ route }) => {
           </Badge>
         </Left>
         <Body>
-          <Text
-            testID={"skills-" + assignment.id}
-            note
-            style={styles.cardSkills}
-          >
+          <Text testID="skills" note style={styles.cardSkills}>
             Skills: {assignment.skills}
           </Text>
         </Body>
