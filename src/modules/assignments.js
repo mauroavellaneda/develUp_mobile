@@ -13,6 +13,15 @@ const Assignments = {
     }
   },
 
+  async show(assignmentId) {
+    try {
+      const response = await axios.get(`/assignments/${assignmentId}`);
+      return response.data.assignment;
+    } catch (error) {
+      return error.response.data.errors;
+    }
+  },
+
   async create(assignment) {
     let headers = JSON.parse(await storage.getItem("auth-storage"));
     try {

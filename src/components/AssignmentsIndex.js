@@ -42,7 +42,7 @@ const AssignmentsIndex = ({ navigation }) => {
         data={assignments}
         keyExtractor={(assignment) => assignment.id.toString()}
         renderItem={({ item }) => {
-          return <AssignmentCard assignment={item} />;
+          return <AssignmentCard navigation={navigation} assignment={item}  />;
         }}
       />
     </Container>

@@ -2,6 +2,7 @@ import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import AssignmentsIndex from "./src/components/AssignmentsIndex";
+import SingleAssignment from "./src/components/SingleAssignment";
 import ClientSignUp from "./src/components/ClientSignUp";
 import ClientPage from "./src/components/ClientPage";
 import AssignmentForm from "./src/components/AssignmentForm";
@@ -15,6 +16,7 @@ const App = () => {
     <NavigationContainer>
       <Stack.Navigator screenOptions={myOptions}>
         <Stack.Screen name="develUp" component={AssignmentsIndex} />
+        <Stack.Screen name="singleAssignment" component={SingleAssignment} />
         {authenticated ? (
           <>
             <Stack.Screen name="clientPage" component={ClientPage} />
