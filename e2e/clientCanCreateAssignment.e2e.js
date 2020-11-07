@@ -37,7 +37,7 @@ describe("Client can create assignments", () => {
     await element(by.id("publishButton")).tap();
     await expect(element(by.id("successfullyCreatedMessage"))).toBeVisible();
   });
-  it("unsuccessfully", async () => {
+  it("unsuccessfully with missing fields", async () => {
     const randomize = Math.floor(Math.random() * 10000);
     await expect(element(by.id("wantToPublishButton"))).toBeVisible();
     await element(by.id("wantToPublishButton")).tap();

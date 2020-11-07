@@ -5,7 +5,7 @@ describe("Client can sign up", () => {
     await reloadApp();
   });
 
-  it("successfully", async () => {
+  it("successfully ", async () => {
     await expect(element(by.id("wantToPublishButton"))).toBeVisible();
     await element(by.id("wantToPublishButton")).tap();
     await element(by.id("emailInput")).tap();
@@ -24,7 +24,7 @@ describe("Client can sign up", () => {
     await expect(element(by.id("welcomeMessage"))).toBeVisible();
     await expect(element(by.id("createAssignmentButton"))).toBeVisible();
   });
-  it("unsuccessfully", async () => {
+  it("unsuccessfully with wrong password and existing email", async () => {
     await expect(element(by.id("wantToPublishButton"))).toBeVisible();
     await element(by.id("wantToPublishButton")).tap();
     await element(by.id("emailInput")).tap();
@@ -32,7 +32,7 @@ describe("Client can sign up", () => {
     await element(by.id("passwordLabel")).tap();
     await element(by.id("passwordInput")).typeText("password");
     await element(by.id("passwordConfirmationLabel")).tap();
-    await element(by.id("passwordConfirmationInput")).typeText("passwordaas");
+    await element(by.id("passwordConfirmationInput")).typeText("wrongpassword");
     await element(by.id("companyNameLabel")).tap();
     await element(by.id("companyNameInput")).typeText("develup");
     await element(by.id("companyUrlLabel")).tap();
