@@ -1,4 +1,7 @@
 import axios from "axios";
+import AsyncStorage from "@react-native-community/async-storage";
+
+const storage = AsyncStorage;
 
 const Assignments = {
   async index() {
@@ -17,6 +20,25 @@ const Assignments = {
     } catch (error) {
       console.log(error.response);
       return error.response.data.errors;
+    }
+  },
+
+  async create(assignment) {
+    let headers = JSON.parse(await storage.getItem("auth-storage"));
+    try {
+      let response = await axios.post(
+        "/assignments",
+        {
+          assignment: assignment,
+        },
+        {
+          headers: headers,
+        }
+      );
+      return response.data.message;
+    } catch (error) {
+      let errorMessage = error.response.data.message;
+      return errorMessage;
     }
   },
 };
