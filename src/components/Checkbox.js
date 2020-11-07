@@ -6,7 +6,6 @@ const Checkbox = (props) => {
     <>
       <CheckBox
         style={styles.checkbox}
-        testID="boom bom bom bom"
         checked={props.isChecked}
         // onPress={() =>
         //   props.handleCheckboxElement({

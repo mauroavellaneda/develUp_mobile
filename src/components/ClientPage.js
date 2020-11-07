@@ -5,15 +5,15 @@ import { Button, Item } from "native-base";
 const ClientPage = (props) => {
   return (
     <View>
-      <Text style={styles.clientSignUpMessage}>
+      <Text testID='welcomeMessage'style={styles.clientSignUpMessage}>
         {props.route.params.clientSignUpMessage}
       </Text>
       <Item>
-        <Text style={styles.assignmentCreateMessage}>
+        <Text testID='successfullyCreatedMessage'style={styles.assignmentCreateMessage}>
           {props.route.params.assignmentCreateMessage}
         </Text>
       </Item>
-      <Button
+      <Button testID='createAssignmentButton'
         onPress={() => props.navigation.navigate("assignmentForm")}
         style={styles.createButton}
       >

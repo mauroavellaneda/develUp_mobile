@@ -101,7 +101,7 @@ const ClientSignUp = (props) => {
             />
           </Item>
         </Form>
-        <Text style={styles.errorMessage}>{message}</Text>
+        <Text testID='errorMessageSubmit'style={styles.errorMessage}>{message}</Text>
       </Content>
       <Button testID="submitButton" block  onPress={() => signUpHandler()}>
         <Text >Submit</Text>

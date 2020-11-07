@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Checkbox from "./Checkbox";
 import Assignments from "../modules/assignments";
-import { StyleSheet, Text } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 import {
   Container,
   Button,
@@ -102,7 +102,7 @@ const AssignmentForm = (props) => {
 
     if (response === "successfully saved") {
       props.navigation.navigate("clientPage", {
-        assignmentCreateMessage: `Assignment successfully created! Applicants will be listed below. Once you have decided on best candidate, you find the assign button on the applicants profile page`,
+        assignmentCreateMessage: `Assignment successfully created`,
       });
     } else {
       setErrorMessage(response);
@@ -137,15 +137,17 @@ const AssignmentForm = (props) => {
         </Text>
         <Form id="create-assignment">
           <Label style={styles.title}>Assignment</Label>
-          <Item fixedLabel>
+          <Item testID="titleAssignment" fixedLabel>
             <Input
+              testID="titleInput"
               onChangeText={(text) => setTitle(text)}
               placeholder="Title"
               style={styles.input}
             />
           </Item>
-          <Item fixedLabel>
+          <Item testID="descriptionLabel" fixedLabel>
             <Textarea
+              testID="descriptionInput"
               rowSpan={5}
               floated
               placeholder="Short description of your assignment"
@@ -153,16 +155,22 @@ const AssignmentForm = (props) => {
             />
           </Item>
           <Item fixedLabel>
-            <Label style={styles.label}>Timeframe</Label>
+            <Label testID="timeFrameLabel" style={styles.label}>
+              Timeframe
+            </Label>
             <Input
+              testID="timeFrameInput"
               keyboardType="numeric"
               onChangeText={(text) => setTimeframe(text.replace(/[^0-9]/g, ""))}
               placeholder="Number of days"
             />
           </Item>
           <Item fixedLabel>
-            <Label style={styles.label}>Budget</Label>
+            <Label testID="budgetLabel" style={styles.label}>
+              Budget
+            </Label>
             <Input
+              testID="budgetInput"
               keyboardType="numeric"
               onChangeText={(text) => setBudget(text.replace(/[^0-9]/g, ""))}
               placeholder="$"
@@ -175,27 +183,29 @@ const AssignmentForm = (props) => {
           {skills.map((skill) => {
             return (
               // touchableOpacity with a test id . tap on it.
+              <View key={skill.id}>
+                <TouchableOpacity
+                  testID={"skills-" + skill.id}
+                  onPress={() =>
+                    handleCheckboxElement({
+                      checked: !skill.isChecked,
+                      name: skill.name,
+                    })
+                  }
+                >
+                  <Item>
+                    <Checkbox
+                      // onPress={handleCheckboxElement}
+                      // title={skill.name}
+                      // handleCheckboxElement={handleCheckboxElement}
+                      {...skill}
+                      style={styles.checkbox}
+                    />
 
-              <TouchableOpacity
-                key={skill.id}
-                onPress={() =>
-                  handleCheckboxElement({
-                    checked: !skill.isChecked,
-                    name: skill.name,
-                  })
-                }
-              >
-                <Item>
-                  <Checkbox
-                    // onPress={handleCheckboxElement}
-                    // title={skill.name}
-                    // handleCheckboxElement={handleCheckboxElement}
-                    {...skill}
-                    style={styles.checkbox}
-                  />
-                  <Label style={styles.skills}>{skill.name}</Label>
-                </Item>
-              </TouchableOpacity>
+                    <Label style={styles.skills}>{skill.name}</Label>
+                  </Item>
+                </TouchableOpacity>
+              </View>
             );
           })}
         </Form>
@@ -206,7 +216,7 @@ const AssignmentForm = (props) => {
           <Text>{assignmentPoints}</Text>
         </Badge>
       </Item>
-      <Button block onPress={() => publishAssignment()}>
+      <Button testID="publishButton" block onPress={() => publishAssignment()}>
         <Text>Publish</Text>
       </Button>
     </Container>
