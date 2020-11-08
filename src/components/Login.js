@@ -58,7 +58,7 @@ const Login = (props) => {
           {errorMessage && (
             <Item style={styles.errorItem}>
               <Icon name="warning" style={styles.errorIcon} />
-              <Text testID="createErrorMessage" style={styles.errorMessage}>
+              <Text testID="errorMessage" style={styles.errorMessage}>
                 {errorMessage}
               </Text>
             </Item>
