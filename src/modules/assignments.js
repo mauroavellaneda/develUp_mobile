@@ -13,14 +13,16 @@ const Assignments = {
     }
   },
 
-  async show(assignmentId) {
-    let headers = JSON.parse(await storage.getItem("auth-storage"));
-    debugger
+  async show(assignmentId, authenticated) {
+    let headers;
+    {
+      authenticated &&
+        (headers = JSON.parse(await storage.getItem("auth-storage")));
+    }
     try {
       const response = await axios.get(`/assignments/${assignmentId}`, {
         headers: headers,
       });
-      debugger
       return response.data.assignment;
     } catch (error) {
       return error.response.data.errors;

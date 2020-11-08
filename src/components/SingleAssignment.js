@@ -11,7 +11,7 @@ const SingleAssignment = ({ route }) => {
 
   useEffect(() => {
     const getSingleAssignment = async () => {
-      const response = await Assignments.show(route.params.assignmentId);
+      const response = await Assignments.show(route.params.assignmentId, authenticated);
       if (response.id) {
         setAssignment(response);
       } else {

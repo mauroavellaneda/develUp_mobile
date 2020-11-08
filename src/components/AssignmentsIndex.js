@@ -19,8 +19,10 @@ const AssignmentsIndex = ({ navigation }) => {
   }, []);
 
   let redirect;
-  if (authenticated) {
+  if (role === "client") {
     redirect = "assignmentForm";
+  } else if (role === "develuper") {
+    redirect = "develUp";
   } else {
     redirect = "clientSignUp";
   }
@@ -35,7 +37,7 @@ const AssignmentsIndex = ({ navigation }) => {
           {authenticated && role === "client"
             ? "Publish Assignments"
             : role === "develuper"
-            ? "Welcome develUper"
+            ? "Profile page"
             : "Publish Assignments for free!"}
         </Text>
       </Button>
