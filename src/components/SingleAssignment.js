@@ -1,6 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { StyleSheet } from "react-native";
-import { Card, CardItem, Text, Icon, Left, Body, Badge } from "native-base";
+import {
+  Card,
+  CardItem,
+  Text,
+  Icon,
+  Left,
+  Body,
+  Badge,
+  Button,
+} from "native-base";
 import Assignments from "../modules/assignments";
 
 const SingleAssignment = ({ route }) => {
@@ -18,45 +27,56 @@ const SingleAssignment = ({ route }) => {
     getSingleAssignment();
   }, [route]);
 
+  const applyHandler = () => {
+    let response = await Assignments.apply(route.params.assignmentId, applicantId)
+    
+  }
+
+
   return (
-    <Card>
-      <CardItem header bordered style={styles.titleCard}>
-        <Left>
-          <Icon name="laptop" />
+    <>
+      <Card>
+        <CardItem header bordered style={styles.titleCard}>
+          <Left>
+            <Icon name="laptop" />
+            <Body>
+              <Text testID="title" style={styles.title}>
+                {assignment.title}
+              </Text>
+              <Text testID="budget" style={styles.budget} note>
+                $ {assignment.budget}
+              </Text>
+              <Text>{assignment.id}</Text>
+            </Body>
+          </Left>
+        </CardItem>
+        <CardItem style={styles.descriptionCard}>
           <Body>
-            <Text testID="title" style={styles.title} >
-              {assignment.title}
+            <Text testID="description" style={styles.description}>
+              {assignment.description}
             </Text>
-            <Text testID="budget" style={styles.budget} note >
-              $ {assignment.budget}
-            </Text>
-            <Text>{assignment.id}</Text>
           </Body>
-        </Left>
-      </CardItem>
-      <CardItem style={styles.descriptionCard}>
-        <Body>
-          <Text testID="description" style={styles.description}>
-            {assignment.description}
-          </Text>
-        </Body>
-      </CardItem>
-      <CardItem footer bordered style={styles.container}>
-        <Left testID="points">
-          <Text note style={styles.container2}>
-            Points:
-          </Text>
-          <Badge primary>
-            <Text>{assignment.points}</Text>
-          </Badge>
-        </Left>
-        <Body>
-          <Text testID="skills" note style={styles.cardSkills}>
-            Skills: {assignment.skills}
-          </Text>
-        </Body>
-      </CardItem>
-    </Card>
+        </CardItem>
+        <CardItem footer bordered style={styles.container}>
+          <Left testID="points">
+            <Text note style={styles.container2}>
+              Points:
+            </Text>
+            <Badge primary>
+              <Text>{assignment.points}</Text>
+            </Badge>
+          </Left>
+          <Body>
+            <Text testID="skills" note style={styles.cardSkills}>
+              Skills: {assignment.skills}
+            </Text>
+          </Body>
+        </CardItem>
+      </Card>
+      <Button testID="applyButton" block onPress={() => applyHandler()}>
+        <Text>Apply now</Text>
+      </Button>
+    </>
   );
 };
 
