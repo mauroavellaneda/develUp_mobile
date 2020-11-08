@@ -38,7 +38,7 @@ const ClientSignUp = (props) => {
       });
       await storage.setItem("auth-storage", JSON.stringify(response.headers));
       dispatch({
-        type: "SIGNUP",
+        type: "AUTHENTICATE",
         payload: {
           authenticated: true,
           currentUser: response.data.data,

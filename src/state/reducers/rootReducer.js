@@ -2,7 +2,7 @@ import initialState from "../store/initialState";
 
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
-    case "SIGNUP":
+    case "AUTHENTICATE":
       return {
         ...state,
         authenticated: action.payload.authenticated,
