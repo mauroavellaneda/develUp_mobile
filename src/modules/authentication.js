@@ -101,8 +101,8 @@ class Auth {
         );
         this.setRoles(validateResponse);
         resolve(validateResponse);
-      } catch (err) {
-        reject(err);
+      } catch (error) {
+        reject(error);
       }
     });
   }
