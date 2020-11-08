@@ -9,15 +9,22 @@ import {
   Body,
   Badge,
   Button,
+  Item,
 } from "native-base";
 import Assignments from "../modules/assignments";
+import { useSelector } from "react-redux";
 
 const SingleAssignment = ({ route }) => {
   const [assignment, setAssignment] = useState({});
+  const authenticated = useSelector((state) => state.authenticated);
+  const [message, setMessage] = useState("");
 
   useEffect(() => {
     const getSingleAssignment = async () => {
-      const response = await Assignments.show(route.params.assignmentId);
+      const response = await Assignments.show(
+        route.params.assignmentId,
+        authenticated
+      );
       if (response.id) {
         setAssignment(response);
       } else {
@@ -46,7 +53,6 @@ const SingleAssignment = ({ route }) => {
               <Text testID="budget" style={styles.budget} note>
                 $ {assignment.budget}
               </Text>
-              <Text>{assignment.id}</Text>
             </Body>
           </Left>
         </CardItem>
@@ -76,6 +82,13 @@ const SingleAssignment = ({ route }) => {
       <Button testID="applyButton" block onPress={() => applyHandler()}>
         <Text>Apply now</Text>
       </Button>
+      <Text>
+        {message && (
+          <Item style={styles.banner}>
+            <Text style={styles.bannerText}>{message}</Text>
+          </Item>
+        )}
+      </Text>
     </>
   );
 };
@@ -104,5 +117,11 @@ const styles = StyleSheet.create({
   },
   descriptionCard: {
     backgroundColor: "#d0dce2",
+  },
+  banner: {
+    backgroundColor: "red",
+  },
+  bannerText: {
+    fontSize: 22,
   },
 });

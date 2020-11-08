@@ -3,12 +3,13 @@ import { StyleSheet, FlatList } from "react-native";
 import AssignmentCard from "./AssignmentCard";
 import Assignments from "../modules/assignments";
 import { Button, Container, Text } from "native-base";
-
 import { useSelector } from "react-redux";
 
 const AssignmentsIndex = ({ navigation }) => {
   const authenticated = useSelector((state) => state.authenticated);
   const [assignments, setAssignments] = useState([]);
+  const [message, setMessage] = useState("");
+  const role = useSelector((state) => state.currentUser.role);
 
   useEffect(() => {
     const getAssignmentsIndex = async () => {
@@ -19,21 +20,26 @@ const AssignmentsIndex = ({ navigation }) => {
   }, []);
 
   let redirect;
-  if (authenticated) {
+  if (role === "client") {
     redirect = "assignmentForm";
+  } else if (role === "develuper") {
+    redirect = "develUp";
   } else {
     redirect = "clientSignUp";
   }
 
   return (
     <Container style={styles.container}>
+      <Text>{message && <Text>{message}</Text>}</Text>
       <Button
-        testID="wantToPublishButton"
+        testID="navigationButton"
         onPress={() => navigation.navigate(redirect)}
       >
         <Text>
-          {authenticated
+          {authenticated && role === "client"
             ? "Publish Assignments"
+            : role === "develuper"
+            ? "Profile page"
             : "Publish Assignments for free!"}
         </Text>
       </Button>
@@ -42,7 +48,7 @@ const AssignmentsIndex = ({ navigation }) => {
         data={assignments}
         keyExtractor={(assignment) => assignment.id.toString()}
         renderItem={({ item }) => {
-          return <AssignmentCard navigation={navigation} assignment={item}  />;
+          return <AssignmentCard navigation={navigation} assignment={item} />;
         }}
       />
     </Container>

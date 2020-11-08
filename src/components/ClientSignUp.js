@@ -21,7 +21,7 @@ const ClientSignUp = (props) => {
   const [passwordConfirmation, setPasswordConfirmation] = useState("");
   const [company, setCompany] = useState("");
   const [companyUrl, setCompanyUrl] = useState("");
-  const [message, setMessage] = useState();
+  const [errorMessage, setErrorMessage] = useState();
   const auth = new Auth({ host: "https://develup-2020.herokuapp.com/api" });
 
   const storage = AsyncStorage;
@@ -38,18 +38,18 @@ const ClientSignUp = (props) => {
       });
       await storage.setItem("auth-storage", JSON.stringify(response.headers));
       dispatch({
-        type: "SIGNUP",
+        type: "AUTHENTICATE",
         payload: {
           authenticated: true,
           currentUser: response.data.data,
         },
       });
       props.navigation.navigate("clientPage", {
-        clientSignUpMessage: `You are logged in with: ${response.data.data.company_name}!`,
+        message: `You are logged in with: ${response.data.data.company_name}!`,
       });
     } catch (error) {
       let errorMessage = error.response.data.errors.full_messages;
-      setMessage(errorMessage);
+      setErrorMessage(errorMessage);
     }
   };
 
@@ -98,7 +98,7 @@ const ClientSignUp = (props) => {
           </Item>
         </Form>
         <Text testID="errorMessageSubmit" style={styles.errorMessage}>
-          {message}
+          {errorMessage}
         </Text>
       </Content>
       <Button testID="submitButton" block onPress={() => signUpHandler()}>
