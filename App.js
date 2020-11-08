@@ -8,6 +8,8 @@ import ClientPage from "./src/components/ClientPage";
 import AssignmentForm from "./src/components/AssignmentForm";
 import Login from "./src/components/Login";
 import { useSelector } from "react-redux";
+import { Button } from "react-native";
+import { Text, Item } from "native-base";
 
 const Stack = createStackNavigator();
 
@@ -17,8 +19,24 @@ const App = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator screenOptions={myOptions}>
-        <Stack.Screen name="develUp" component={AssignmentsIndex} />
-        <Stack.Screen name="login" component={Login} />
+        <Stack.Screen
+          name="develUp"
+          component={AssignmentsIndex}
+          options={({ navigation }) => ({
+            headerRight: () => (
+              <Item>
+                {!authenticated && (
+                  <Text>
+                    <Button
+                      onPress={() => navigation.navigate("login")}
+                      title="Login"
+                    />
+                  </Text>
+                )}
+              </Item>
+            ),
+          })}
+        />
         <Stack.Screen name="singleAssignment" component={SingleAssignment} />
         {authenticated ? (
           <>
@@ -26,7 +44,10 @@ const App = () => {
             <Stack.Screen name="assignmentForm" component={AssignmentForm} />
           </>
         ) : (
-          <Stack.Screen name="clientSignUp" component={ClientSignUp} />
+          <>
+            <Stack.Screen name="login" component={Login} />
+            <Stack.Screen name="clientSignUp" component={ClientSignUp} />
+          </>
         )}
       </Stack.Navigator>
     </NavigationContainer>
