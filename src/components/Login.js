@@ -39,7 +39,7 @@ const Login = (props) => {
       });
 
       response.data.role === "client"
-        ? props.navigation.navigate("develUp", {
+        ? props.navigation.navigate("clientPage", {
             clientSignUpMessage: `You are logged in with: ${response.data.email}!`,
           })
         : props.navigation.navigate("develUp", {

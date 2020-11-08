@@ -30,6 +30,7 @@ const App = () => {
                     <Button
                       onPress={() => navigation.navigate("login")}
                       title="Login"
+                      testID="loginButton"
                     />
                   </Text>
                 )}
