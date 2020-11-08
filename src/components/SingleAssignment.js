@@ -46,7 +46,6 @@ const SingleAssignment = ({ route }) => {
               <Text testID="budget" style={styles.budget} note>
                 $ {assignment.budget}
               </Text>
-              <Text>{assignment.id}</Text>
             </Body>
           </Left>
         </CardItem>
@@ -73,11 +72,13 @@ const SingleAssignment = ({ route }) => {
           </Body>
         </CardItem>
       </Card>
-      <Item style={styles.banner}>
-        <Text>
-          {message && <Text style={styles.bannerText}>{message}</Text>}
-        </Text>
-      </Item>
+      <Text>
+        {message && (
+          <Item style={styles.banner}>
+            <Text style={styles.bannerText}>{message}</Text>
+          </Item>
+        )}
+      </Text>
     </>
   );
 };

@@ -10,6 +10,7 @@ import Login from "./src/components/Login";
 import { useSelector } from "react-redux";
 import { Button } from "react-native";
 import { Text, Item } from "native-base";
+import HeaderButtons from "./src/components/HeaderButtons";
 
 const Stack = createStackNavigator();
 
@@ -18,26 +19,20 @@ const App = () => {
 
   return (
     <NavigationContainer>
-      <Stack.Navigator screenOptions={myOptions}>
-        <Stack.Screen
-          name="develUp"
-          component={AssignmentsIndex}
-          options={({ navigation }) => ({
-            headerRight: () => (
-              <Item>
-                {!authenticated && (
-                  <Text>
-                    <Button
-                      onPress={() => navigation.navigate("login")}
-                      title="Login"
-                      testID="loginButton"
-                    />
-                  </Text>
-                )}
-              </Item>
-            ),
-          })}
-        />
+      <Stack.Navigator
+        screenOptions={(props) => ({
+          headerStyle: { backgroundColor: "#F9AA33" },
+          title: "develUp",
+          headerTitleAlign: "center",
+          headerTitleStyle: {
+            fontWeight: "bold",
+            fontSize: 25,
+          },
+          headerTintColor: "white",
+          headerRight: () => <HeaderButtons {...props} />,
+        })}
+      >
+        <Stack.Screen name="develUp" component={AssignmentsIndex} />
         <Stack.Screen name="singleAssignment" component={SingleAssignment} />
         {authenticated ? (
           <>
@@ -56,14 +51,3 @@ const App = () => {
 };
 
 export default App;
-
-const myOptions = {
-  headerStyle: { backgroundColor: "#F9AA33" },
-  title: "develUp",
-  headerTitleAlign: "center",
-  headerTitleStyle: {
-    fontWeight: "bold",
-    fontSize: 25,
-  },
-  headerTintColor: "white",
-};
