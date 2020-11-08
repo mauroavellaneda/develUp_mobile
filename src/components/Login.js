@@ -23,7 +23,7 @@ const Login = (props) => {
 
   const storage = AsyncStorage;
 
-  const auth = new Auth({ host: "http://localhost:3000/api" });
+  const auth = new Auth({ host: "http://localhost:3000/api" })
 
   const loginHandler = async () => {
     try {
@@ -37,7 +37,7 @@ const Login = (props) => {
           currentUser: response.data,
         },
       });
-
+      
       response.data.role === "client"
         ? props.navigation.navigate("clientPage", {
             clientSignUpMessage: `You are logged in with: ${response.data.email}!`,

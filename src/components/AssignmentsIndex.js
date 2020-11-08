@@ -3,13 +3,12 @@ import { StyleSheet, FlatList } from "react-native";
 import AssignmentCard from "./AssignmentCard";
 import Assignments from "../modules/assignments";
 import { Button, Container, Text } from "native-base";
-
 import { useSelector } from "react-redux";
 
 const AssignmentsIndex = ({ navigation }) => {
   const authenticated = useSelector((state) => state.authenticated);
   const [assignments, setAssignments] = useState([]);
-
+  const role = useSelector((state) => state.currentUser.role);
 
   useEffect(() => {
     const getAssignmentsIndex = async () => {
@@ -33,8 +32,10 @@ const AssignmentsIndex = ({ navigation }) => {
         onPress={() => navigation.navigate(redirect)}
       >
         <Text>
-          {authenticated
+          {authenticated && role === "client"
             ? "Publish Assignments"
+            : role === "develuper"
+            ? "Welcome develUper"
             : "Publish Assignments for free!"}
         </Text>
       </Button>

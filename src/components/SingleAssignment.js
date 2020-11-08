@@ -2,9 +2,12 @@ import React, { useEffect, useState } from "react";
 import { StyleSheet } from "react-native";
 import { Card, CardItem, Text, Icon, Left, Body, Badge } from "native-base";
 import Assignments from "../modules/assignments";
+import { useSelector } from "react-redux";
 
 const SingleAssignment = ({ route }) => {
   const [assignment, setAssignment] = useState({});
+  const [message, setMessage] = useState("")
+  const authenticated = useSelector((state) => state.authenticated);
 
   useEffect(() => {
     const getSingleAssignment = async () => {
@@ -20,6 +23,9 @@ const SingleAssignment = ({ route }) => {
 
   return (
     <Card>
+      <Text>
+         {!authenticated && <Text>{message}</Text>}
+         </Text>
       <CardItem header bordered style={styles.titleCard}>
         <Left>
           <Icon name="laptop" />
