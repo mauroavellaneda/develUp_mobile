@@ -14,10 +14,12 @@ import {
 import Assignments from "../modules/assignments";
 import { useSelector } from "react-redux";
 
-const SingleAssignment = ({ route }) => {
+
+const SingleAssignment = ({ route, navigation }) => {
   const [assignment, setAssignment] = useState({});
   const authenticated = useSelector((state) => state.authenticated);
   const [message, setMessage] = useState("");
+  const currentUser = useSelector(state => state.currentUser) 
 
   useEffect(() => {
     const getSingleAssignment = async () => {
@@ -35,8 +37,12 @@ const SingleAssignment = ({ route }) => {
   }, [route]);
 
   const applyHandler = () => {
-    let response = await Assignments.apply(route.params.assignmentId, applicantId)
-    
+    let response = await Assignments.apply(route.params.assignmentId, currentUser.id)
+    if (response.message) {
+      navigation.navigate("develUp", {
+        message: response.data
+      });
+    } 
   }
 
 
