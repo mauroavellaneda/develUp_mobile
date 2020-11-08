@@ -6,7 +6,7 @@ const ClientPage = (props) => {
   return (
     <View>
       <Text testID="welcomeMessage" style={styles.clientSignUpMessage}>
-        {props.route.params.clientSignUpMessage}
+        {props.route.params.message}
       </Text>
       <Item>
         <Text

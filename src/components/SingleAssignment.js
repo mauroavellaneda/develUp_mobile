@@ -6,12 +6,14 @@ import { useSelector } from "react-redux";
 
 const SingleAssignment = ({ route }) => {
   const [assignment, setAssignment] = useState({});
-  const [message, setMessage] = useState("")
   const authenticated = useSelector((state) => state.authenticated);
 
   useEffect(() => {
     const getSingleAssignment = async () => {
-      const response = await Assignments.show(route.params.assignmentId, authenticated);
+      const response = await Assignments.show(
+        route.params.assignmentId,
+        authenticated
+      );
       if (response.id) {
         setAssignment(response);
       } else {
@@ -23,17 +25,14 @@ const SingleAssignment = ({ route }) => {
 
   return (
     <Card>
-      <Text>
-         {!authenticated && <Text>{message}</Text>}
-         </Text>
       <CardItem header bordered style={styles.titleCard}>
         <Left>
           <Icon name="laptop" />
           <Body>
-            <Text testID="title" style={styles.title} >
+            <Text testID="title" style={styles.title}>
               {assignment.title}
             </Text>
-            <Text testID="budget" style={styles.budget} note >
+            <Text testID="budget" style={styles.budget} note>
               $ {assignment.budget}
             </Text>
             <Text>{assignment.id}</Text>

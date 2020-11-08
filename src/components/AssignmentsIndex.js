@@ -8,6 +8,7 @@ import { useSelector } from "react-redux";
 const AssignmentsIndex = ({ navigation }) => {
   const authenticated = useSelector((state) => state.authenticated);
   const [assignments, setAssignments] = useState([]);
+  const [message, setMessage] = useState("");
   const role = useSelector((state) => state.currentUser.role);
 
   useEffect(() => {
@@ -29,8 +30,9 @@ const AssignmentsIndex = ({ navigation }) => {
 
   return (
     <Container style={styles.container}>
+      <Text>{message && <Text>{message}</Text>}</Text>
       <Button
-        testID="wantToPublishButton"
+        testID="navigationButton"
         onPress={() => navigation.navigate(redirect)}
       >
         <Text>
