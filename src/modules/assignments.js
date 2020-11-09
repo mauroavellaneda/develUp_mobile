@@ -49,6 +49,7 @@ const Assignments = {
   },
 
   async apply(assignmentId, applicantId) {
+
     let headers = JSON.parse(await storage.getItem("auth-storage"));
     try {
       let response = await axios.put(

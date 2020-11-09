@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { StyleSheet } from "react-native";
+import { StyleSheet, Dimensions } from "react-native";
 import {
   Card,
   CardItem,
@@ -35,14 +35,14 @@ const SingleAssignment = ({ route, navigation }) => {
     getSingleAssignment();
   }, [route]);
 
-  // useEffect(() => {
-  //   const appliedChecker = async () => {
-  //     if (assignment.applicants.includes(currentUser.email)) {
-  //       setApplied(true);
-  //     }
-  //   };
-  //   appliedChecker();
-  // }, [assignment]);
+  useEffect(() => {
+    const appliedChecker = async () => {
+      if (assignment.applicants.includes(currentUser.id)) {
+        setApplied(true);
+      }
+    };
+    appliedChecker();
+  }, [assignment]);
 
   const applyHandler = async () => {
     let response = await Assignments.apply(
@@ -52,7 +52,6 @@ const SingleAssignment = ({ route, navigation }) => {
     if (response.message) {
       setApplied(true);
     } else {
-      debugger;
       setMessage(response);
     }
   };
@@ -113,8 +112,13 @@ const SingleAssignment = ({ route, navigation }) => {
       )}
       <Text>
         {message && (
-          <Button full danger onPress={() => navigation.navigate("develUp")}>
-            <Text>{message}</Text>
+          <Button
+            style={styles.fullWidth}
+            full
+            danger
+            onPress={() => navigation.navigate("develUp")}
+          >
+            <Text> {message} </Text>
           </Button>
         )}
       </Text>
@@ -146,5 +150,8 @@ const styles = StyleSheet.create({
   },
   descriptionCard: {
     backgroundColor: "#d0dce2",
+  },
+  fullWidth: {
+    width: Dimensions.get("window").width,
   },
 });

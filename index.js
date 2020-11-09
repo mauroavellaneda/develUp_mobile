@@ -8,7 +8,6 @@ import configureStore from "./src/state/store/configureStore";
 // axios.defaults.baseURL = "https://develup-2020.herokuapp.com/api";
 axios.defaults.baseURL = "http://localhost:3000/api";
 
-
 const store = configureStore();
 
 const ConnectedApp = () => {
