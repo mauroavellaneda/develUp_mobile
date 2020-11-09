@@ -11,6 +11,7 @@ import { useSelector } from "react-redux";
 import { Button } from "react-native";
 import { Text, Item } from "native-base";
 import HeaderButtons from "./src/components/HeaderButtons";
+import Subscribe from './src/components/Subscribe'
 
 const Stack = createStackNavigator();
 
@@ -31,7 +32,8 @@ const App = () => {
           headerTintColor: "white",
           headerRight: () => <HeaderButtons {...props} />,
         })}
-      >
+      > 
+      <Stack.Screen name="subscribe" component={Subscribe} />
         <Stack.Screen name="develUp" component={AssignmentsIndex} />
         <Stack.Screen name="singleAssignment" component={SingleAssignment} />
         {authenticated ? (
