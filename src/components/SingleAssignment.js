@@ -103,7 +103,7 @@ const SingleAssignment = ({ route, navigation }) => {
       {authenticated && applied && (
         <Button
           success
-          testID="applyButton"
+          testID="successfullyAppliedMessage"
           block
           onPress={() => navigation.navigate("develUp")}
         >
