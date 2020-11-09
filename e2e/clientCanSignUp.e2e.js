@@ -5,7 +5,7 @@ describe("Client can sign up", () => {
     await reloadApp();
   });
 
-  xit("successfully ", async () => {
+  it("successfully ", async () => {
     await expect(element(by.id("wantToPublishButton"))).toBeVisible();
     await element(by.id("wantToPublishButton")).tap();
     await element(by.id("emailLabel")).tap();

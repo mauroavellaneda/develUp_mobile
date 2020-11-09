@@ -4,7 +4,7 @@ describe("Visitor can see single assignment", () => {
     await reloadApp();
   });
 
-  xit("successfully ", async () => {
+  it.only("successfully ", async () => {
     await expect(element(by.id("assignment-45"))).toExist();
     element(by.id("assignment-45")).tap();
     element(by.label("Build a Web page"));

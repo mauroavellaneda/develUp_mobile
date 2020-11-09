@@ -16,7 +16,7 @@ const App = () => {
     <NavigationContainer>
       <Stack.Navigator screenOptions={myOptions}>
         <Stack.Screen name="develUp" component={AssignmentsIndex} />
-        {/* <Stack.Screen name="singleAssignment" component={SingleAssignment} />
+        <Stack.Screen name="singleAssignment" component={SingleAssignment} />
         {authenticated ? (
           <>
             <Stack.Screen name="clientPage" component={ClientPage} />
@@ -24,7 +24,7 @@ const App = () => {
           </>
         ) : (
           <Stack.Screen name="clientSignUp" component={ClientSignUp} />
-        )} */}
+        )}
       </Stack.Navigator>
     </NavigationContainer>
   );

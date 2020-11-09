@@ -12,7 +12,6 @@ const AssignmentsIndex = ({ navigation }) => {
 
   const getAssignmentsIndex = async () => {
     const response = await Assignments.index();
-    debugger
     setAssignments(response);
   };
   useEffect(() => {
