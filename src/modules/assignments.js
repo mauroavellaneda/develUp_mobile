@@ -60,7 +60,7 @@ const Assignments = {
           headers: headers,
         }
       );
-      return response.data.message;
+      return response.data;
     } catch (error) {
       let errorMessage = error.response.data.message;
       return errorMessage;

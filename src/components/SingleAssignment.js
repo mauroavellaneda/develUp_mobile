@@ -9,17 +9,16 @@ import {
   Body,
   Badge,
   Button,
-  Item,
 } from "native-base";
 import Assignments from "../modules/assignments";
 import { useSelector } from "react-redux";
-
 
 const SingleAssignment = ({ route, navigation }) => {
   const [assignment, setAssignment] = useState({});
   const authenticated = useSelector((state) => state.authenticated);
   const [message, setMessage] = useState("");
-  const currentUser = useSelector(state => state.currentUser) 
+  const currentUser = useSelector((state) => state.currentUser);
+  const [applied, setApplied] = useState(false);
 
   useEffect(() => {
     const getSingleAssignment = async () => {
@@ -36,15 +35,27 @@ const SingleAssignment = ({ route, navigation }) => {
     getSingleAssignment();
   }, [route]);
 
-  const applyHandler = () => {
-    let response = await Assignments.apply(route.params.assignmentId, currentUser.id)
-    if (response.message) {
-      navigation.navigate("develUp", {
-        message: response.data
-      });
-    } 
-  }
+  // useEffect(() => {
+  //   const appliedChecker = async () => {
+  //     if (assignment.applicants.includes(currentUser.email)) {
+  //       setApplied(true);
+  //     }
+  //   };
+  //   appliedChecker();
+  // }, [assignment]);
 
+  const applyHandler = async () => {
+    let response = await Assignments.apply(
+      route.params.assignmentId,
+      currentUser.id
+    );
+    if (response.message) {
+      setApplied(true);
+    } else {
+      debugger;
+      setMessage(response);
+    }
+  };
 
   return (
     <>
@@ -85,14 +96,26 @@ const SingleAssignment = ({ route, navigation }) => {
           </Body>
         </CardItem>
       </Card>
-      <Button testID="applyButton" block onPress={() => applyHandler()}>
-        <Text>Apply now</Text>
-      </Button>
+      {authenticated && !applied && (
+        <Button testID="applyButton" block onPress={() => applyHandler()}>
+          <Text>Apply now!</Text>
+        </Button>
+      )}
+      {authenticated && applied && (
+        <Button
+          success
+          testID="applyButton"
+          block
+          onPress={() => navigation.navigate("develUp")}
+        >
+          <Text>You have Applied! Keep Browsing</Text>
+        </Button>
+      )}
       <Text>
         {message && (
-          <Item style={styles.banner}>
-            <Text style={styles.bannerText}>{message}</Text>
-          </Item>
+          <Button full danger onPress={() => navigation.navigate("develUp")}>
+            <Text>{message}</Text>
+          </Button>
         )}
       </Text>
     </>
@@ -123,11 +146,5 @@ const styles = StyleSheet.create({
   },
   descriptionCard: {
     backgroundColor: "#d0dce2",
-  },
-  banner: {
-    backgroundColor: "red",
-  },
-  bannerText: {
-    fontSize: 22,
   },
 });

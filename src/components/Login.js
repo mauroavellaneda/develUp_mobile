@@ -23,7 +23,9 @@ const Login = (props) => {
 
   const storage = AsyncStorage;
 
-  const auth = new Auth({ host: "https://develup-2020.herokuapp.com/api" })
+  // const auth = new Auth({ host: "https://develup-2020.herokuapp.com/api" })
+  const auth = new Auth({ host: "http://localhost:3000/api" })
+
 
   const loginHandler = async () => {
     try {
