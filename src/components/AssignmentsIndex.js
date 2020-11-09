@@ -10,11 +10,12 @@ const AssignmentsIndex = ({ navigation }) => {
   const authenticated = useSelector((state) => state.authenticated);
   const [assignments, setAssignments] = useState([]);
 
+  const getAssignmentsIndex = async () => {
+    const response = await Assignments.index();
+    debugger
+    setAssignments(response);
+  };
   useEffect(() => {
-    const getAssignmentsIndex = async () => {
-      const response = await Assignments.index();
-      setAssignments(response);
-    };
     getAssignmentsIndex();
   }, []);
 

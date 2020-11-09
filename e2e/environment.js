@@ -1,30 +1,22 @@
-//environment.js
 const { cleanup, init } = require("detox");
 const adapter = require("detox/runners/jest/adapter");
 const config = require("../package.json").detox;
-// const nock = require('nock')
-// const axios = require('axios')
-// const { assignmentsResponse } = require('./mocks/assignmentsResponse')
-// axios.defaults.adapter = require('axios/lib/adapters/http')
+const { mockServer } = require('./mockServer')
+
+let server
 jest.setTimeout(120000);
 jasmine.getEnv().addReporter(adapter);
-// const assignments = assignmentsResponse()
-// console.log(JSON.stringify(assignments))
-// nock(/my-json-server.typicode.com/)
-//   .get('/assignments')
-//   .delayBody(200)
-//   .reply(200, assignments)
+
 beforeAll(async () => {
-  // await nock(/my-json-server.typicode.com/)
-  //   .get('/assignments')
-  //   .reply(200, assignments)
+  server = mockServer.open(3000)
   await init(config);
 });
 beforeEach(async () => {
   await adapter.beforeEach();
 });
-afterEach(async () => {});
+afterEach(async () => { });
 afterAll(async () => {
+  mockServer.close(server)
   await adapter.afterAll();
   await cleanup();
 });
