@@ -11,11 +11,11 @@ const AssignmentsIndex = ({ navigation }) => {
   const [message, setMessage] = useState("");
   const role = useSelector((state) => state.currentUser.role);
 
+  const getAssignmentsIndex = async () => {
+    const response = await Assignments.index();
+    setAssignments(response);
+  };
   useEffect(() => {
-    const getAssignmentsIndex = async () => {
-      const response = await Assignments.index();
-      setAssignments(response);
-    };
     getAssignmentsIndex();
   }, []);
 
