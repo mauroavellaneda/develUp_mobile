@@ -37,8 +37,12 @@ const SingleAssignment = ({ route, navigation }) => {
 
   useEffect(() => {
     const appliedChecker = async () => {
-      if (assignment.applicants.includes(currentUser.id)) {
-        setApplied(true);
+      try {
+        if (assignment.applicants.includes(currentUser.id)) {
+          setApplied(true);
+        }
+      } catch (error) {
+        console.log(error);
       }
     };
     appliedChecker();
@@ -95,12 +99,12 @@ const SingleAssignment = ({ route, navigation }) => {
           </Body>
         </CardItem>
       </Card>
-      {authenticated && !applied && (
+      {currentUser.role === "develuper" && !applied && (
         <Button testID="applyButton" block onPress={() => applyHandler()}>
           <Text>Apply now!</Text>
         </Button>
       )}
-      {authenticated && applied && (
+      {currentUser.role === "develuper" && applied && (
         <Button
           success
           testID="applyButton"
