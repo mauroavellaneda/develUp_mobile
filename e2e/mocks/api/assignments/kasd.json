@@ -1,6 +1,3 @@
- HTTP/1.1 201 CREATED
-Content-Type: application/json; charset=utf-8
-
 {
   "message": "successfully saved",
   "status": 200,
