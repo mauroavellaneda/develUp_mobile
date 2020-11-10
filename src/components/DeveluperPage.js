@@ -29,7 +29,7 @@ const DeveluperPage = ({ route }) => {
             </Body>
           </Left>
         </CardItem>
-        <CardItem style={styles.descriptionCard}>
+        <CardItem style={styles.description}>
           <Body>
             <Text testID="description" style={styles.description}>
               {develuperProfile.email}
@@ -51,7 +51,7 @@ const DeveluperPage = ({ route }) => {
             </Text>
           </Body>
         </CardItem>
-        <CardItem header bordered style={styles.titleCard}>
+        <CardItem header bordered style={styles.titleCardSkills}>
           <Left>
             <Icon name="laptop" />
             <Body>
@@ -80,7 +80,8 @@ export default DeveluperPage;
 
 const styles = StyleSheet.create({
   titleCard: {
-    backgroundColor: "#4A6572",
+    backgroundColor: "#4e8de0",
+    height: 90,
   },
   container: {
     backgroundColor: "#4A6572",
@@ -97,11 +98,16 @@ const styles = StyleSheet.create({
   },
   description: {
     fontSize: 22,
+    backgroundColor: "#78acef"
   },
   descriptionCard: {
     backgroundColor: "#d0dce2",
   },
   fullWidth: {
     width: Dimensions.get("window").width,
+  },
+  titleCardSkills: {
+    backgroundColor: "#78acef",
+    height: 80,
   },
 });
