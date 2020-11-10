@@ -23,7 +23,7 @@ const DeveluperPage = ({ route }) => {
           <Left>
             <Icon name="person" />
             <Body>
-              <Text testID="title" style={styles.title}>
+              <Text testID="develuperName" style={styles.title}>
                 {develuperProfile.name}
               </Text>
             </Body>

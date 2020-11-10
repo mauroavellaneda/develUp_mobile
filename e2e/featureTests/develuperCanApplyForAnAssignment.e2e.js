@@ -15,7 +15,6 @@ describe("Develuper can apply for an assignment", () => {
   it("successfully", async () => {
     await expect(element(by.id("assignment-45"))).toExist();
     await expect(element(by.id("assignment-45"))).toBeVisible();
-
     await element(by.id("assignment-45")).tap();
     await expect(element(by.id("applyButton"))).toBeVisible();
     await element(by.id("applyButton")).tap();
