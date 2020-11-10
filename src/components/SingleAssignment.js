@@ -62,43 +62,45 @@ const SingleAssignment = ({ route, navigation }) => {
 
   return (
     <>
-      <Card>
-        <CardItem header bordered style={styles.titleCard}>
-          <Left>
-            <Icon name="laptop" />
+      {authenticated && (
+        <Card>
+          <CardItem header bordered style={styles.titleCard}>
+            <Left>
+              <Icon name="laptop" />
+              <Body>
+                <Text testID="title" style={styles.title}>
+                  {assignment.title}
+                </Text>
+                <Text testID="budget" style={styles.budget} note>
+                  $ {assignment.budget}
+                </Text>
+              </Body>
+            </Left>
+          </CardItem>
+          <CardItem style={styles.descriptionCard}>
             <Body>
-              <Text testID="title" style={styles.title}>
-                {assignment.title}
-              </Text>
-              <Text testID="budget" style={styles.budget} note>
-                $ {assignment.budget}
+              <Text testID="description" style={styles.description}>
+                {assignment.description}
               </Text>
             </Body>
-          </Left>
-        </CardItem>
-        <CardItem style={styles.descriptionCard}>
-          <Body>
-            <Text testID="description" style={styles.description}>
-              {assignment.description}
-            </Text>
-          </Body>
-        </CardItem>
-        <CardItem footer bordered style={styles.container}>
-          <Left testID="points">
-            <Text note style={styles.container2}>
-              Points:
-            </Text>
-            <Badge primary>
-              <Text>{assignment.points}</Text>
-            </Badge>
-          </Left>
-          <Body>
-            <Text testID="skills" note style={styles.cardSkills}>
-              Skills: {assignment.skills}
-            </Text>
-          </Body>
-        </CardItem>
-      </Card>
+          </CardItem>
+          <CardItem footer bordered style={styles.container}>
+            <Left testID="points">
+              <Text note style={styles.container2}>
+                Points:
+              </Text>
+              <Badge primary>
+                <Text>{assignment.points}</Text>
+              </Badge>
+            </Left>
+            <Body>
+              <Text testID="skills" note style={styles.cardSkills}>
+                Skills: {assignment.skills}
+              </Text>
+            </Body>
+          </CardItem>
+        </Card>
+      )}
       {currentUser.role === "develuper" && !applied && (
         <Button testID="applyButton" block onPress={() => applyHandler()}>
           <Text>Apply now!</Text>
@@ -120,7 +122,7 @@ const SingleAssignment = ({ route, navigation }) => {
             style={styles.fullWidth}
             full
             danger
-            onPress={() => navigation.navigate("develUp")}
+            onPress={() => navigation.navigate("login")}
           >
             <Text> {message} </Text>
           </Button>
