@@ -1,6 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { StyleSheet, Text, Dimensions } from "react-native";
 import Users from "../modules/users";
+import {
+  Card,
+  CardItem,
+  Icon,
+  Left,
+  Body,
+  Badge,
+  Button,
+} from "native-base";
 
 const DeveluperPage = ({ route }) => {
   const [develuperProfile, setDeveluperProfile] = useState();
@@ -17,73 +26,60 @@ const DeveluperPage = ({ route }) => {
 
   return (
     <>
-      <Text>{route.params.userId}</Text>
-      {/* {authenticated && (
-        <Card>
-          <CardItem header bordered style={styles.titleCard}>
-            <Left>
-              <Icon name="laptop" />
-              <Body>
-                <Text testID="title" style={styles.title}>
-                  {assignment.title}
-                </Text>
-                <Text testID="budget" style={styles.budget} note>
-                  $ {assignment.budget}
-                </Text>
-              </Body>
-            </Left>
-          </CardItem>
-          <CardItem style={styles.descriptionCard}>
+      <Card>
+        <CardItem header bordered style={styles.titleCard}>
+          <Left>
+            <Icon name="laptop" />
             <Body>
-              <Text testID="description" style={styles.description}>
-                {assignment.description}
+              <Text testID="title" style={styles.title}>
+                {develuperProfile.name}
               </Text>
             </Body>
-          </CardItem>
-          <CardItem footer bordered style={styles.container}>
-            <Left testID="points">
-              <Text note style={styles.container2}>
-                Points:
-              </Text>
-              <Badge primary>
-                <Text>{assignment.points}</Text>
-              </Badge>
-            </Left>
+          </Left>
+        </CardItem>
+        <CardItem style={styles.descriptionCard}>
+          <Body>
+            <Text testID="description" style={styles.description}>
+              {develuperProfile.email}
+            </Text>
+          </Body>
+        </CardItem>
+        <CardItem footer bordered style={styles.container}>
+          <Left testID="points">
+            <Text note style={styles.container2}>
+              Points:
+            </Text>
+            <Badge primary>
+              <Text>{develuperProfile.level}</Text>
+            </Badge>
+          </Left>
+          <Body>
+            <Text testID="skills" note style={styles.cardSkills}>
+              Skills: {develuperProfile.points}
+            </Text>
+          </Body>
+        </CardItem>
+        <CardItem header bordered style={styles.titleCard}>
+          <Left>
+            <Icon name="laptop" />
             <Body>
-              <Text testID="skills" note style={styles.cardSkills}>
-                Skills: {assignment.skills}
+              <Text testID="title" style={styles.title}>
+                {develuperProfile.skills}
               </Text>
             </Body>
-          </CardItem>
-        </Card>
-      )}
-      {currentUser.role === "develuper" && !applied && (
-        <Button testID="applyButton" block onPress={() => applyHandler()}>
-          <Text>Apply now!</Text>
-        </Button>
-      )}
-      {currentUser.role === "develuper" && applied && (
-        <Button
-          success
-          testID="successfullyAppliedMessage"
-          block
-          onPress={() => navigation.navigate("develUp")}
-        >
-          <Text>You have Applied! Keep Browsing</Text>
-        </Button>
-      )}
-      <Text>
-        {message && (
-          <Button
-            style={styles.fullWidth}
-            full
-            danger
-            onPress={() => navigation.navigate("login")}
-          >
-            <Text> {message} </Text>
-          </Button>
-        )}
-      </Text> */}
+          </Left>
+        </CardItem>
+        <CardItem header bordered style={styles.titleCard}>
+          <Left>
+            <Icon name="laptop" />
+            <Body>
+              <Text testID="title" style={styles.title}>
+                {develuperProfile.completed_projects}
+              </Text>
+            </Body>
+          </Left>
+        </CardItem>
+      </Card>
     </>
   );
 };
