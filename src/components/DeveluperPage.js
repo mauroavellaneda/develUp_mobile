@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { StyleSheet, Text, Dimensions } from "react-native";
 import Users from "../modules/users";
-import { Card, CardItem, Icon, Left, Body, Badge } from "native-base";
+import { Card, CardItem, Icon, Left, Body, Badge, Right } from "native-base";
 
 const DeveluperPage = ({ route }) => {
   const [develuperProfile, setDeveluperProfile] = useState([]);
@@ -19,9 +19,9 @@ const DeveluperPage = ({ route }) => {
   return (
     <>
       <Card>
-        <CardItem header bordered style={styles.titleCard}>
+        <CardItem header bordered style={styles.firstCard}>
           <Left>
-            <Icon name="person" />
+            <Icon name="person" style={styles.person} />
             <Body>
               <Text testID="title" style={styles.title}>
                 {develuperProfile.name}
@@ -29,47 +29,53 @@ const DeveluperPage = ({ route }) => {
             </Body>
           </Left>
         </CardItem>
-        <CardItem style={styles.description}>
-          <Body>
-            <Text testID="description" style={styles.description}>
-              {develuperProfile.email}
-            </Text>
-          </Body>
-        </CardItem>
         <CardItem footer bordered style={styles.container}>
           <Left testID="points">
             <Text note style={styles.container2}>
-              Points:
+              Level:
             </Text>
             <Badge primary>
               <Text>{develuperProfile.level}</Text>
             </Badge>
           </Left>
-          <Body>
-            <Text testID="skills" note style={styles.cardSkills}>
-              Skills: {develuperProfile.points}
-            </Text>
-          </Body>
+          <Right>
+            <Body>
+              <Text testID="skills" note style={styles.cardSkills}>
+                Points:
+              </Text>
+              <Badge primary>
+                <Text>{develuperProfile.points}</Text>
+              </Badge>
+            </Body>
+          </Right>
         </CardItem>
         <CardItem header bordered style={styles.titleCardSkills}>
           <Left>
             <Icon name="laptop" />
             <Body>
-              <Text testID="title" style={styles.title}>
+              <Text testID="title" style={styles.skills}>
                 {develuperProfile.skills}
               </Text>
             </Body>
           </Left>
         </CardItem>
-        <CardItem header bordered style={styles.titleCard}>
+        <CardItem header bordered style={styles.titleCardProjects}>
           <Left>
-            <Icon name="laptop" />
+            <Icon name="folder" />
+            <Text style={styles.projects}>Completed projects:</Text>
             <Body>
-              <Text testID="title" style={styles.title}>
-                {develuperProfile.completed_projects}
-              </Text>
+              <Text testID="title" style={styles.titleProjects}></Text>
+              <Badge primary>
+                <Text>{develuperProfile.completed_projects}</Text>
+              </Badge>
             </Body>
           </Left>
+        </CardItem>
+        <CardItem style={styles.mailAdress}>
+          <Icon name="mail" />
+          <Text testID="description" style={styles.skills}>
+            {develuperProfile.email}
+          </Text>
         </CardItem>
       </Card>
     </>
@@ -79,35 +85,42 @@ const DeveluperPage = ({ route }) => {
 export default DeveluperPage;
 
 const styles = StyleSheet.create({
-  titleCard: {
+  firstCard: {
     backgroundColor: "#4e8de0",
-    height: 90,
+    height: 250,
+  },
+  person: {
+    fontSize: 70,
+    margin: 5,
+  },
+  title: {
+    fontSize: 50,
+    padding: 20,
   },
   container: {
     backgroundColor: "#4A6572",
+    height: 60,
   },
-  cardSkills: {
-    color: "#ffff",
-  },
-  title: {
-    fontSize: 30,
-  },
-  budget: {
+  skills: {
     fontSize: 20,
-    color: "#0a0d10",
-  },
-  description: {
-    fontSize: 22,
-    backgroundColor: "#78acef"
-  },
-  descriptionCard: {
-    backgroundColor: "#d0dce2",
-  },
-  fullWidth: {
-    width: Dimensions.get("window").width,
   },
   titleCardSkills: {
-    backgroundColor: "#78acef",
-    height: 80,
+    backgroundColor: "#4A6572",
+    height: 60,
+  },
+  titleCardProjects: {
+    height: 60,
+    backgroundColor: "#4A6572",
+  },
+  titleProjects: {
+    fontSize: 20,
+  },
+  mailAdress: {
+    height: 60,
+    backgroundColor: "#4A6572",
+  },
+  projects: {
+    fontSize: 20,
+    margin: 4,
   },
 });
