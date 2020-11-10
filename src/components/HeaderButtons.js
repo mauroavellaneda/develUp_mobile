@@ -24,7 +24,7 @@ const HeaderButtons = (props) => {
       {currentUser.role === "develuper" && (
         <Button
           title="My Page"
-          onPress={() => props.navigation.navigate("develUp")}
+          onPress={() => props.navigation.navigate("develuperPage")}
         ></Button>
       )}
     </Text>

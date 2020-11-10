@@ -21,7 +21,6 @@ describe("Client can sign up", () => {
     await expect(element(by.id("submitButton"))).toBeVisible();
     await element(by.id("submitButton")).tap();
     await element(by.id("createAssignmentButton")).tap();
-
   });
   it("unsuccessfully with wrong password and existing email", async () => {
     await expect(element(by.id("navigationButton"))).toBeVisible();
