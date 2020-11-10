@@ -1,18 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { StyleSheet, Text, Dimensions } from "react-native";
 import Users from "../modules/users";
-import {
-  Card,
-  CardItem,
-  Icon,
-  Left,
-  Body,
-  Badge,
-  Button,
-} from "native-base";
+import { Card, CardItem, Icon, Left, Body, Badge } from "native-base";
 
 const DeveluperPage = ({ route }) => {
-  const [develuperProfile, setDeveluperProfile] = useState();
+  const [develuperProfile, setDeveluperProfile] = useState([]);
 
   useEffect(() => {
     const getDeveluperProfile = async () => {
@@ -29,7 +21,7 @@ const DeveluperPage = ({ route }) => {
       <Card>
         <CardItem header bordered style={styles.titleCard}>
           <Left>
-            <Icon name="laptop" />
+            <Icon name="person" />
             <Body>
               <Text testID="title" style={styles.title}>
                 {develuperProfile.name}

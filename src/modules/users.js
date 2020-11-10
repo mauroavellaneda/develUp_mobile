@@ -10,9 +10,9 @@ const Users = {
     try {
       const response = await axios.get(`/users/${userId}`, {
         headers: headers,
-      });debugger
+      });
       return response.data.user;
-    } catch (error) {debugger
+    } catch (error) {
       console.log(error);
     }
   },
