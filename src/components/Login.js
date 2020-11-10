@@ -22,7 +22,7 @@ const Login = (props) => {
 
   const storage = AsyncStorage;
 
-  const auth = new Auth({ host: "http://localhost:3000/api" });
+  const auth = new Auth({ host: "https://develup-2020.herokuapp.com/api" });
 
   const loginHandler = async () => {
     try {
@@ -90,7 +90,7 @@ const Login = (props) => {
           light
           onPress={() => props.navigation.navigate("clientSignUp")}
         >
-          <Text>I want to regiser as a client</Text>
+          <Text>I want to register as a client</Text>
         </Button>
       </Content>
     </Container>

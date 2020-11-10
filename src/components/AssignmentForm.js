@@ -99,7 +99,6 @@ const AssignmentForm = (props) => {
       skills: skillSelection,
       points: assignmentPoints,
     });
-debugger
     if (response === "successfully saved") {
       props.navigation.navigate("clientPage", {
         assignmentCreateMessage: `Assignment successfully created`,

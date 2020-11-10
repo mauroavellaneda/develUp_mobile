@@ -41,9 +41,8 @@ const Assignments = {
           headers: headers,
         }
       );
-      debugger
       return response.data.message;
-    } catch (error) {debugger
+    } catch (error) {
       let errorMessage = error.response.data.message;
       return errorMessage;
     }
