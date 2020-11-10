@@ -1,0 +1,132 @@
+ HTTP/1.1 200 OK
+Content-Type: application/json; charset=utf-8
+
+ {
+  "data": {
+    "message": "successfully saved"
+  },
+  "status": 200,
+  "headers": {
+    "x-permitted-cross-domain-policies": "none",
+    "x-xss-protection": "1; mode=block",
+    "etag": "W/\"77d9194b28ab10454ae750ccd9824298\"",
+    "uid": "client@mail.com",
+    "transfer-encoding": "Identity",
+    "token-type": "Bearer",
+    "content-type": "application/json; charset=utf-8",
+    "x-frame-options": "SAMEORIGIN",
+    "x-request-id": "e648028b-f70f-4385-9389-9e5565ac1ea7",
+    "vary": "Origin",
+    "cache-control": "max-age=0, private, must-revalidate",
+    "referrer-policy": "strict-origin-when-cross-origin",
+    "access-token": "5krOntiEsoin2iKB7brZ3A",
+    "expiry": "1606216834",
+    "x-content-type-options": "nosniff",
+    "client": "w1kidkgV_ka-VFfxuO_AAg",
+    "x-runtime": "0.029930",
+    "x-download-options": "noopen"
+  },
+  "config": {
+    "url": "/assignments",
+    "method": "post",
+    "data": "{\"assignment\":{\"title\":\"Dedede\",\"description\":\"Eddeedede\",\"timeframe\":\"222\",\"budget\":\"222\",\"skills\":[\"Fullstack\"],\"points\":2220}}",
+    "headers": {
+      "Accept": "application/json, text/plain, */*",
+      "Content-Type": "application/json; charset=utf-8",
+      "access-token": "5krOntiEsoin2iKB7brZ3A",
+      "cache-control": "max-age=0, private, must-revalidate",
+      "client": "w1kidkgV_ka-VFfxuO_AAg",
+      "expiry": "1606216834",
+      "token-type": "Bearer",
+      "uid": "client@mail.com"
+    },
+    "baseURL": "http://localhost:3000/api",
+    "transformRequest": [
+      null
+    ],
+    "transformResponse": [
+      null
+    ],
+    "timeout": 0,
+    "xsrfCookieName": "XSRF-TOKEN",
+    "xsrfHeaderName": "X-XSRF-TOKEN",
+    "maxContentLength": -1,
+    "maxBodyLength": -1
+  },
+  "request": {
+    "UNSENT": 0,
+    "OPENED": 1,
+    "HEADERS_RECEIVED": 2,
+    "LOADING": 3,
+    "DONE": 4,
+    "readyState": 4,
+    "status": 200,
+    "timeout": 0,
+    "withCredentials": true,
+    "upload": {},
+    "_aborted": false,
+    "_hasError": false,
+    "_method": "POST",
+    "_perfKey": "network_XMLHttpRequest_http://localhost:3000/api/assignments",
+    "_response": "{\"message\":\"successfully saved\"}",
+    "_url": "http://localhost:3000/api/assignments",
+    "_timedOut": false,
+    "_trackingName": "unknown",
+    "_incrementalEvents": false,
+    "responseHeaders": {
+      "X-Permitted-Cross-Domain-Policies": "none",
+      "X-XSS-Protection": "1; mode=block",
+      "Etag": "W/\"77d9194b28ab10454ae750ccd9824298\"",
+      "uid": "client@mail.com",
+      "Transfer-Encoding": "Identity",
+      "token-type": "Bearer",
+      "Content-Type": "application/json; charset=utf-8",
+      "X-Frame-Options": "SAMEORIGIN",
+      "X-Request-Id": "e648028b-f70f-4385-9389-9e5565ac1ea7",
+      "Vary": "Origin",
+      "Cache-Control": "max-age=0, private, must-revalidate",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "access-token": "5krOntiEsoin2iKB7brZ3A",
+      "expiry": "1606216834",
+      "X-Content-Type-Options": "nosniff",
+      "client": "w1kidkgV_ka-VFfxuO_AAg",
+      "X-Runtime": "0.029930",
+      "X-Download-Options": "noopen"
+    },
+    "_requestId": null,
+    "_headers": {
+      "accept": "application/json, text/plain, */*",
+      "content-type": "application/json; charset=utf-8",
+      "access-token": "5krOntiEsoin2iKB7brZ3A",
+      "cache-control": "max-age=0, private, must-revalidate",
+      "client": "w1kidkgV_ka-VFfxuO_AAg",
+      "expiry": "1606216834",
+      "token-type": "Bearer",
+      "uid": "client@mail.com"
+    },
+    "_responseType": "",
+    "_sent": true,
+    "_lowerCaseResponseHeaders": {
+      "x-permitted-cross-domain-policies": "none",
+      "x-xss-protection": "1; mode=block",
+      "etag": "W/\"77d9194b28ab10454ae750ccd9824298\"",
+      "uid": "client@mail.com",
+      "transfer-encoding": "Identity",
+      "token-type": "Bearer",
+      "content-type": "application/json; charset=utf-8",
+      "x-frame-options": "SAMEORIGIN",
+      "x-request-id": "e648028b-f70f-4385-9389-9e5565ac1ea7",
+      "vary": "Origin",
+      "cache-control": "max-age=0, private, must-revalidate",
+      "referrer-policy": "strict-origin-when-cross-origin",
+      "access-token": "5krOntiEsoin2iKB7brZ3A",
+      "expiry": "1606216834",
+      "x-content-type-options": "nosniff",
+      "client": "w1kidkgV_ka-VFfxuO_AAg",
+      "x-runtime": "0.029930",
+      "x-download-options": "noopen"
+    },
+    "_subscriptions": [],
+    "responseURL": "http://localhost:3000/api/assignments"
+  }
+}

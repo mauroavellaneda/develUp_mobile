@@ -8,8 +8,6 @@ import ClientPage from "./src/components/ClientPage";
 import AssignmentForm from "./src/components/AssignmentForm";
 import Login from "./src/components/Login";
 import { useSelector } from "react-redux";
-import { Button } from "react-native";
-import { Text, Item } from "native-base";
 import HeaderButtons from "./src/components/HeaderButtons";
 
 const Stack = createStackNavigator();

@@ -2,13 +2,18 @@ const { reloadApp } = require("detox-expo-helpers");
 describe("Client can create assignments", () => {
   beforeEach(async () => {
     await reloadApp();
-    await expect(element(by.id("loginButton"))).toBeVisible();
-    await element(by.id("loginButton")).tap();
+    await element(by.id("navigationButton")).tap();
     await element(by.id("emailLabel")).tap();
-    await element(by.id("emailInput")).typeText("client@mail.com");
+    await element(by.id("emailInput")).typeText("client6789@mail.com");
     await element(by.id("passwordLabel")).tap();
     await element(by.id("passwordInput")).typeText("password");
-    await element(by.id("loginContainer")).tap();
+    await element(by.id("passwordConfirmationLabel")).tap();
+    await element(by.id("passwordConfirmationInput")).typeText("password");
+    await element(by.id("companyNameLabel")).tap();
+    await element(by.id("companyNameInput")).typeText("develup");
+    await element(by.id("companyUrlLabel")).tap();
+    await element(by.id("companyUrlInput")).typeText("develup.com");
+    await element(by.id("mainContainer")).tap();
     await expect(element(by.id("submitButton"))).toBeVisible();
     await element(by.id("submitButton")).tap();
   });
@@ -28,10 +33,10 @@ describe("Client can create assignments", () => {
     await element(by.id("skills-1")).tap();
     await expect(element(by.id("publishButton"))).toBeVisible();
     await element(by.id("publishButton")).tap();
-    await expect(element(by.id("successfullyCreatedMessage"))).toBeVisible();
+    await element(by.id("createAssignmentButton")).tap();
+    // await expect(element(by.id("successfullyCreatedMessage"))).toBeVisible();
   });
   it("unsuccessfully with missing fields", async () => {
-    await expect(element(by.id("createAssignmentButton"))).toBeVisible();
     await element(by.id("createAssignmentButton")).tap();
     await expect(element(by.id("titleAssignment"))).toBeVisible();
     await element(by.id("skills-1")).tap();

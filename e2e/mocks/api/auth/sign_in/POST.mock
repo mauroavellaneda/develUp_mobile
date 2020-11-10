@@ -1,0 +1,21 @@
+HTTP/1.1 200 OK
+Content-Type: application/json; charset=utf-8
+
+{
+  "success": true,
+  "data": {
+    "id": 1,
+    "provider": "email",
+    "uid": "client@mail.com",
+    "allow_password_change": false,
+    "email": "client@mail.com",
+    "company_name": "asfads",
+    "company_url": "algos",
+    "role": "client",
+    "name": null,
+    "skills": [],
+    "points": 0,
+    "level": 0,
+    "completed_projects": 0
+  }
+}
