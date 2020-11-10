@@ -12,7 +12,6 @@ import {
   Input,
   Label,
   Text,
-  Icon,
 } from "native-base";
 
 const Login = (props) => {
@@ -23,8 +22,7 @@ const Login = (props) => {
 
   const storage = AsyncStorage;
 
-  // const auth = new Auth({ host: "https://develup-2020.herokuapp.com/api" })
-  const auth = new Auth({ host: "http://localhost:3000/api" });
+  const auth = new Auth({ host: "https://develup-2020.herokuapp.com/api" });
 
   const loginHandler = async () => {
     try {
@@ -40,12 +38,8 @@ const Login = (props) => {
       });
 
       response.data.role === "client"
-        ? props.navigation.navigate("clientPage", {
-            message: `You are logged in with: ${response.data.email}!`,
-          })
-        : props.navigation.navigate("develUp", {
-            message: `You are logged in with: ${response.data.email}!`,
-          });
+        ? props.navigation.navigate("clientPage")
+        : props.navigation.navigate("develUp");
     } catch (error) {
       let errorMessage = error.response.data.errors;
       setErrorMessage(errorMessage);

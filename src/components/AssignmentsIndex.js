@@ -9,7 +9,6 @@ const AssignmentsIndex = ({ navigation }) => {
   const authenticated = useSelector((state) => state.authenticated);
   const [assignments, setAssignments] = useState([]);
   const [message, setMessage] = useState("");
-  // const role = useSelector((state) => state.currentUser.role);
 
   const getAssignmentsIndex = async () => {
     const response = await Assignments.index();
@@ -28,7 +27,7 @@ const AssignmentsIndex = ({ navigation }) => {
           testID="navigationButton"
           onPress={() => navigation.navigate("clientSignUp")}
         >
-          <Text >Publish Assignments for free!</Text>
+          <Text>Publish Assignments for free!</Text>
         </Button>
       )}
       <FlatList

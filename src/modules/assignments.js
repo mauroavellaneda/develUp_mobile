@@ -7,7 +7,6 @@ const Assignments = {
   async index() {
     try {
       const response = await axios.get("/assignments");
-      debugger
       return response.data.assignments;
     } catch (error) {
       console.log(error);
@@ -50,7 +49,6 @@ const Assignments = {
   },
 
   async apply(assignmentId, applicantId) {
-
     let headers = JSON.parse(await storage.getItem("auth-storage"));
     try {
       let response = await axios.put(

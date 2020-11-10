@@ -24,7 +24,6 @@ const HeaderButtons = (props) => {
       {currentUser.role === "develuper" && (
         <Button
           title="My Page"
-          // just for now redirecting to develUp
           onPress={() => props.navigation.navigate("develUp")}
         ></Button>
       )}
