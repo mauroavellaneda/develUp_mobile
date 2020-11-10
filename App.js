@@ -36,7 +36,7 @@ const App = () => {
         {authenticated ? (
           <>
             <Stack.Screen name="clientPage" component={ClientPage} />
-            <Stack.Screen name="develuperPage" componen={DeveluperPage} />
+            <Stack.Screen name="develuperPage" component={DeveluperPage} />
             <Stack.Screen name="assignmentForm" component={AssignmentForm} />
           </>
         ) : (

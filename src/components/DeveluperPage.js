@@ -1,13 +1,23 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { StyleSheet, Text, Dimensions } from "react-native";
+import Users from "../modules/users";
 
+const DeveluperPage = ({ route }) => {
+  const [develuperProfile, setDeveluperProfile] = useState();
 
-const DeveluperPage = () => {
+  useEffect(() => {
+    const getDeveluperProfile = async () => {
+      const response = await Users.show(route.params.userId);
+      if (response.id) {
+        setDeveluperProfile(response);
+      }
+    };
+    getDeveluperProfile();
+  }, [route]);
 
-    
   return (
     <>
-      <Text>Hello</Text>
+      <Text>{route.params.userId}</Text>
       {/* {authenticated && (
         <Card>
           <CardItem header bordered style={styles.titleCard}>
