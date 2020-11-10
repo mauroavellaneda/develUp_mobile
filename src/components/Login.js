@@ -92,7 +92,6 @@ const Login = (props) => {
         </Button>
         <Text style={styles.paddingBottom}></Text>
         <Button
-          testID="submitButton"
           full
           light
           onPress={() => props.navigation.navigate("clientSignUp")}

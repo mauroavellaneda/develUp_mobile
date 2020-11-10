@@ -28,7 +28,7 @@ const AssignmentsIndex = ({ navigation }) => {
           testID="navigationButton"
           onPress={() => navigation.navigate("clientSignUp")}
         >
-          <Text>Publish Assignments for free!</Text>
+          <Text >Publish Assignments for free!</Text>
         </Button>
       )}
       <FlatList

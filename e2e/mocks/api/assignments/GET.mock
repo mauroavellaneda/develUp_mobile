@@ -7,7 +7,7 @@ Content-Type: application/json; charset=utf-8
         "id": 100,
         "title": "Build a Web page",
         "points": 320,
-        "skills": ["Ruby", "Javascript"],
+        "skills": ["Ruby", "JavaScript"],
         "budget": 500
       },
       {
@@ -140,4 +140,4 @@ Content-Type: application/json; charset=utf-8
         "budget": 300
       }
     ]
-  }
+  } 

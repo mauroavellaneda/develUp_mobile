@@ -29,7 +29,6 @@ const ClientPage = (props) => {
       )}
       <Item>
         <Button
-          testID="createAssignmentButton"
           onPress={() => props.navigation.navigate("develUp")}
           style={styles.createButton}
           light

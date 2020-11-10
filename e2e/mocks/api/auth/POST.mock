@@ -1,8 +1,8 @@
 HTTP/1.1 200 OK
-Content-Type: text/xml; charset=utf-8
+Content-Type: application/json; charset=utf-8
 
-
-{
+  {
+  "data": {
     "status": "success",
     "data": {
       "id": 7,
@@ -21,4 +21,118 @@ Content-Type: text/xml; charset=utf-8
       "level": 0,
       "completed_projects": 0
     }
+  },
+  "status": 200,
+  "headers": {
+    "x-permitted-cross-domain-policies": "none",
+    "x-xss-protection": "1; mode=block",
+    "etag": "W/\"ccafea53473bc60831a9951b15a15111\"",
+    "uid": "client6789@mail.com",
+    "transfer-encoding": "Identity",
+    "token-type": "Bearer",
+    "content-type": "application/json; charset=utf-8",
+    "x-frame-options": "SAMEORIGIN",
+    "x-request-id": "433cf547-a5b9-4a17-8bd2-44d3cdca7514",
+    "vary": "Origin",
+    "cache-control": "max-age=0, private, must-revalidate",
+    "referrer-policy": "strict-origin-when-cross-origin",
+    "access-token": "BUdgbd3sbAi3M0p48dzQNA",
+    "expiry": "1606168567",
+    "x-content-type-options": "nosniff",
+    "client": "v5gCsKoGJexAL4U-tZYPhw",
+    "x-runtime": "0.377626",
+    "x-download-options": "noopen"
+  },
+  "config": {
+    "url": "http://localhost:3000/api/auth",
+    "method": "post",
+    "data": "{\"email\":\"client6789@mail.com\",\"password\":\"asdasd\",\"password_confirmation\":\"asdasd\",\"company_name\":\"Asd\",\"company_url\":\"Asdas\",\"role\":\"client\"}",
+    "headers": {
+      "Accept": "application/json, text/plain, */*",
+      "Content-Type": "application/json;charset=utf-8"
+    },
+    "params": {},
+    "baseURL": "http://localhost:3000/api",
+    "transformRequest": [
+      null
+    ],
+    "transformResponse": [
+      null
+    ],
+    "timeout": 0,
+    "xsrfCookieName": "XSRF-TOKEN",
+    "xsrfHeaderName": "X-XSRF-TOKEN",
+    "maxContentLength": -1,
+    "maxBodyLength": -1
+  },
+  "request": {
+    "UNSENT": 0,
+    "OPENED": 1,
+    "HEADERS_RECEIVED": 2,
+    "LOADING": 3,
+    "DONE": 4,
+    "readyState": 4,
+    "status": 200,
+    "timeout": 0,
+    "withCredentials": true,
+    "upload": {},
+    "_aborted": false,
+    "_hasError": false,
+    "_method": "POST",
+    "_perfKey": "network_XMLHttpRequest_http://localhost:3000/api/auth",
+    "_response": "{\"status\":\"success\",\"data\":{\"id\":7,\"provider\":\"email\",\"uid\":\"client6789@mail.com\",\"allow_password_change\":false,\"email\":\"client6789@mail.com\",\"created_at\":\"2020-11-09T21:56:07.495Z\",\"updated_at\":\"2020-11-09T21:56:07.577Z\",\"company_name\":\"Asd\",\"company_url\":\"Asdas\",\"role\":\"client\",\"name\":null,\"skills\":[],\"points\":0,\"level\":0,\"completed_projects\":0}}",
+    "_url": "http://localhost:3000/api/auth",
+    "_timedOut": false,
+    "_trackingName": "unknown",
+    "_incrementalEvents": false,
+    "responseHeaders": {
+      "X-Permitted-Cross-Domain-Policies": "none",
+      "X-XSS-Protection": "1; mode=block",
+      "Etag": "W/\"ccafea53473bc60831a9951b15a15111\"",
+      "uid": "client6789@mail.com",
+      "Transfer-Encoding": "Identity",
+      "token-type": "Bearer",
+      "Content-Type": "application/json; charset=utf-8",
+      "X-Frame-Options": "SAMEORIGIN",
+      "X-Request-Id": "433cf547-a5b9-4a17-8bd2-44d3cdca7514",
+      "Vary": "Origin",
+      "Cache-Control": "max-age=0, private, must-revalidate",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+      "access-token": "BUdgbd3sbAi3M0p48dzQNA",
+      "expiry": "1606168567",
+      "X-Content-Type-Options": "nosniff",
+      "client": "v5gCsKoGJexAL4U-tZYPhw",
+      "X-Runtime": "0.377626",
+      "X-Download-Options": "noopen"
+    },
+    "_requestId": null,
+    "_headers": {
+      "accept": "application/json, text/plain, */*",
+      "content-type": "application/json;charset=utf-8"
+    },
+    "_responseType": "",
+    "_sent": true,
+    "_lowerCaseResponseHeaders": {
+      "x-permitted-cross-domain-policies": "none",
+      "x-xss-protection": "1; mode=block",
+      "etag": "W/\"ccafea53473bc60831a9951b15a15111\"",
+      "uid": "client6789@mail.com",
+      "transfer-encoding": "Identity",
+      "token-type": "Bearer",
+      "content-type": "application/json; charset=utf-8",
+      "x-frame-options": "SAMEORIGIN",
+      "x-request-id": "433cf547-a5b9-4a17-8bd2-44d3cdca7514",
+      "vary": "Origin",
+      "cache-control": "max-age=0, private, must-revalidate",
+      "referrer-policy": "strict-origin-when-cross-origin",
+      "access-token": "BUdgbd3sbAi3M0p48dzQNA",
+      "expiry": "1606168567",
+      "x-content-type-options": "nosniff",
+      "client": "v5gCsKoGJexAL4U-tZYPhw",
+      "x-runtime": "0.377626",
+      "x-download-options": "noopen"
+    },
+    "_subscriptions": [],
+    "responseURL": "http://localhost:3000/api/auth"
   }
+}
