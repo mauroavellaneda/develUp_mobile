@@ -9,7 +9,7 @@ describe("Client can sign up", () => {
     await expect(element(by.id("navigationButton"))).toBeVisible();
     await element(by.id("navigationButton")).tap();
     await element(by.id("emailLabel")).tap();
-    await element(by.id("emailInput")).typeText(`user${randomize}@gmail.com`);
+    await element(by.id("emailInput")).typeText("client6789@mail.com");
     await element(by.id("passwordLabel")).tap();
     await element(by.id("passwordInput")).typeText("password");
     await element(by.id("passwordConfirmationLabel")).tap();
@@ -28,7 +28,7 @@ describe("Client can sign up", () => {
     await expect(element(by.id("navigationButton"))).toBeVisible();
     await element(by.id("navigationButton")).tap();
     await element(by.id("emailLabel")).tap();
-    await element(by.id("emailInput")).typeText(`user${randomize}@gmail.com`);
+    await element(by.id("emailInput")).typeText("client6789@mail.com");
     await element(by.id("passwordLabel")).tap();
     await element(by.id("passwordInput")).typeText("password");
     await element(by.id("passwordConfirmationLabel")).tap();
