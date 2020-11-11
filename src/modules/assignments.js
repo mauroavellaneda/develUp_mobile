@@ -13,6 +13,24 @@ const Assignments = {
     }
   },
 
+  async clientIndex(clientID) {
+    let headers;
+    try {
+      const response = await axios.get(
+        `/assignments/`,
+        {
+          client_id: clientID,
+        },
+        {
+          headers: headers,
+        }
+      );
+      return response.data.assignments;
+    } catch (error) {
+      return error.response.data.errors;
+    }
+  },
+
   async show(assignmentId, authenticated) {
     let headers;
     {
