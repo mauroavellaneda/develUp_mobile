@@ -30,24 +30,23 @@ const DeveluperPage = ({ route }) => {
           </Left>
         </CardItem>
         <CardItem footer bordered style={styles.container}>
+          <Icon name="paper" style={styles.points} />
           <Left testID="points">
-            <Text note style={styles.container2}>
+            <Text note style={styles.titleProjects}>
               Level:
             </Text>
             <Badge primary>
               <Text>{develuperProfile.level}</Text>
             </Badge>
           </Left>
-          <Right>
-            <Body>
-              <Text testID="skills" note style={styles.cardSkills}>
-                Points:
-              </Text>
-              <Badge primary>
-                <Text>{develuperProfile.points}</Text>
-              </Badge>
-            </Body>
-          </Right>
+          <Left>
+            <Text testID="skills" note style={styles.titleProjects}>
+              Points:
+            </Text>
+            <Badge primary>
+              <Text>{develuperProfile.points}</Text>
+            </Badge>
+          </Left>
         </CardItem>
         <CardItem header bordered style={styles.titleCardSkills}>
           <Left>
@@ -113,7 +112,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#4A6572",
   },
   titleProjects: {
-    fontSize: 20,
+    fontSize: 22,
   },
   mailAdress: {
     height: 60,
