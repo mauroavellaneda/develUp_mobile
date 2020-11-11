@@ -9,41 +9,27 @@ describe("Client can create assignments", () => {
     await element(by.id("passwordLabel")).tap();
     await element(by.id("passwordInput")).typeText("password");
     await element(by.id("loginContainer")).tap();
-    await element(by.id("submitButton")).tap().withTimeout(1000);
+    await element(by.id("submitButton")).tap();
   });
 
   it("successfully ", async () => {
-
-    // ALL THIS IS JUST TRYING TO TAP ON develuperMyPageButton
     await expect(element(by.id("assignment-45"))).toExist();
-    element(by.id("assignment-45")).tap().withTimeout(1000);;
+    element(by.id("assignment-45")).tap();
+    await expect(element(by.id("applyButton"))).toBeVisible();
     await element(by.id("applyButton")).tap();
-    await element(by.id("cardContainer")).tap();
-
-
-
-    // await expect(element(by.id("develuperMyPageButton"))).toBeVisible();
-    await expect(element(by.id("develuperMyPageButton")))
-      .toBeVisible()
-      .withTimeout(1000);
-    await element(by.id("develuperMyPageButton")).tap().withTimeout(1000);
-
-
-    await element(by.id("develuperMyPageButton")).tap().withTimeout(1000);
-    // await element(by.id("develuperMyPageButton")).tap();
-
-    // await expect(element(by.id("develuperName"))).toBeVisible();
-
-    // element(by.label("develuperName"));
-    // element(by.label("Completed Projects:"));
-    // element(by.label("Ongoing Projects:"));
-    // element(by.label("Level:"));
-    // element(
-    //   by.label(
-    //     "I need to design a cool website with some Animation graphics and video. The New company is a PPE manufacturer and distributor. We will sell direct to the public."
-    //   )
-    // );
-    // element(by.label("Skills: Ruby JavaScript"));
-    // element(by.label("Points: 320"));
+    await expect(element(by.id("develuperMyPageButton"))).toExist();
+    await element(by.id("develuperMyPageButton")).tap();
+    await expect(element(by.id("develuperName"))).toBeVisible();
+    element(by.label("develuperName"));
+    element(by.label("Completed Projects:"));
+    element(by.label("Ongoing Projects:"));
+    element(by.label("Level:"));
+    element(
+      by.label(
+        "I need to design a cool website with some Animation graphics and video. The New company is a PPE manufacturer and distributor. We will sell direct to the public."
+      )
+    );
+    element(by.label("Skills: Ruby JavaScript"));
+    element(by.label("Points: 320"));
   });
 });

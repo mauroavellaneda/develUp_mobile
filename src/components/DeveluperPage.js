@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet, Text, Dimensions } from "react-native";
+import { StyleSheet, Text } from "react-native";
 import Users from "../modules/users";
-import { Card, CardItem, Icon, Left, Body, Badge, Right } from "native-base";
+import { Card, CardItem, Icon, Left, Body, Badge } from "native-base";
 
 const DeveluperPage = ({ route }) => {
   const [develuperProfile, setDeveluperProfile] = useState([]);
