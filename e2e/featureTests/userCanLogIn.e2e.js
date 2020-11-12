@@ -4,7 +4,7 @@ describe("Client and develuper can log in", () => {
     await reloadApp();
   });
 
-  xit("successfully client can login", async () => {
+  it("successfully client can login", async () => {
     await expect(element(by.id("loginButton"))).toBeVisible();
     await element(by.id("loginButton")).tap();
     await element(by.id("emailLabel")).tap();
@@ -36,7 +36,7 @@ describe("Client and develuper can log in", () => {
       )
     );
     element(by.label("Skills: Ruby JavaScript"));
-    element(by.label("Points: 320")); 
+    element(by.label("Points: 320"));
   });
 
   xit("unsuccessfully with wrong password or existing email", async () => {

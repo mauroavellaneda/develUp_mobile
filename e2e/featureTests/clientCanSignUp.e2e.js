@@ -22,7 +22,7 @@ describe("Client can sign up", () => {
     await element(by.id("submitButton")).tap();
     await element(by.id("createAssignmentButton")).tap();
   });
-  xit("unsuccessfully with wrong password and existing email", async () => {
+  it("unsuccessfully with wrong password and existing email", async () => {
     await expect(element(by.id("navigationButton"))).toBeVisible();
     await element(by.id("navigationButton")).tap();
     await element(by.id("emailLabel")).tap();

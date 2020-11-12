@@ -30,7 +30,7 @@ describe("Client can create assignments", () => {
     await expect(element(by.id("successfullyCreatedMessage"))).toBeVisible();
   });
 
-  xit("unsuccessfully with missing fields", async () => {
+  it("unsuccessfully with missing fields", async () => {
     await element(by.id("createAssignmentButton")).tap();
     await expect(element(by.id("titleAssignment"))).toBeVisible();
     await element(by.id("skills-1")).tap();
