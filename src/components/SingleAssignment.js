@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { StyleSheet, Dimensions } from "react-native";
+import { StyleSheet, Dimensions, FlatList } from "react-native";
 import {
   Card,
   CardItem,
@@ -100,6 +100,29 @@ const SingleAssignment = ({ route, navigation }) => {
             </Body>
           </CardItem>
         </Card>
+      )}
+      {currentUser.role === "client" && (
+        <FlatList
+          data={assignment.applicants}
+          keyExtractor={(applicant) => applicant.id.toString()}
+          renderItem={({ item }) => {
+            return (
+              <Button
+                info
+                testID="successfullyAppliedMessage"
+                block
+                onPress={() => {
+                  navigation.navigate("develuperPage", {
+                    userId: item.id,
+                    assignmentTitle: assignment.title,
+                  });
+                }}
+              >
+                <Text>{item.email}</Text>
+              </Button>
+            );
+          }}
+        />
       )}
       {currentUser.role === "develuper" && !applied && (
         <Button testID="applyButton" block onPress={() => applyHandler()}>

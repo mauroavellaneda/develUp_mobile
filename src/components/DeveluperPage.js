@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { StyleSheet, Text } from "react-native";
 import Users from "../modules/users";
-import { Card, CardItem, Icon, Left, Body, Badge } from "native-base";
+import { Card, CardItem, Icon, Left, Body, Badge, Button } from "native-base";
+import { useSelector } from "react-redux";
 
 const DeveluperPage = ({ route }) => {
   const [develuperProfile, setDeveluperProfile] = useState([]);
+  const currentUser = useSelector((state) => state.currentUser);
 
   useEffect(() => {
     const getDeveluperProfile = async () => {
@@ -77,6 +79,17 @@ const DeveluperPage = ({ route }) => {
           </Text>
         </CardItem>
       </Card>
+      {currentUser.role === "client" && (
+        <Button
+          testID="selectDeveluperButton"
+          block
+          onPress={() => selectDeveluperHandler()}
+        >
+          <Text>
+            Select {develuperProfile.name} to {route.params.assignmentTitle}
+          </Text>
+        </Button>
+      )}
     </>
   );
 };
