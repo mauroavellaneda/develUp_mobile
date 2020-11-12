@@ -9,6 +9,7 @@ import AssignmentForm from "./src/components/AssignmentForm";
 import Login from "./src/components/Login";
 import { useSelector } from "react-redux";
 import HeaderButtons from "./src/components/HeaderButtons";
+import DeveluperPage from "./src/components/DeveluperPage";
 
 const Stack = createStackNavigator();
 
@@ -35,6 +36,7 @@ const App = () => {
         {authenticated ? (
           <>
             <Stack.Screen name="clientPage" component={ClientPage} />
+            <Stack.Screen name="develuperPage" component={DeveluperPage} />
             <Stack.Screen name="assignmentForm" component={AssignmentForm} />
           </>
         ) : (

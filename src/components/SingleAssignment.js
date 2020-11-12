@@ -63,7 +63,7 @@ const SingleAssignment = ({ route, navigation }) => {
   return (
     <>
       {authenticated && (
-        <Card>
+        <Card testID="cardContainer">
           <CardItem header bordered style={styles.titleCard}>
             <Left>
               <Icon name="laptop" />

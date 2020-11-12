@@ -37,7 +37,6 @@ const Login = (props) => {
           currentUser: response.data,
         },
       });
-
       response.data.role === "client"
         ? props.navigation.navigate("clientPage")
         : props.navigation.navigate("develUp");
