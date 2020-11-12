@@ -84,5 +84,25 @@ const Assignments = {
       return errorMessage;
     }
   },
+
+  async selectDeveluper(assignmentId, selectedId) {
+    let headers = JSON.parse(await storage.getItem("auth-storage"));
+    try {
+      let response = await axios.put(
+        `/assignments/${assignmentId}`,
+        {
+          selected: selectedId,
+          status: "ongoing",
+        },
+        {
+          headers: headers,
+        }
+      );
+      return response.data;
+    } catch (error) {
+      let errorMessage = error.response.data.message;
+      return errorMessage;
+    }
+  },
 };
 export default Assignments;

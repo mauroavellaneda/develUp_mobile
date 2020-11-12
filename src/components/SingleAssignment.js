@@ -115,6 +115,7 @@ const SingleAssignment = ({ route, navigation }) => {
                   navigation.navigate("develuperPage", {
                     userId: item.id,
                     assignmentTitle: assignment.title,
+                    assignmentId: assignment.id,
                   });
                 }}
               >

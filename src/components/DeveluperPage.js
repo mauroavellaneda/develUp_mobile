@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet, Text } from "react-native";
+import { StyleSheet, Text, Dimensions } from "react-native";
 import Users from "../modules/users";
 import { Card, CardItem, Icon, Left, Body, Badge, Button } from "native-base";
 import { useSelector } from "react-redux";
@@ -7,6 +7,8 @@ import { useSelector } from "react-redux";
 const DeveluperPage = ({ route }) => {
   const [develuperProfile, setDeveluperProfile] = useState([]);
   const currentUser = useSelector((state) => state.currentUser);
+  const [message, setMessage] = useState("");
+  const [selected, setSelected] = useState(false);
 
   useEffect(() => {
     const getDeveluperProfile = async () => {
@@ -17,6 +19,18 @@ const DeveluperPage = ({ route }) => {
     };
     getDeveluperProfile();
   }, [route]);
+
+  const selectDeveluperHandler = async () => {
+    let response = await Assignments.selectDeveluper(
+      route.params.assignmentId,
+      route.params.userId
+    );
+    if (response.message) {
+      setSelected(true);
+    } else {
+      setMessage(response);
+    }
+  };
 
   return (
     <>
@@ -79,7 +93,7 @@ const DeveluperPage = ({ route }) => {
           </Text>
         </CardItem>
       </Card>
-      {currentUser.role === "client" && (
+      {currentUser.role === "client" && !selected && (
         <Button
           testID="selectDeveluperButton"
           block
@@ -90,6 +104,16 @@ const DeveluperPage = ({ route }) => {
           </Text>
         </Button>
       )}
+      {/* {message && (
+          <Button
+            style={styles.fullWidth}
+            full
+            danger
+            onPress={() => navigation.navigate("clientPage")}
+          >
+            <Text> {message} </Text>
+          </Button>
+        )} */}
     </>
   );
 };
@@ -134,5 +158,8 @@ const styles = StyleSheet.create({
   projects: {
     fontSize: 20,
     margin: 4,
+  },
+  fullWidth: {
+    width: Dimensions.get("window").width,
   },
 });
