@@ -33,8 +33,8 @@ const App = () => {
         })}
       >
         
-        <Stack.Screen name="subscription" component={DeveluperSubscription} />
         <Stack.Screen name="develUp" component={AssignmentsIndex} />
+        <Stack.Screen name="develuperSubscription" component={DeveluperSubscription} />
         <Stack.Screen name="singleAssignment" component={SingleAssignment} />
         {authenticated ? (
           <>

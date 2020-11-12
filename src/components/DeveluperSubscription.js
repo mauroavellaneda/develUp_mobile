@@ -16,7 +16,6 @@ const DeveluperSubscription = () => {
     );}
 
   function onMessage(data) {
-debugger
     alert(data.nativeEvent.data);
     console.log(data.nativeEvent.data);
     // props.navigation.navigate("develUp");

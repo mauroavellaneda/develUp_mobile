@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { StyleSheet, FlatList } from "react-native";
 import AssignmentCard from "./AssignmentCard";
 import Assignments from "../modules/assignments";
-import { Button, Container, Text } from "native-base";
+import { Button, Container, Text, View} from "native-base";
 import { useSelector } from "react-redux";
 
 const AssignmentsIndex = ({ navigation }) => {
@@ -22,13 +22,23 @@ const AssignmentsIndex = ({ navigation }) => {
     <Container style={styles.container}>
       <Text>{message && <Text>{message}</Text>}</Text>
       {!authenticated && (
-        <Button
+<View>
+<Button
+          full
+          testID="navigationButton"
+          onPress={() => navigation.navigate("develuperSubscription")}
+        >
+          <Text>I want to become a devulUper!</Text>
+        </Button>
+<Button
           full
           testID="navigationButton"
           onPress={() => navigation.navigate("clientSignUp")}
         >
           <Text>Publish Assignments for free!</Text>
         </Button>
+</View>
+
       )}
       <FlatList
         testID="scroll"
