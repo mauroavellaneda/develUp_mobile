@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { StyleSheet } from "react-native";
+import { StyleSheet, Dimensions } from "react-native";
 import {
   Card,
   CardItem,
@@ -8,15 +8,17 @@ import {
   Left,
   Body,
   Badge,
-  Item,
+  Button,
 } from "native-base";
 import Assignments from "../modules/assignments";
 import { useSelector } from "react-redux";
 
-const SingleAssignment = ({ route }) => {
+const SingleAssignment = ({ route, navigation }) => {
   const [assignment, setAssignment] = useState({});
   const authenticated = useSelector((state) => state.authenticated);
   const [message, setMessage] = useState("");
+  const currentUser = useSelector((state) => state.currentUser);
+  const [applied, setApplied] = useState(false);
 
   useEffect(() => {
     const getSingleAssignment = async () => {
@@ -33,50 +35,97 @@ const SingleAssignment = ({ route }) => {
     getSingleAssignment();
   }, [route]);
 
+  useEffect(() => {
+    const appliedChecker = async () => {
+      try {
+        if (assignment.applicants.includes(currentUser.id)) {
+          setApplied(true);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    appliedChecker();
+  }, [assignment]);
+
+  const applyHandler = async () => {
+    let response = await Assignments.apply(
+      route.params.assignmentId,
+      currentUser.id
+    );
+    if (response.message) {
+      setApplied(true);
+    } else {
+      setMessage(response);
+    }
+  };
+
   return (
     <>
-      <Card>
-        <CardItem header bordered style={styles.titleCard}>
-          <Left>
-            <Icon name="laptop" />
+      {authenticated && (
+        <Card testID="cardContainer">
+          <CardItem header bordered style={styles.titleCard}>
+            <Left>
+              <Icon name="laptop" />
+              <Body>
+                <Text testID="title" style={styles.title}>
+                  {assignment.title}
+                </Text>
+                <Text testID="budget" style={styles.budget} note>
+                  $ {assignment.budget}
+                </Text>
+              </Body>
+            </Left>
+          </CardItem>
+          <CardItem style={styles.descriptionCard}>
             <Body>
-              <Text testID="title" style={styles.title}>
-                {assignment.title}
-              </Text>
-              <Text testID="budget" style={styles.budget} note>
-                $ {assignment.budget}
+              <Text testID="description" style={styles.description}>
+                {assignment.description}
               </Text>
             </Body>
-          </Left>
-        </CardItem>
-        <CardItem style={styles.descriptionCard}>
-          <Body>
-            <Text testID="description" style={styles.description}>
-              {assignment.description}
-            </Text>
-          </Body>
-        </CardItem>
-        <CardItem footer bordered style={styles.container}>
-          <Left testID="points">
-            <Text note style={styles.container2}>
-              Points:
-            </Text>
-            <Badge primary>
-              <Text>{assignment.points}</Text>
-            </Badge>
-          </Left>
-          <Body>
-            <Text testID="skills" note style={styles.cardSkills}>
-              Skills: {assignment.skills}
-            </Text>
-          </Body>
-        </CardItem>
-      </Card>
+          </CardItem>
+          <CardItem footer bordered style={styles.container}>
+            <Left testID="points">
+              <Text note style={styles.container2}>
+                Points:
+              </Text>
+              <Badge primary>
+                <Text>{assignment.points}</Text>
+              </Badge>
+            </Left>
+            <Body>
+              <Text testID="skills" note style={styles.cardSkills}>
+                Skills: {assignment.skills}
+              </Text>
+            </Body>
+          </CardItem>
+        </Card>
+      )}
+      {currentUser.role === "develuper" && !applied && (
+        <Button testID="applyButton" block onPress={() => applyHandler()}>
+          <Text>Apply now!</Text>
+        </Button>
+      )}
+      {currentUser.role === "develuper" && applied && (
+        <Button
+          success
+          testID="successfullyAppliedMessage"
+          block
+          onPress={() => navigation.navigate("develUp")}
+        >
+          <Text>You have Applied! Keep Browsing</Text>
+        </Button>
+      )}
       <Text>
         {message && (
-          <Item style={styles.banner}>
-            <Text style={styles.bannerText}>{message}</Text>
-          </Item>
+          <Button
+            style={styles.fullWidth}
+            full
+            danger
+            onPress={() => navigation.navigate("login")}
+          >
+            <Text> {message} </Text>
+          </Button>
         )}
       </Text>
     </>
@@ -108,10 +157,7 @@ const styles = StyleSheet.create({
   descriptionCard: {
     backgroundColor: "#d0dce2",
   },
-  banner: {
-    backgroundColor: "red",
-  },
-  bannerText: {
-    fontSize: 22,
+  fullWidth: {
+    width: Dimensions.get("window").width,
   },
 });

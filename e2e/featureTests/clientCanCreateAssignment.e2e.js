@@ -9,14 +9,13 @@ describe("Client can create assignments", () => {
     await element(by.id("passwordLabel")).tap();
     await element(by.id("passwordInput")).typeText("password");
     await element(by.id("loginContainer")).tap();
-    await expect(element(by.id("submitButton"))).toBeVisible();
     await element(by.id("submitButton")).tap();
+    await expect(element(by.id("createAssignmentButton"))).toBeVisible();
+    await element(by.id("createAssignmentButton")).tap();
   });
 
   it("successfully", async () => {
-    await expect(element(by.id("createAssignmentButton"))).toBeVisible();
-    await element(by.id("createAssignmentButton")).tap();
-    await expect(element(by.id("titleAssignment"))).toBeVisible();
+    await element(by.id("titleInput")).tap();
     await element(by.id("titleInput")).tap();
     await element(by.id("titleInput")).typeText("Build a Webpage");
     await element(by.id("descriptionLabel")).tap();
@@ -30,8 +29,8 @@ describe("Client can create assignments", () => {
     await element(by.id("publishButton")).tap();
     await expect(element(by.id("successfullyCreatedMessage"))).toBeVisible();
   });
+
   it("unsuccessfully with missing fields", async () => {
-    await expect(element(by.id("createAssignmentButton"))).toBeVisible();
     await element(by.id("createAssignmentButton")).tap();
     await expect(element(by.id("titleAssignment"))).toBeVisible();
     await element(by.id("skills-1")).tap();

@@ -1,0 +1,143 @@
+HTTP/1.1 200 OK
+Content-Type: application/json; charset=utf-8
+
+{
+  "assignments": [
+      {
+        "id": 100,
+        "title": "Build a Web page",
+        "points": 320,
+        "skills": ["Ruby", "JavaScript"],
+        "budget": 500
+      },
+      {
+        "id": 45,
+        "title": "Build a Web page",
+        "skills": [
+          "Ruby",
+          "Javascript"
+        ],
+        "points": 320,
+        "budget": 500
+      },
+      {
+        "id": 2,
+        "title": "Dedicated React Developer",
+        "skills": [
+          "React",
+          "HTML-CSS"
+        ],
+        "points": 40,
+        "budget": 250
+      },
+      {
+        "id": 3,
+        "title": "Build an API",
+        "skills": [
+          "Ruby",
+          "Angular"
+        ],
+        "points": 670,
+        "budget": 1500
+      },
+      {
+        "id": 5,
+        "title": "Build a Home page",
+        "skills": [
+          "HTML-CSS",
+          "Javascript"
+        ],
+        "points": 220,
+        "budget": 300
+      },
+      {
+        "id": 6,
+        "title": "Build a responsive Web page",
+        "skills": [
+          "Ruby",
+          "Javascript"
+        ],
+        "points": 320,
+        "budget": 500
+      },
+      {
+        "id": 7,
+        "title": "Awesome React Developer",
+        "skills": [
+          "React",
+          "HTML-CSS"
+        ],
+        "points": 40,
+        "budget": 250
+      },
+      {
+        "id": 8,
+        "title": "Build an REST API",
+        "skills": [
+          "Ruby",
+          "Angular"
+        ],
+        "points": 670,
+        "budget": 1500
+      },
+      {
+        "id": 9,
+        "title": "Build a Home page 2",
+        "skills": [
+          "React Native",
+          "Javascript"
+        ],
+        "points": 1320,
+        "budget": 2500
+      },
+      {
+        "id": 4,
+        "title": "Build a Native App",
+        "skills": [
+          "React Native",
+          "Javascript"
+        ],
+        "points": 1320,
+        "budget": 2500
+      },
+      {
+        "id": 10,
+        "title": "Build a Home page 3",
+        "skills": [
+          "HTML-CSS",
+          "Javascript"
+        ],
+        "points": 220,
+        "budget": 300
+      },
+      {
+        "id": 12,
+        "title": "Dedicated React Developer 5",
+        "skills": [
+          "React",
+          "HTML-CSS"
+        ],
+        "points": 40,
+        "budget": 250
+      },
+      {
+        "id": 11,
+        "title": "Build a Web page 4",
+        "skills": [
+          "Ruby",
+          "Javascript"
+        ],
+        "points": 320,
+        "budget": 500
+      },
+      {
+        "id": 14,
+        "title": "Build a Full Stack Rails application",
+        "skills": [
+          "Ruby"
+        ],
+        "points": 220,
+        "budget": 300
+      }
+    ]
+  } 

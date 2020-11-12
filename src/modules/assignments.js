@@ -47,5 +47,24 @@ const Assignments = {
       return errorMessage;
     }
   },
+
+  async apply(assignmentId, applicantId) {
+    let headers = JSON.parse(await storage.getItem("auth-storage"));
+    try {
+      let response = await axios.put(
+        `/assignments/${assignmentId}`,
+        {
+          applicants: applicantId,
+        },
+        {
+          headers: headers,
+        }
+      );
+      return response.data;
+    } catch (error) {
+      let errorMessage = error.response.data.message;
+      return errorMessage;
+    }
+  },
 };
 export default Assignments;

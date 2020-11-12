@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { StyleSheet } from "react-native";
+import { StyleSheet, Dimensions } from "react-native";
 import Auth from "../modules/authentication";
 import { useDispatch } from "react-redux";
 import AsyncStorage from "@react-native-community/async-storage";
@@ -12,7 +12,6 @@ import {
   Input,
   Label,
   Text,
-  Icon,
 } from "native-base";
 
 const Login = (props) => {
@@ -23,7 +22,7 @@ const Login = (props) => {
 
   const storage = AsyncStorage;
 
-  const auth = new Auth({ host: "https://develup-2020.herokuapp.com/api" })
+  const auth = new Auth({ host: "https://develup-2020.herokuapp.com/api" });
 
   const loginHandler = async () => {
     try {
@@ -37,14 +36,9 @@ const Login = (props) => {
           currentUser: response.data,
         },
       });
-      
       response.data.role === "client"
-        ? props.navigation.navigate("clientPage", {
-            message: `You are logged in with: ${response.data.email}!`,
-          })
-        : props.navigation.navigate("develUp", {
-            message: `You are logged in with: ${response.data.email}!`,
-          });
+        ? props.navigation.navigate("clientPage")
+        : props.navigation.navigate("develUp");
     } catch (error) {
       let errorMessage = error.response.data.errors;
       setErrorMessage(errorMessage);
@@ -56,15 +50,19 @@ const Login = (props) => {
       <Content testID="loginContainer">
         <Text>
           {errorMessage && (
-            <Item style={styles.errorItem}>
-              <Icon name="warning" style={styles.errorIcon} />
-              <Text testID="errorMessage" style={styles.errorMessage}>
-                {errorMessage}
-              </Text>
-            </Item>
+            <Button
+              testID="errorMessage"
+              style={styles.fullWidth}
+              full
+              danger
+              onPress={() => navigation.navigate("login")}
+            >
+              <Text> {errorMessage} </Text>
+            </Button>
           )}
         </Text>
-        <Form>
+
+        <Form style={styles.paddingBottom}>
           <Item floatingLabel>
             <Label testID="emailLabel">Email</Label>
             <Input
@@ -81,8 +79,17 @@ const Login = (props) => {
             />
           </Item>
         </Form>
-        <Button testID="submitButton" block onPress={() => loginHandler()}>
-          <Text>Submit</Text>
+
+        <Button testID="submitButton" full onPress={() => loginHandler()}>
+          <Text>Log in</Text>
+        </Button>
+        <Text style={styles.paddingBottom}></Text>
+        <Button
+          full
+          light
+          onPress={() => props.navigation.navigate("clientSignUp")}
+        >
+          <Text>I want to register as a client</Text>
         </Button>
       </Content>
     </Container>
@@ -92,19 +99,13 @@ const Login = (props) => {
 export default Login;
 
 const styles = StyleSheet.create({
-  errorItem: {
-    height: 35,
-    backgroundColor: "red",
-    marginLeft: 30,
+  fullWidth: {
+    width: Dimensions.get("window").width,
   },
-  errorMessage: {
-    marginLeft: 25,
-    fontSize: 12,
-    marginRight: 10,
+  paddingBottom: {
+    paddingBottom: 20,
   },
-  errorIcon: {
-    fontSize: 20,
-    marginLeft: 10,
-    paddingLeft: 10,
+  paddingTop: {
+    paddingTop: 60,
   },
 });

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { CheckBox } from "native-base";
 import Assignments from "../modules/assignments";
 import { StyleSheet, Text, View } from "react-native";
+import { TouchableOpacity } from "react-native-gesture-handler";
 import {
   Container,
   Button,
@@ -14,8 +14,9 @@ import {
   ListItem,
   Icon,
   Badge,
+  CheckBox
 } from "native-base";
-import { TouchableOpacity } from "react-native-gesture-handler";
+
 
 const AssignmentForm = (props) => {
   const [title, setTitle] = useState("");
@@ -99,7 +100,6 @@ const AssignmentForm = (props) => {
       skills: skillSelection,
       points: assignmentPoints,
     });
-
     if (response === "successfully saved") {
       props.navigation.navigate("clientPage", {
         assignmentCreateMessage: `Assignment successfully created`,

@@ -5,7 +5,7 @@ import axios from "axios";
 import { Provider } from "react-redux";
 import configureStore from "./src/state/store/configureStore";
 
-axios.defaults.baseURL = "https://develup-2020.herokuapp.com/api";
+axios.defaults.baseURL = "https://8f6744efd0ad.ngrok.io/api";
 
 const store = configureStore();
 

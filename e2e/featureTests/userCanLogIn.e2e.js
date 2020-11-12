@@ -12,12 +12,11 @@ describe("Client and develuper can log in", () => {
     await element(by.id("passwordLabel")).tap();
     await element(by.id("passwordInput")).typeText("password");
     await element(by.id("loginContainer")).tap();
-    await expect(element(by.id("submitButton"))).toBeVisible();
     await element(by.id("submitButton")).tap();
-    await expect(element(by.id("welcomeMessage"))).toBeVisible();
     await expect(element(by.id("createAssignmentButton"))).toBeVisible();
   });
-  it("successfully develuper can login", async () => {
+
+  it("Develuper can login and see single assignmnet", async () => {
     await expect(element(by.id("loginButton"))).toBeVisible();
     await element(by.id("loginButton")).tap();
     await element(by.id("emailLabel")).tap();
@@ -27,10 +26,20 @@ describe("Client and develuper can log in", () => {
     await element(by.id("loginContainer")).tap();
     await expect(element(by.id("submitButton"))).toBeVisible();
     await element(by.id("submitButton")).tap();
-    await expect(element(by.id("navigationButton"))).toBeVisible();
-    await expect(element(by.id("navigationButton"))).toHaveLabel("Profile page");
+    await expect(element(by.id("assignment-45"))).toExist();
+    element(by.id("assignment-45")).tap();
+    element(by.label("Build a Web page"));
+    element(by.label("$ 500"));
+    element(
+      by.label(
+        "I need to design a cool website with some Animation graphics and video. The New company is a PPE manufacturer and distributor. We will sell direct to the public."
+      )
+    );
+    element(by.label("Skills: Ruby JavaScript"));
+    element(by.label("Points: 320"));
   });
-  it("unsuccessfully with wrong password or existing email", async () => {
+
+  xit("unsuccessfully with wrong password or existing email", async () => {
     await expect(element(by.id("loginButton"))).toBeVisible();
     await element(by.id("loginButton")).tap();
     await element(by.id("emailLabel")).tap();
