@@ -3,11 +3,11 @@ import { StyleSheet, Text, Dimensions } from "react-native";
 import Users from "../modules/users";
 import { Card, CardItem, Icon, Left, Body, Badge, Button } from "native-base";
 import { useSelector } from "react-redux";
+import Assignments from "../modules/assignments";
 
-const DeveluperPage = ({ route }) => {
+const DeveluperPage = ({ route, navigation }) => {
   const [develuperProfile, setDeveluperProfile] = useState([]);
   const currentUser = useSelector((state) => state.currentUser);
-  const [message, setMessage] = useState("");
   const [selected, setSelected] = useState(false);
 
   useEffect(() => {
@@ -17,7 +17,13 @@ const DeveluperPage = ({ route }) => {
         setDeveluperProfile(response);
       }
     };
+    const selectedChecker = async () => {
+      if (route.params.selected) {
+        setSelected(true);
+      }
+    };
     getDeveluperProfile();
+    selectedChecker();
   }, [route]);
 
   const selectDeveluperHandler = async () => {
@@ -27,8 +33,6 @@ const DeveluperPage = ({ route }) => {
     );
     if (response.message) {
       setSelected(true);
-    } else {
-      setMessage(response);
     }
   };
 
@@ -104,16 +108,22 @@ const DeveluperPage = ({ route }) => {
           </Text>
         </Button>
       )}
-      {/* {message && (
-          <Button
-            style={styles.fullWidth}
-            full
-            danger
-            onPress={() => navigation.navigate("clientPage")}
-          >
-            <Text> {message} </Text>
-          </Button>
-        )} */}
+      {currentUser.role === "client" && selected && (
+        <Button
+          success
+          block
+          onPress={() => {
+            navigation.navigate("singleAssignment", {
+              assignmentId: route.params.assignmentId,
+            });
+          }}
+        >
+          <Text>
+            {develuperProfile.name} is currently working on "
+            {route.params.assignmentTitle}"
+          </Text>
+        </Button>
+      )}
     </>
   );
 };

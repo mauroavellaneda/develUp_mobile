@@ -19,6 +19,7 @@ const AssignmentCard = ({ navigation, assignment }) => {
             <Icon name="laptop" />
             <Body>
               <Text testID={"title-" + assignment.id}>{assignment.title}</Text>
+              <Text testID={"title-" + assignment.id}>{assignment.id}</Text>
               <Text note testID={"budget-" + assignment.id}>
                 $ {assignment.budget}
               </Text>

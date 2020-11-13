@@ -102,28 +102,57 @@ const SingleAssignment = ({ route, navigation }) => {
         </Card>
       )}
       {currentUser.role === "client" && (
-        <FlatList
-          data={assignment.applicants}
-          keyExtractor={(applicant) => applicant.id.toString()}
-          renderItem={({ item }) => {
-            return (
-              <Button
-                info
-                testID="successfullyAppliedMessage"
-                block
-                onPress={() => {
-                  navigation.navigate("develuperPage", {
-                    userId: item.id,
-                    assignmentTitle: assignment.title,
-                    assignmentId: assignment.id,
-                  });
-                }}
-              >
-                <Text>{item.email}</Text>
-              </Button>
-            );
-          }}
-        />
+        <CardItem footer bordered style={styles.container}>
+          <Left testID="points">
+            <Text note style={styles.container2}>
+              Status:
+            </Text>
+            <Badge primary>
+              <Text>{assignment.status}</Text>
+            </Badge>
+          </Left>
+        </CardItem>
+      )}
+      {currentUser.role === "client" && assignment.status === "ongoing" && (
+        <>
+          <Text>Develuper in charge:</Text>
+          <Icon
+            name="person"
+            block
+            onPress={() => {
+              navigation.navigate("develuperPage", {
+                userId: assignment.selected,
+                assignmentTitle: assignment.title,
+                assignmentId: assignment.id,
+                selected: true,
+              });
+            }}
+          />
+        </>
+      )}
+      {currentUser.role === "client" && assignment.status === "published" && (
+        <>
+          <Text>DevelUpers that would like to work in your project:</Text>
+          <FlatList
+            data={assignment.applicants}
+            keyExtractor={(applicant) => applicant.toString()}
+            renderItem={({ item }) => {
+              return (
+                <Icon
+                  name="person"
+                  block
+                  onPress={() => {
+                    navigation.navigate("develuperPage", {
+                      userId: item,
+                      assignmentTitle: assignment.title,
+                      assignmentId: assignment.id,
+                    });
+                  }}
+                />
+              );
+            }}
+          />
+        </>
       )}
       {currentUser.role === "develuper" && !applied && (
         <Button testID="applyButton" block onPress={() => applyHandler()}>

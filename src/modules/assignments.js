@@ -14,17 +14,8 @@ const Assignments = {
   },
 
   async clientIndex(clientID) {
-    let headers;
     try {
-      const response = await axios.get(
-        `/assignments/`,
-        {
-          client_id: clientID,
-        },
-        {
-          headers: headers,
-        }
-      );
+      const response = await axios.get(`/assignments/?client_id=${clientID}`);
       return response.data.assignments;
     } catch (error) {
       return error.response.data.errors;

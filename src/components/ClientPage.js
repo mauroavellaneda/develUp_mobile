@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { StyleSheet, Text, View, FlatList } from "react-native";
 import Assignments from "../modules/assignments";
-import { Button, Item, Container } from "native-base";
+import { Button, Item } from "native-base";
 import { useSelector } from "react-redux";
 import AssignmentCard from "./AssignmentCard";
 
