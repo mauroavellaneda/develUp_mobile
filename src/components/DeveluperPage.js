@@ -132,7 +132,7 @@ export default DeveluperPage;
 
 const styles = StyleSheet.create({
   firstCard: {
-    backgroundColor: "#4e8de0",
+    backgroundColor: "#6eb0d4",
     height: 250,
   },
   person: {

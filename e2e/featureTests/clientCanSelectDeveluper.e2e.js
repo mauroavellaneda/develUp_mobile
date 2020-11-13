@@ -14,9 +14,8 @@ describe("Client can select develuper", () => {
   });
 
   it("successfully", async () => {
-    await expect(element(by.id("assignment-45"))).toExist();
-    await expect(element(by.id("assignment-45"))).toBeVisible();
-    await element(by.id("assignment-45")).tap();
+    await expect(element(by.id("assignment-89"))).toExist();
+    await element(by.id("assignment-89")).tap();
     await expect(element(by.id("selectSecondApplicant"))).toBeVisible();
     await element(by.id("selectSecondApplicant")).tap();
     await expect(element(by.id("successfullySelectedMessage"))).toBeVisible();

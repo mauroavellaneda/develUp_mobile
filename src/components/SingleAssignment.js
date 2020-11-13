@@ -9,6 +9,7 @@ import {
   Body,
   Badge,
   Button,
+  Container,
 } from "native-base";
 import Assignments from "../modules/assignments";
 import { useSelector } from "react-redux";
@@ -115,10 +116,11 @@ const SingleAssignment = ({ route, navigation }) => {
       )}
       {currentUser.role === "client" && assignment.status === "ongoing" && (
         <>
-          <Text>Develuper in charge:</Text>
-          <Icon
-            name="person"
-            block
+          <Text style={styles.text}>Develuper in charge:</Text>
+          <Button
+            bordered
+            info
+            style={styles.develupersButtons}
             onPress={() => {
               navigation.navigate("develuperPage", {
                 userId: assignment.selected,
@@ -127,31 +129,43 @@ const SingleAssignment = ({ route, navigation }) => {
                 selected: true,
               });
             }}
-          />
+          >
+            <Icon info name="person" />
+            <Text info>View develuper</Text>
+          </Button>
         </>
       )}
       {currentUser.role === "client" && assignment.status === "published" && (
         <>
-          <Text>DevelUpers that would like to work in your project:</Text>
-          <FlatList
-            data={assignment.applicants}
-            keyExtractor={(applicant) => applicant.toString()}
-            renderItem={({ item }) => {
-              return (
-                <Icon
-                  name="person"
-                  block
-                  onPress={() => {
-                    navigation.navigate("develuperPage", {
-                      userId: item,
-                      assignmentTitle: assignment.title,
-                      assignmentId: assignment.id,
-                    });
-                  }}
-                />
-              );
-            }}
-          />
+          <Text style={styles.text}>
+            DevelUpers that would like to work in your project:
+          </Text>
+          <Container style={styles.develupersContainer}>
+            <FlatList
+              numColumns={2}
+              data={assignment.applicants}
+              keyExtractor={(applicant) => applicant.toString()}
+              renderItem={({ item }) => {
+                return (
+                  <Button
+                    style={styles.develupersButtons}
+                    bordered
+                    info
+                    onPress={() => {
+                      navigation.navigate("develuperPage", {
+                        userId: item,
+                        assignmentTitle: assignment.title,
+                        assignmentId: assignment.id,
+                      });
+                    }}
+                  >
+                    <Icon name="person" />
+                    <Text>View develuper</Text>
+                  </Button>
+                );
+              }}
+            />
+          </Container>
         </>
       )}
       {currentUser.role === "develuper" && !applied && (
@@ -161,6 +175,7 @@ const SingleAssignment = ({ route, navigation }) => {
       )}
       {currentUser.role === "develuper" && applied && (
         <Button
+          block
           success
           testID="successfullyAppliedMessage"
           block
@@ -212,5 +227,17 @@ const styles = StyleSheet.create({
   },
   fullWidth: {
     width: Dimensions.get("window").width,
+  },
+  text: {
+    paddingTop: 5,
+    paddingBottom: 5,
+    margin: 5,
+    alignSelf: "center",
+  },
+  develupersContainer: {
+    padding: 3,
+  },
+  develupersButtons: {
+    margin: 3,
   },
 });

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { StyleSheet, Text, View, FlatList } from "react-native";
 import Assignments from "../modules/assignments";
-import { Button, Item } from "native-base";
+import { Button, Item, Icon } from "native-base";
 import { useSelector } from "react-redux";
 import AssignmentCard from "./AssignmentCard";
 
@@ -40,19 +40,22 @@ const ClientPage = (props) => {
       )}
       <Item>
         <Button
+          icon
           onPress={() => props.navigation.navigate("develUp")}
           style={styles.createButton}
           info
-
         >
-          <Text>Home Page</Text>
+          <Icon name="home" />
+          <Text></Text>
         </Button>
 
         <Button
+          icon
           testID="createAssignmentButton"
           onPress={() => props.navigation.navigate("assignmentForm")}
           style={styles.createButton}
         >
+          <Icon name="folder" />
           <Text>Create Assignment</Text>
         </Button>
       </Item>
