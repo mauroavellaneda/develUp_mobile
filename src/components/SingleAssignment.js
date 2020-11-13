@@ -61,6 +61,13 @@ const SingleAssignment = ({ route, navigation }) => {
     }
   };
 
+  const closeAssignmentHandler = async () => {
+    let response = await Assignments.closeAssignment(route.params.assignmentId);
+    if (response.message) {
+      setSelected(true);
+    }
+  };
+
   return (
     <>
       {authenticated && (
@@ -117,22 +124,33 @@ const SingleAssignment = ({ route, navigation }) => {
       {currentUser.role === "client" && assignment.status === "ongoing" && (
         <>
           <Text style={styles.text}>Develuper in charge:</Text>
-          <Button
-            bordered
-            info
-            style={styles.develupersButtons}
-            onPress={() => {
-              navigation.navigate("develuperPage", {
-                userId: assignment.selected,
-                assignmentTitle: assignment.title,
-                assignmentId: assignment.id,
-                selected: true,
-              });
-            }}
-          >
-            <Icon info name="person" />
-            <Text info>View develuper</Text>
-          </Button>
+          <Container style={styles.develupersContainer}>
+            <Button
+              bordered
+              info
+              style={styles.develupersButtons}
+              onPress={() => {
+                navigation.navigate("develuperPage", {
+                  userId: assignment.selected,
+                  assignmentTitle: assignment.title,
+                  assignmentId: assignment.id,
+                  selected: true,
+                });
+              }}
+            >
+              <Icon info name="person" />
+              <Text info>View develuper</Text>
+            </Button>
+            <Button
+              bordered
+              info
+              style={styles.develupersButtons}
+              onPress={() => {closeAssignmentHandler()}}
+            >
+              <Icon info name="person" />
+              <Text info>Close Assignment</Text>
+            </Button>
+          </Container>
         </>
       )}
       {currentUser.role === "client" && assignment.status === "published" && (

@@ -95,5 +95,24 @@ const Assignments = {
       return errorMessage;
     }
   },
+
+  async closeAssignment(assignmentId) {
+    let headers = JSON.parse(await storage.getItem("auth-storage"));
+    try {
+      let response = await axios.put(
+        `/assignments/${assignmentId}`,
+        {
+          status: "closed",
+        },
+        {
+          headers: headers,
+        }
+      ); debugger
+      return response.data;
+    } catch (error) { debugger
+      let errorMessage = error.response.data.message;
+      return errorMessage;
+    }
+  },
 };
 export default Assignments;
