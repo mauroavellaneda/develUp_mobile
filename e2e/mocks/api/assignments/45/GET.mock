@@ -4,13 +4,16 @@ Content-Type: application/json; charset=utf-8
 {
   "assignment": {
     "id": 45,
-    "title": "Build a Web page",
+    "title": "Build an awesome Web page",
     "skills": ["Ruby", "JavaScript"],
     "points": 40,
     "budget": 250,
     "description": "I need to design a cool website with some Animation graphics and video. The New company is a PPE manufacturer and distributor. We will sell direct to the public.",
     "client_id": 10,
     "timeframe": 70,
-    "applicants": [23, 34]
+    "applicants": [
+      { "id": 1, "email": "develuper@mail.com" },
+      { "id": 423, "email": "develuper1@mail.com" }
+    ]
   }
 }

@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from "react";
-import { StyleSheet, Text, View } from "react-native";
-import { Button, Item } from "native-base";
+import { StyleSheet, Text, View, FlatList } from "react-native";
+import Assignments from "../modules/assignments";
+import { Button, Item, Icon } from "native-base";
 import { useSelector } from "react-redux";
+import AssignmentCard from "./AssignmentCard";
 
 const ClientPage = (props) => {
   const [message, setMessage] = useState();
   const currentUser = useSelector((state) => state.currentUser);
+  const [assignments, setAssignments] = useState([]);
 
   useEffect(() => {
     const messageSetter = () => {
@@ -15,6 +18,14 @@ const ClientPage = (props) => {
     };
     messageSetter();
   }, [props]);
+
+  const getAssignmentsIndex = async () => {
+    const response = await Assignments.clientIndex(currentUser.id);
+    setAssignments(response);
+  };
+  useEffect(() => {
+    getAssignmentsIndex();
+  }, []);
 
   return (
     <View>
@@ -29,21 +40,34 @@ const ClientPage = (props) => {
       )}
       <Item>
         <Button
+          icon
           onPress={() => props.navigation.navigate("develUp")}
           style={styles.createButton}
-          light
+          info
         >
-          <Text>Home Page</Text>
+          <Icon name="home" />
         </Button>
 
         <Button
+          icon
           testID="createAssignmentButton"
           onPress={() => props.navigation.navigate("assignmentForm")}
           style={styles.createButton}
         >
+          <Icon name="folder" />
           <Text>Create Assignment</Text>
         </Button>
       </Item>
+      <FlatList
+        testID="scroll"
+        data={assignments}
+        keyExtractor={(assignment) => assignment.id.toString()}
+        renderItem={({ item }) => {
+          return (
+            <AssignmentCard navigation={props.navigation} assignment={item} />
+          );
+        }}
+      />
     </View>
   );
 };

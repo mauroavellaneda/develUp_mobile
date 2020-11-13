@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { StyleSheet, Dimensions } from "react-native";
+import { StyleSheet, Dimensions, FlatList } from "react-native";
 import {
   Card,
   CardItem,
@@ -9,6 +9,7 @@ import {
   Body,
   Badge,
   Button,
+  Container,
 } from "native-base";
 import Assignments from "../modules/assignments";
 import { useSelector } from "react-redux";
@@ -101,6 +102,72 @@ const SingleAssignment = ({ route, navigation }) => {
           </CardItem>
         </Card>
       )}
+      {currentUser.role === "client" && (
+        <CardItem footer bordered style={styles.container}>
+          <Left testID="points">
+            <Text note style={styles.container2}>
+              Status:
+            </Text>
+            <Badge primary>
+              <Text>{assignment.status}</Text>
+            </Badge>
+          </Left>
+        </CardItem>
+      )}
+      {currentUser.role === "client" && assignment.status === "ongoing" && (
+        <>
+          <Text style={styles.text}>Develuper in charge:</Text>
+          <Button
+            bordered
+            info
+            style={styles.develupersButtons}
+            onPress={() => {
+              navigation.navigate("develuperPage", {
+                userId: assignment.selected,
+                assignmentTitle: assignment.title,
+                assignmentId: assignment.id,
+                selected: true,
+              });
+            }}
+          >
+            <Icon info name="person" />
+            <Text info>View develuper</Text>
+          </Button>
+        </>
+      )}
+      {currentUser.role === "client" && assignment.status === "published" && (
+        <>
+          <Text style={styles.text}>
+            DevelUpers that would like to work in your project:
+          </Text>
+          <Container style={styles.develupersContainer}>
+            <FlatList
+              numColumns={2}
+              data={assignment.applicants}
+              keyExtractor={(applicant) => applicant.toString()}
+              renderItem={({ item }) => {
+                return (
+                  <Button
+                    style={styles.develupersButtons}
+                    bordered
+                    info
+                    onPress={() => {
+                      navigation.navigate("develuperPage", {
+                        userId: item,
+                        assignmentTitle: assignment.title,
+                        assignmentId: assignment.id,
+                      });
+                    }}
+                  >
+                    <Icon name="person" />
+                    <Text>View develuper</Text>
+                  </Button>
+                );
+              }}
+            />
+          </Container>
+        </>
+      )}
       {currentUser.role === "develuper" && !applied && (
         <Button testID="applyButton" block onPress={() => applyHandler()}>
           <Text>Apply now!</Text>
@@ -108,6 +175,7 @@ const SingleAssignment = ({ route, navigation }) => {
       )}
       {currentUser.role === "develuper" && applied && (
         <Button
+          block
           success
           testID="successfullyAppliedMessage"
           block
@@ -159,5 +227,17 @@ const styles = StyleSheet.create({
   },
   fullWidth: {
     width: Dimensions.get("window").width,
+  },
+  text: {
+    paddingTop: 5,
+    paddingBottom: 5,
+    margin: 5,
+    alignSelf: "center",
+  },
+  develupersContainer: {
+    padding: 3,
+  },
+  develupersButtons: {
+    margin: 3,
   },
 });
