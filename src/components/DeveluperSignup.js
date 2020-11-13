@@ -29,7 +29,7 @@ const ClientSignUp = (props) => {
   const [pointsSum, setPointsSum] = useState(0);
   const [assignmentPoints, setAssignmentPoints] = useState(0);
   const [errorMessage, setErrorMessage] = useState("");
-  const auth = new Auth({ host: "https://8f6744efd0ad.ngrok.io/api" });
+  const auth = new Auth({ host: "http://localhost:3000/api" });
 
   const storage = AsyncStorage;
 
@@ -51,20 +51,6 @@ const ClientSignUp = (props) => {
     calculatePoints();
   }, [pointsSum, timeframe]);
 
-  /* 
-  useEffect(() => {
-    const selectedSkills = [];
-    const skillsUpdater = () => {
-      skills.forEach((skill) => {
-        if (skill.isChecked) {
-          selectedSkills.push(skill.name);
-        }
-      });
-      setSkillSelection(selectedSkills);
-    };
-    skillsUpdater();
-  }, []); */
-
   const signUpHandler = async () => {
     try {
       let response = await auth.signUp({
@@ -73,7 +59,7 @@ const ClientSignUp = (props) => {
         password_confirmation: passwordConfirmation,
         name: name,
         skills: skillSelection,
-        role: "develuper",
+        role: "registered",
       });
       await storage.setItem("auth-storage", JSON.stringify(response.headers));
       dispatch({
@@ -84,7 +70,7 @@ const ClientSignUp = (props) => {
         },
       });
       props.navigation.navigate("develuperSubscription", {
-        message: `You are logged in with: ${response.data.data.name}!`,
+        id: response.data.data.id
       });
     } catch (error) {
       let errorMessage = error.response.data.errors.full_messages;

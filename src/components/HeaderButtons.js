@@ -32,6 +32,17 @@ const HeaderButtons = (props) => {
           }}
         ></Button>
       )}
+      {currentUser.role === "registered" && (
+        <Button
+          title="Subscribe"
+          testID="develuperMyPageButton"
+          onPress={() => {
+            props.navigation.navigate("develuperSubscription", {
+              userId: currentUser.id,
+            });
+          }}
+        ></Button>
+      )}
     </Text>
   );
 };

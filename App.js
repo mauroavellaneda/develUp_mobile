@@ -35,19 +35,19 @@ const App = () => {
       >
         
         <Stack.Screen name="develUp" component={AssignmentsIndex} />
-        <Stack.Screen name="develuperSignup" component={DeveluperSignup} />
-        <Stack.Screen name="develuperSubscription" component={DeveluperSubscription} />
         <Stack.Screen name="singleAssignment" component={SingleAssignment} />
         {authenticated ? (
           <>
             <Stack.Screen name="clientPage" component={ClientPage} />
             <Stack.Screen name="develuperPage" component={DeveluperPage} />
             <Stack.Screen name="assignmentForm" component={AssignmentForm} />
+            <Stack.Screen name="develuperSubscription" component={DeveluperSubscription} />
           </>
         ) : (
           <>
             <Stack.Screen name="login" component={Login} />
             <Stack.Screen name="clientSignUp" component={ClientSignUp} />
+          <Stack.Screen name="develuperSignup" component={DeveluperSignup} />
           </>
         )}
       </Stack.Navigator>

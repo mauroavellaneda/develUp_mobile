@@ -1,34 +1,30 @@
 import React, { useState } from "react";
 import { WebView, ActivityIndicator } from "react-native-webview";
+import Subscription from '../modules/subscription'
 
 const myHtmlFile = require("../assets/index.html");
 
-
-const DeveluperSubscription = () => {
-  // const [onMessage, setMessage] = useState("");
+const DeveluperSubscription = (props) => {
   const webviewRef = React.useRef(null);
   function LoadingIndicatorView() {
-    return (
-      <ActivityIndicator
-        color="#009b88"
-        size="large"
-      />
-    );}
+    return <ActivityIndicator color="#009b88" size="large" />;
+  }
 
-  function onMessage(data) {
-    alert(data.nativeEvent.data);
-    console.log(data.nativeEvent.data);
-    // props.navigation.navigate("develUp");
+  async function  onMessage(data) {
+    if(data.nativeEvent.data === "paid")
+    {
+      const response = await Subscription.approved(props.route.params.id);
+    }
+    props.navigation.navigate("develUp");
   }
   return (
     <>
-      <WebView source={myHtmlFile}
-         renderLoading={LoadingIndicatorView}
-        //  startInLoadingState={true}
-          ref={webviewRef}
-          onMessage={onMessage}
-          />
-
+      <WebView
+        source={myHtmlFile}
+        renderLoading={LoadingIndicatorView}
+        ref={webviewRef}
+        onMessage={onMessage}
+      />
     </>
   );
 };

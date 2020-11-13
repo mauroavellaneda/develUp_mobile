@@ -2,11 +2,12 @@ import React, { useState, useEffect } from "react";
 import { StyleSheet, FlatList } from "react-native";
 import AssignmentCard from "./AssignmentCard";
 import Assignments from "../modules/assignments";
-import { Button, Container, Text, View} from "native-base";
+import { Button, Container, Text, View } from "native-base";
 import { useSelector } from "react-redux";
 
 const AssignmentsIndex = ({ navigation }) => {
   const authenticated = useSelector((state) => state.authenticated);
+  const currentUser = useSelector((state) => state.currentUser);
   const [assignments, setAssignments] = useState([]);
   const [message, setMessage] = useState("");
 
@@ -22,24 +23,33 @@ const AssignmentsIndex = ({ navigation }) => {
     <Container style={styles.container}>
       <Text>{message && <Text>{message}</Text>}</Text>
       {!authenticated && (
-<View>
-<Button
-          full
-          testID="navigationButton"
-          onPress={() => navigation.navigate("develuperSignup")}
-        >
-          <Text>I want to become a devulUper!</Text>
-        </Button>
-<Button
-          full
-          testID="navigationButton"
-          onPress={() => navigation.navigate("clientSignUp")}
-        >
-          <Text>Publish Assignments for free!</Text>
-        </Button>
-</View>
-
+        <View>
+          <Button
+            full
+            testID="navigationButton"
+            onPress={() => navigation.navigate("develuperSignup")}
+          >
+            <Text>I want to become a devulUper!</Text>
+          </Button>
+          <Button
+            full
+            testID="navigationButton"
+            onPress={() => navigation.navigate("clientSignUp")}
+          >
+            <Text>Publish Assignments for free!</Text>
+          </Button>
+        </View>
       )}
+      {currentUser.role === "registered" && (
+        <Button
+          full
+          testID="navigationButton"
+          onPress={() => navigation.navigate("develuperSubscription")}
+        >
+          <Text>Subscribe to apply to assignments</Text>
+        </Button>
+      )}
+
       <FlatList
         testID="scroll"
         data={assignments}
