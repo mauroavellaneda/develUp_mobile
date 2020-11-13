@@ -46,7 +46,6 @@ const ClientPage = (props) => {
           info
         >
           <Icon name="home" />
-          <Text></Text>
         </Button>
 
         <Button
