@@ -213,7 +213,14 @@ const AssignmentForm = (props) => {
           <Text>{assignmentPoints}</Text>
         </Badge>
       </Item>
-      <Button testID="publishButton" block onPress={() => publishAssignment()}>
+      <Button
+        testID="publishButton"
+        bordered
+        info
+        block
+        onPress={() => publishAssignment()}
+      >
+        <Icon name="checkmark" />
         <Text>Publish</Text>
       </Button>
     </Container>
