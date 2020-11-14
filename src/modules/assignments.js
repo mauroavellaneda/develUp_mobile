@@ -13,6 +13,15 @@ const Assignments = {
     }
   },
 
+  async clientIndex(clientID) {
+    try {
+      const response = await axios.get(`/assignments/?client_id=${clientID}`);
+      return response.data.assignments;
+    } catch (error) {
+      return error.response.data.errors;
+    }
+  },
+
   async show(assignmentId, authenticated) {
     let headers;
     {
@@ -55,6 +64,26 @@ const Assignments = {
         `/assignments/${assignmentId}`,
         {
           applicants: applicantId,
+        },
+        {
+          headers: headers,
+        }
+      );
+      return response.data;
+    } catch (error) {
+      let errorMessage = error.response.data.message;
+      return errorMessage;
+    }
+  },
+
+  async selectDeveluper(assignmentId, selectedId) {
+    let headers = JSON.parse(await storage.getItem("auth-storage"));
+    try {
+      let response = await axios.put(
+        `/assignments/${assignmentId}`,
+        {
+          selected: selectedId,
+          status: "ongoing",
         },
         {
           headers: headers,

@@ -1,10 +1,14 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet, Text } from "react-native";
+import { StyleSheet, Text, Dimensions } from "react-native";
 import Users from "../modules/users";
-import { Card, CardItem, Icon, Left, Body, Badge } from "native-base";
+import { Card, CardItem, Icon, Left, Body, Badge, Button } from "native-base";
+import { useSelector } from "react-redux";
+import Assignments from "../modules/assignments";
 
-const DeveluperPage = ({ route }) => {
+const DeveluperPage = ({ route, navigation }) => {
   const [develuperProfile, setDeveluperProfile] = useState([]);
+  const currentUser = useSelector((state) => state.currentUser);
+  const [selected, setSelected] = useState(false);
 
   useEffect(() => {
     const getDeveluperProfile = async () => {
@@ -13,8 +17,24 @@ const DeveluperPage = ({ route }) => {
         setDeveluperProfile(response);
       }
     };
+    const selectedChecker = async () => {
+      if (route.params.selected) {
+        setSelected(true);
+      }
+    };
     getDeveluperProfile();
+    selectedChecker();
   }, [route]);
+
+  const selectDeveluperHandler = async () => {
+    let response = await Assignments.selectDeveluper(
+      route.params.assignmentId,
+      route.params.userId
+    );
+    if (response.message) {
+      setSelected(true);
+    }
+  };
 
   return (
     <>
@@ -77,6 +97,33 @@ const DeveluperPage = ({ route }) => {
           </Text>
         </CardItem>
       </Card>
+      {currentUser.role === "client" && !selected && (
+        <Button
+          testID="selectDeveluperButton"
+          block
+          onPress={() => selectDeveluperHandler()}
+        >
+          <Text>
+            Select {develuperProfile.name} to {route.params.assignmentTitle}
+          </Text>
+        </Button>
+      )}
+      {currentUser.role === "client" && selected && (
+        <Button
+          success
+          block
+          onPress={() => {
+            navigation.navigate("singleAssignment", {
+              assignmentId: route.params.assignmentId,
+            });
+          }}
+        >
+          <Text>
+            {develuperProfile.name} is currently working on "
+            {route.params.assignmentTitle}"
+          </Text>
+        </Button>
+      )}
     </>
   );
 };
@@ -85,7 +132,7 @@ export default DeveluperPage;
 
 const styles = StyleSheet.create({
   firstCard: {
-    backgroundColor: "#4e8de0",
+    backgroundColor: "#6eb0d4",
     height: 250,
   },
   person: {
@@ -121,5 +168,8 @@ const styles = StyleSheet.create({
   projects: {
     fontSize: 20,
     margin: 4,
+  },
+  fullWidth: {
+    width: Dimensions.get("window").width,
   },
 });
