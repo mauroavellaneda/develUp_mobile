@@ -11,7 +11,6 @@ const DeveluperPage = ({ route, navigation }) => {
   const [selected, setSelected] = useState(false);
   const [resolver, setResolver] = useState(false);
 
-
   useEffect(() => {
     const getDeveluperProfile = async () => {
       const response = await Users.show(route.params.userId);
@@ -104,7 +103,7 @@ const DeveluperPage = ({ route, navigation }) => {
           </Text>
         </CardItem>
       </Card>
-      
+
       {currentUser.role === "client" && !selected && (
         <Button
           bordered
@@ -121,8 +120,9 @@ const DeveluperPage = ({ route, navigation }) => {
       )}
       {currentUser.role === "client" && selected && (
         <Button
-          success
-          block
+          style={styles.develupersButtons}
+          bordered
+          info
           onPress={() => {
             navigation.navigate("singleAssignment", {
               assignmentId: route.params.assignmentId,
