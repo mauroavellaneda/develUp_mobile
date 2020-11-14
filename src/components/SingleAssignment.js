@@ -158,6 +158,16 @@ const SingleAssignment = ({ route, navigation }) => {
           </Container>
         </>
       )}
+      {currentUser.role === "client" && assignment.status === "closed" && (
+        <>
+          <Container style={styles.develupersContainer}>
+            <Button bordered info style={styles.develupersButtons}>
+              <Icon info name="checkbox" />
+              <Text info>Assignment closed</Text>
+            </Button>
+          </Container>
+        </>
+      )}
       {currentUser.role === "client" && assignment.status === "published" && (
         <>
           <Card></Card>
