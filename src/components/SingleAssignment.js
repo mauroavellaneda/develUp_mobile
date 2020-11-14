@@ -127,47 +127,43 @@ const SingleAssignment = ({ route, navigation }) => {
       )}
       {currentUser.role === "client" && assignment.status === "ongoing" && (
         <>
-          <Card>
-            <Container style={styles.develupersContainer}>
-              <Grid style={styles.grid}>
-                <Button
-                  bordered
-                  info
-                  style={styles.develupersButtons}
-                  onPress={() => {
-                    navigation.navigate("develuperPage", {
-                      userId: assignment.selected,
-                      assignmentTitle: assignment.title,
-                      assignmentId: assignment.id,
-                      selected: true,
-                    });
-                  }}
-                >
-                  <Icon info name="person" />
-                  <Text info>View develuper</Text>
-                </Button>
-                <Button
-                  bordered
-                  info
-                  style={styles.develupersButtons}
-                  onPress={() => {
-                    closeAssignmentHandler();
-                  }}
-                >
-                  <Icon info name="checkbox" />
-                  <Text info>Close Assignment</Text>
-                </Button>
-              </Grid>
-            </Container>
-          </Card>
+          <Container style={styles.develupersContainer}>
+            <Button
+              bordered
+              info
+              style={styles.develupersButtons}
+              onPress={() => {
+                navigation.navigate("develuperPage", {
+                  userId: assignment.selected,
+                  assignmentTitle: assignment.title,
+                  assignmentId: assignment.id,
+                  selected: true,
+                });
+              }}
+            >
+              <Icon info name="person" />
+              <Text info>View develuper</Text>
+            </Button>
+            <Button
+              bordered
+              info
+              style={styles.develupersButtons}
+              onPress={() => {
+                closeAssignmentHandler();
+              }}
+            >
+              <Icon info name="checkbox" />
+              <Text info>Close Assignment</Text>
+            </Button>
+          </Container>
         </>
       )}
       {currentUser.role === "client" && assignment.status === "published" && (
         <>
+          <Card></Card>
           <Text style={styles.text}>
             DevelUpers that would like to work in your project:
           </Text>
-
           <Container style={styles.develupersContainer}>
             <FlatList
               numColumns={2}
@@ -197,22 +193,16 @@ const SingleAssignment = ({ route, navigation }) => {
         </>
       )}
       {currentUser.role === "develuper" && !applied && (
-        <Button
-          testID="applyButton"
-          onPress={() => applyHandler()}
-          bordered
-          info
-          style={styles.develupersButtons}
-        >
-          <Icon name="checkmark" />
-          <Text style={styles.buttonText}>Apply now!</Text>
+        <Button testID="applyButton" block onPress={() => applyHandler()}>
+          <Text>Apply now!</Text>
         </Button>
       )}
       {currentUser.role === "develuper" && applied && (
         <Button
+          block
           success
           testID="successfullyAppliedMessage"
-          style={styles.develupersButtons}
+          block
           onPress={() => navigation.navigate("develUp")}
         >
           <Text>You have Applied! Keep Browsing</Text>
@@ -266,15 +256,11 @@ const styles = StyleSheet.create({
     margin: 5,
     alignSelf: "center",
   },
-  buttonText: {
-    color: "black",
-  },
   develupersContainer: {
     padding: 3,
   },
   develupersButtons: {
     margin: 3,
-    marginLeft: 5,
   },
   grid: {
     margin: 5,
