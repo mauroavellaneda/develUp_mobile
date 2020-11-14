@@ -121,8 +121,9 @@ const DeveluperPage = ({ route, navigation }) => {
       )}
       {/* {currentUser.role === "client" && selected && (
         <Button
-          success
-          block
+          style={styles.develupersButtons}
+          bordered
+          info
           onPress={() => {
             navigation.navigate("singleAssignment", {
               assignmentId: route.params.assignmentId,

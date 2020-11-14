@@ -226,19 +226,28 @@ const SingleAssignment = ({ route, navigation }) => {
         </>
       )}
       {currentUser.role === "develuper" && !applied && (
-        <Button testID="applyButton" block onPress={() => applyHandler()}>
-          <Text>Apply now!</Text>
+        <Button
+          testID="applyButton"
+          bordered
+          info
+          style={styles.develupersButtons}
+          onPress={() => applyHandler()}
+        >
+          <Text style={styles.buttonsText}>Apply now!</Text>
         </Button>
       )}
       {currentUser.role === "develuper" && applied && (
         <Button
-          block
-          success
+          bordered
+          info
+          style={styles.develupersButtons}
           testID="successfullyAppliedMessage"
-          block
           onPress={() => navigation.navigate("develUp")}
         >
-          <Text>You have Applied! Keep Browsing</Text>
+          <Icon info name="checkbox" />
+          <Text style={styles.buttonsText}>
+            You have Applied! Keep Browsing
+          </Text>
         </Button>
       )}
       <Text>
@@ -294,6 +303,10 @@ const styles = StyleSheet.create({
   },
   develupersButtons: {
     margin: 3,
+    marginLeft: 10,
+  },
+  buttonsText: {
+    color: "black",
   },
   grid: {
     margin: 5,
