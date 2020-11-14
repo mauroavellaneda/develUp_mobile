@@ -12,6 +12,7 @@ import {
   Input,
   Label,
   Text,
+  Right,
 } from "native-base";
 
 const Login = (props) => {
@@ -23,8 +24,7 @@ const Login = (props) => {
   const storage = AsyncStorage;
 
   // const auth = new Auth({ host: "https://develup-2020.herokuapp.com/api" });
-  const auth = new Auth({ host: "http://localhost:3000/api" });
-
+  const auth = new Auth({ host: "http://1e8400dcb803.ngrok.io/api" });
 
   const loginHandler = async () => {
     try {
@@ -82,14 +82,19 @@ const Login = (props) => {
           </Item>
         </Form>
 
-        <Button testID="submitButton" full onPress={() => loginHandler()}>
+        <Button
+          testID="submitButton"
+          onPress={() => loginHandler()}
+          style={styles.loginButton}
+        >
           <Text>Log in</Text>
         </Button>
         <Text style={styles.paddingBottom}></Text>
         <Button
-          full
-          light
+          bordered
+          info
           onPress={() => props.navigation.navigate("clientSignUp")}
+          style={styles.button}
         >
           <Text>I want to register as a client</Text>
         </Button>
@@ -109,5 +114,12 @@ const styles = StyleSheet.create({
   },
   paddingTop: {
     paddingTop: 60,
+  },
+  loginButton: {
+    marginLeft: 20,
+  },
+  button: {
+    margin: 3,
+    marginLeft: 20,
   },
 });

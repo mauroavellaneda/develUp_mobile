@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { StyleSheet, Dimensions, FlatList } from "react-native";
+import Assignments from "../modules/assignments";
+import { useSelector } from "react-redux";
+import { Col, Row, Grid } from "react-native-easy-grid";
 import {
   Card,
   CardItem,
@@ -11,8 +14,6 @@ import {
   Button,
   Container,
 } from "native-base";
-import Assignments from "../modules/assignments";
-import { useSelector } from "react-redux";
 
 const SingleAssignment = ({ route, navigation }) => {
   const [assignment, setAssignment] = useState({});
@@ -62,6 +63,7 @@ const SingleAssignment = ({ route, navigation }) => {
   };
 
   const closeAssignmentHandler = async () => {
+    debugger;
     let response = await Assignments.closeAssignment(route.params.assignmentId);
     if (response.message) {
       setSelected(true);
@@ -110,47 +112,54 @@ const SingleAssignment = ({ route, navigation }) => {
         </Card>
       )}
       {currentUser.role === "client" && (
-        <CardItem footer bordered style={styles.container}>
-          <Left testID="points">
-            <Text note style={styles.container2}>
-              Status:
-            </Text>
-            <Badge primary>
-              <Text>{assignment.status}</Text>
-            </Badge>
-          </Left>
-        </CardItem>
+        <Card>
+          <CardItem footer bordered style={styles.container}>
+            <Left testID="points">
+              <Text note style={styles.container2}>
+                Status:
+              </Text>
+              <Badge primary>
+                <Text>{assignment.status}</Text>
+              </Badge>
+            </Left>
+          </CardItem>
+        </Card>
       )}
       {currentUser.role === "client" && assignment.status === "ongoing" && (
         <>
-          <Text style={styles.text}>Develuper in charge:</Text>
-          <Container style={styles.develupersContainer}>
-            <Button
-              bordered
-              info
-              style={styles.develupersButtons}
-              onPress={() => {
-                navigation.navigate("develuperPage", {
-                  userId: assignment.selected,
-                  assignmentTitle: assignment.title,
-                  assignmentId: assignment.id,
-                  selected: true,
-                });
-              }}
-            >
-              <Icon info name="person" />
-              <Text info>View develuper</Text>
-            </Button>
-            <Button
-              bordered
-              info
-              style={styles.develupersButtons}
-              onPress={() => {closeAssignmentHandler()}}
-            >
-              <Icon info name="person" />
-              <Text info>Close Assignment</Text>
-            </Button>
-          </Container>
+          <Card>
+            <Container style={styles.develupersContainer}>
+              <Grid style={styles.grid}>
+                <Button
+                  bordered
+                  info
+                  style={styles.develupersButtons}
+                  onPress={() => {
+                    navigation.navigate("develuperPage", {
+                      userId: assignment.selected,
+                      assignmentTitle: assignment.title,
+                      assignmentId: assignment.id,
+                      selected: true,
+                    });
+                  }}
+                >
+                  <Icon info name="person" />
+                  <Text info>View develuper</Text>
+                </Button>
+                <Button
+                  bordered
+                  info
+                  style={styles.develupersButtons}
+                  onPress={() => {
+                    closeAssignmentHandler();
+                  }}
+                >
+                  <Icon info name="checkbox" />
+                  <Text info>Close Assignment</Text>
+                </Button>
+              </Grid>
+            </Container>
+          </Card>
         </>
       )}
       {currentUser.role === "client" && assignment.status === "published" && (
@@ -158,6 +167,7 @@ const SingleAssignment = ({ route, navigation }) => {
           <Text style={styles.text}>
             DevelUpers that would like to work in your project:
           </Text>
+
           <Container style={styles.develupersContainer}>
             <FlatList
               numColumns={2}
@@ -187,16 +197,22 @@ const SingleAssignment = ({ route, navigation }) => {
         </>
       )}
       {currentUser.role === "develuper" && !applied && (
-        <Button testID="applyButton" block onPress={() => applyHandler()}>
-          <Text>Apply now!</Text>
+        <Button
+          testID="applyButton"
+          onPress={() => applyHandler()}
+          bordered
+          info
+          style={styles.develupersButtons}
+        >
+          <Icon name="checkmark" />
+          <Text style={styles.buttonText}>Apply now!</Text>
         </Button>
       )}
       {currentUser.role === "develuper" && applied && (
         <Button
-          block
           success
           testID="successfullyAppliedMessage"
-          block
+          style={styles.develupersButtons}
           onPress={() => navigation.navigate("develUp")}
         >
           <Text>You have Applied! Keep Browsing</Text>
@@ -243,19 +259,24 @@ const styles = StyleSheet.create({
   descriptionCard: {
     backgroundColor: "#d0dce2",
   },
-  fullWidth: {
-    width: Dimensions.get("window").width,
-  },
+
   text: {
     paddingTop: 5,
     paddingBottom: 5,
     margin: 5,
     alignSelf: "center",
   },
+  buttonText: {
+    color: "black",
+  },
   develupersContainer: {
     padding: 3,
   },
   develupersButtons: {
     margin: 3,
+    marginLeft: 5,
+  },
+  grid: {
+    margin: 5,
   },
 });

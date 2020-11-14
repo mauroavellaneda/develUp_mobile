@@ -96,14 +96,18 @@ const ClientSignUp = (props) => {
               onChangeText={(text) => setCompanyUrl(text)}
             />
           </Item>
+          <Button
+            testID="submitButton"
+            style={styles.submitButton}
+            onPress={() => signUpHandler()}
+          >
+            <Text>Submit</Text>
+          </Button>
         </Form>
         <Text testID="errorMessageSubmit" style={styles.errorMessage}>
           {errorMessage}
         </Text>
       </Content>
-      <Button testID="submitButton" block onPress={() => signUpHandler()}>
-        <Text>Submit</Text>
-      </Button>
     </Container>
   );
 };
@@ -111,5 +115,12 @@ const ClientSignUp = (props) => {
 export default ClientSignUp;
 
 const styles = StyleSheet.create({
-  errorMessage: { color: "red", fontSize: 18 },
+  errorMessage: {
+    color: "red",
+    fontSize: 18,
+  },
+  submitButton: {
+    marginLeft: 17,
+    marginTop: 15,
+  },
 });
