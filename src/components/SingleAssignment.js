@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { StyleSheet, Dimensions, FlatList } from "react-native";
+import { StyleSheet, FlatList } from "react-native";
 import Assignments from "../modules/assignments";
 import { useSelector } from "react-redux";
 import {
@@ -48,9 +48,7 @@ const SingleAssignment = ({ route, navigation }) => {
       }
     };
     const statusChecker = async () => {
-      
-        setStatus(assignment.status);
-      
+      setStatus(assignment.status);
     };
     appliedChecker();
     statusChecker();
@@ -163,7 +161,7 @@ const SingleAssignment = ({ route, navigation }) => {
           <Container style={styles.develupersContainer}>
             <Button
               bordered
-              info
+              success
               style={styles.develupersButtons}
               onPress={() => {
                 navigation.navigate("develuperPage", {
@@ -175,7 +173,7 @@ const SingleAssignment = ({ route, navigation }) => {
               }}
             >
               <Icon info name="person" />
-              <Text info>View develuper</Text>
+              <Text info>View assigned develuper</Text>
             </Button>
             <Button
               bordered
@@ -239,12 +237,12 @@ const SingleAssignment = ({ route, navigation }) => {
       {currentUser.role === "develuper" && applied && (
         <Button
           bordered
-          info
+          success
           style={styles.develupersButtons}
           testID="successfullyAppliedMessage"
           onPress={() => navigation.navigate("develUp")}
         >
-          <Icon info name="checkbox" />
+          <Icon success name="checkbox" />
           <Text style={styles.buttonsText}>
             You have Applied! Keep Browsing
           </Text>

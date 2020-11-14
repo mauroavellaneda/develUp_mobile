@@ -119,27 +119,11 @@ const DeveluperPage = ({ route, navigation }) => {
           </Text>
         </Button>
       )}
-      {/* {currentUser.role === "client" && selected && (
+      {currentUser.role === "client" && resolver ? (
         <Button
           style={styles.develupersButtons}
           bordered
-          info
-          onPress={() => {
-            navigation.navigate("singleAssignment", {
-              assignmentId: route.params.assignmentId,
-            });
-          }}
-        >
-          <Text>
-            {develuperProfile.name} is currently working on "
-            {route.params.assignmentTitle}"
-          </Text>
-        </Button>
-      )} */}
-      {currentUser.role === "client" && resolver ? (
-        <Button
           success
-          block
           onPress={() => {
             navigation.navigate("singleAssignment", {
               assignmentId: route.params.assignmentId,
@@ -155,8 +139,9 @@ const DeveluperPage = ({ route, navigation }) => {
         currentUser.role === "client" &&
         selected && (
           <Button
+            style={styles.develupersButtons}
+            bordered
             success
-            block
             onPress={() => {
               navigation.navigate("singleAssignment", {
                 assignmentId: route.params.assignmentId,
