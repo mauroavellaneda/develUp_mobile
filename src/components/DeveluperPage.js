@@ -107,10 +107,13 @@ const DeveluperPage = ({ route, navigation }) => {
       
       {currentUser.role === "client" && !selected && (
         <Button
+          bordered
           testID="selectDeveluperButton"
-          block
+          info
+          style={styles.develupersButtons}
           onPress={() => selectDeveluperHandler()}
         >
+          <Icon name="checkmark" />
           <Text>
             Select {develuperProfile.name} to {route.params.assignmentTitle}
           </Text>
@@ -195,5 +198,9 @@ const styles = StyleSheet.create({
   },
   fullWidth: {
     width: Dimensions.get("window").width,
+  },
+  develupersButtons: {
+    margin: 5,
+    padding: 5,
   },
 });

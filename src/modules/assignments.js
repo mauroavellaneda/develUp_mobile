@@ -98,6 +98,7 @@ const Assignments = {
 
   async closeAssignment(assignmentId) {
     let headers = JSON.parse(await storage.getItem("auth-storage"));
+    
     try {
       let response = await axios.put(
         `/assignments/${assignmentId}`,
@@ -107,9 +108,9 @@ const Assignments = {
         {
           headers: headers,
         }
-      ); debugger
+      ); 
       return response.data;
-    } catch (error) { debugger
+    } catch (error) { 
       let errorMessage = error.response.data.message;
       return errorMessage;
     }

@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { StyleSheet, Dimensions, FlatList } from "react-native";
+import Assignments from "../modules/assignments";
+import { useSelector } from "react-redux";
+import { Col, Row, Grid } from "react-native-easy-grid";
 import {
   Card,
   CardItem,
@@ -11,8 +14,6 @@ import {
   Button,
   Container,
 } from "native-base";
-import Assignments from "../modules/assignments";
-import { useSelector } from "react-redux";
 
 const SingleAssignment = ({ route, navigation }) => {
   const [assignment, setAssignment] = useState({});
@@ -69,6 +70,7 @@ const SingleAssignment = ({ route, navigation }) => {
   };
 
   const closeAssignmentHandler = async () => {
+    debugger;
     let response = await Assignments.closeAssignment(route.params.assignmentId);
     if (response.message) {
       setClosed(true);
@@ -117,16 +119,18 @@ const SingleAssignment = ({ route, navigation }) => {
         </Card>
       )}
       {currentUser.role === "client" && (
-        <CardItem footer bordered style={styles.container}>
-          <Left testID="points">
-            <Text note style={styles.container2}>
-              Status:
-            </Text>
-            <Badge primary>
-              <Text>{assignment.status}</Text>
-            </Badge>
-          </Left>
-        </CardItem>
+        <Card>
+          <CardItem footer bordered style={styles.container}>
+            <Left testID="points">
+              <Text note style={styles.container2}>
+                Status:
+              </Text>
+              <Badge primary>
+                <Text>{assignment.status}</Text>
+              </Badge>
+            </Left>
+          </CardItem>
+        </Card>
       )}
 
       {currentUser.role === "client" && closed && (
@@ -157,7 +161,6 @@ const SingleAssignment = ({ route, navigation }) => {
 
       {currentUser.role === "client" && assignment.status === "ongoing" && (
         <>
-          <Text style={styles.text}>Develuper in charge:</Text>
           <Container style={styles.develupersContainer}>
             <Button
               bordered
@@ -183,15 +186,15 @@ const SingleAssignment = ({ route, navigation }) => {
                 closeAssignmentHandler();
               }}
             >
-              <Icon info name="person" />
+              <Icon info name="checkbox" />
               <Text info>Close Assignment</Text>
             </Button>
           </Container>
         </>
       )}
-
       {currentUser.role === "client" && assignment.status === "published" && (
         <>
+          <Card></Card>
           <Text style={styles.text}>
             DevelUpers that would like to work in your project:
           </Text>
@@ -280,9 +283,7 @@ const styles = StyleSheet.create({
   descriptionCard: {
     backgroundColor: "#d0dce2",
   },
-  fullWidth: {
-    width: Dimensions.get("window").width,
-  },
+
   text: {
     paddingTop: 5,
     paddingBottom: 5,
@@ -294,5 +295,8 @@ const styles = StyleSheet.create({
   },
   develupersButtons: {
     margin: 3,
+  },
+  grid: {
+    margin: 5,
   },
 });
