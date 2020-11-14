@@ -301,7 +301,6 @@ const styles = StyleSheet.create({
   },
   develupersButtons: {
     margin: 3,
-    marginLeft: 10,
   },
   buttonsText: {
     color: "black",

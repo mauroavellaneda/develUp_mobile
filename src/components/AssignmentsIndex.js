@@ -19,20 +19,21 @@ const AssignmentsIndex = ({ navigation }) => {
     getAssignmentsIndex();
   }, []);
 
-
   return (
     <Container style={styles.container}>
       <Text>{message && <Text>{message}</Text>}</Text>
       {!authenticated && (
         <View>
           <Button
+            style={styles.becomeDeveluper}
             full
             testID="navigationButton"
             onPress={() => navigation.navigate("develuperSignup")}
           >
-            <Text>I want to become a devulUper!</Text>
+            <Text>I want to become a develUper!</Text>
           </Button>
           <Button
+            style={styles.becomeDeveluper}
             full
             testID="navigationButton"
             onPress={() => navigation.navigate("clientSignUp")}
@@ -68,5 +69,8 @@ export default AssignmentsIndex;
 const styles = StyleSheet.create({
   container: {
     backgroundColor: "#344955",
+  },
+  becomeDeveluper: {
+    marginBottom: 6,
   },
 });

@@ -28,9 +28,9 @@ const Login = (props) => {
   const loginHandler = async () => {
     try {
       let response = await auth.signIn(email, password);
-      
+
       await storage.getItem("auth-storage", JSON.stringify(response.headers));
-      
+
       dispatch({
         type: "AUTHENTICATE",
         payload: {
