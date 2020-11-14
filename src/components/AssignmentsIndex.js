@@ -19,6 +19,7 @@ const AssignmentsIndex = ({ navigation }) => {
     getAssignmentsIndex();
   }, []);
 
+
   return (
     <Container style={styles.container}>
       <Text>{message && <Text>{message}</Text>}</Text>
