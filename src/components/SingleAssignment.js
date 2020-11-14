@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { StyleSheet, Dimensions, FlatList } from "react-native";
 import Assignments from "../modules/assignments";
 import { useSelector } from "react-redux";
-import { Col, Row, Grid } from "react-native-easy-grid";
 import {
   Card,
   CardItem,
@@ -21,7 +20,7 @@ const SingleAssignment = ({ route, navigation }) => {
   const [message, setMessage] = useState("");
   const currentUser = useSelector((state) => state.currentUser);
   const [applied, setApplied] = useState(false);
-  const [closed, setClosed] = useState(false);
+  const [status, setStatus] = useState("");
 
   useEffect(() => {
     const getSingleAssignment = async () => {
@@ -49,9 +48,9 @@ const SingleAssignment = ({ route, navigation }) => {
       }
     };
     const statusChecker = async () => {
-      if (assignment.status === "closed") {
-        setClosed(true);
-      }
+      
+        setStatus(assignment.status);
+      
     };
     appliedChecker();
     statusChecker();
@@ -70,10 +69,9 @@ const SingleAssignment = ({ route, navigation }) => {
   };
 
   const closeAssignmentHandler = async () => {
-    debugger;
     let response = await Assignments.closeAssignment(route.params.assignmentId);
     if (response.message) {
-      setClosed(true);
+      setStatus("closed");
     }
   };
 
@@ -126,14 +124,14 @@ const SingleAssignment = ({ route, navigation }) => {
                 Status:
               </Text>
               <Badge primary>
-                <Text>{assignment.status}</Text>
+                <Text>{status}</Text>
               </Badge>
             </Left>
           </CardItem>
         </Card>
       )}
 
-      {currentUser.role === "client" && closed && (
+      {currentUser.role === "client" && status === "closed" && (
         <>
           <Text style={styles.text}>
             This assignment has been successfully resolved by:
@@ -149,6 +147,7 @@ const SingleAssignment = ({ route, navigation }) => {
                   assignmentTitle: assignment.title,
                   assignmentId: assignment.id,
                   resolver: true,
+                  selected: true,
                 });
               }}
             >
@@ -159,7 +158,7 @@ const SingleAssignment = ({ route, navigation }) => {
         </>
       )}
 
-      {currentUser.role === "client" && assignment.status === "ongoing" && (
+      {currentUser.role === "client" && status === "ongoing" && (
         <>
           <Container style={styles.develupersContainer}>
             <Button

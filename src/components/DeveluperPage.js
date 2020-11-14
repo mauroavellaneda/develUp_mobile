@@ -11,7 +11,6 @@ const DeveluperPage = ({ route, navigation }) => {
   const [selected, setSelected] = useState(false);
   const [resolver, setResolver] = useState(false);
 
-
   useEffect(() => {
     const getDeveluperProfile = async () => {
       const response = await Users.show(route.params.userId);
@@ -31,6 +30,7 @@ const DeveluperPage = ({ route, navigation }) => {
     };
     getDeveluperProfile();
     selectedChecker();
+    resolverChecker();
   }, [route]);
 
   const selectDeveluperHandler = async () => {
@@ -104,7 +104,7 @@ const DeveluperPage = ({ route, navigation }) => {
           </Text>
         </CardItem>
       </Card>
-      
+
       {currentUser.role === "client" && !selected && (
         <Button
           bordered
@@ -119,7 +119,7 @@ const DeveluperPage = ({ route, navigation }) => {
           </Text>
         </Button>
       )}
-      {currentUser.role === "client" && selected && (
+      {/* {currentUser.role === "client" && selected && (
         <Button
           success
           block
@@ -134,8 +134,8 @@ const DeveluperPage = ({ route, navigation }) => {
             {route.params.assignmentTitle}"
           </Text>
         </Button>
-      )}
-      {currentUser.role === "client" && resolver && (
+      )} */}
+      {currentUser.role === "client" && resolver ? (
         <Button
           success
           block
@@ -150,6 +150,24 @@ const DeveluperPage = ({ route, navigation }) => {
             {route.params.assignmentTitle}"
           </Text>
         </Button>
+      ) : (
+        currentUser.role === "client" &&
+        selected && (
+          <Button
+            success
+            block
+            onPress={() => {
+              navigation.navigate("singleAssignment", {
+                assignmentId: route.params.assignmentId,
+              });
+            }}
+          >
+            <Text>
+              {develuperProfile.name} is currently working on "
+              {route.params.assignmentTitle}"
+            </Text>
+          </Button>
+        )
       )}
     </>
   );
