@@ -20,6 +20,7 @@ const SingleAssignment = ({ route, navigation }) => {
   const [message, setMessage] = useState("");
   const currentUser = useSelector((state) => state.currentUser);
   const [applied, setApplied] = useState(false);
+  const [closed, setClosed] = useState(false);
 
   useEffect(() => {
     const getSingleAssignment = async () => {
@@ -46,7 +47,13 @@ const SingleAssignment = ({ route, navigation }) => {
         console.log(error);
       }
     };
+    const statusChecker = async () => {
+      if (assignment.status === "closed") {
+        setClosed(true);
+      }
+    };
     appliedChecker();
+    statusChecker();
   }, [assignment]);
 
   const applyHandler = async () => {
@@ -64,7 +71,7 @@ const SingleAssignment = ({ route, navigation }) => {
   const closeAssignmentHandler = async () => {
     let response = await Assignments.closeAssignment(route.params.assignmentId);
     if (response.message) {
-      setSelected(true);
+      setClosed(true);
     }
   };
 
@@ -121,6 +128,33 @@ const SingleAssignment = ({ route, navigation }) => {
           </Left>
         </CardItem>
       )}
+
+      {currentUser.role === "client" && closed && (
+        <>
+          <Text style={styles.text}>
+            This assignment has been successfully resolved by:
+          </Text>
+          <Container style={styles.develupersContainer}>
+            <Button
+              bordered
+              success
+              style={styles.develupersButtons}
+              onPress={() => {
+                navigation.navigate("develuperPage", {
+                  userId: assignment.selected,
+                  assignmentTitle: assignment.title,
+                  assignmentId: assignment.id,
+                  resolver: true,
+                });
+              }}
+            >
+              <Icon info name="person" />
+              <Text info>View develUper</Text>
+            </Button>
+          </Container>
+        </>
+      )}
+
       {currentUser.role === "client" && assignment.status === "ongoing" && (
         <>
           <Text style={styles.text}>Develuper in charge:</Text>
@@ -145,7 +179,9 @@ const SingleAssignment = ({ route, navigation }) => {
               bordered
               info
               style={styles.develupersButtons}
-              onPress={() => {closeAssignmentHandler()}}
+              onPress={() => {
+                closeAssignmentHandler();
+              }}
             >
               <Icon info name="person" />
               <Text info>Close Assignment</Text>
@@ -153,6 +189,7 @@ const SingleAssignment = ({ route, navigation }) => {
           </Container>
         </>
       )}
+
       {currentUser.role === "client" && assignment.status === "published" && (
         <>
           <Text style={styles.text}>

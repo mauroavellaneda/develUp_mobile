@@ -9,6 +9,8 @@ const DeveluperPage = ({ route, navigation }) => {
   const [develuperProfile, setDeveluperProfile] = useState([]);
   const currentUser = useSelector((state) => state.currentUser);
   const [selected, setSelected] = useState(false);
+  const [resolver, setResolver] = useState(false);
+
 
   useEffect(() => {
     const getDeveluperProfile = async () => {
@@ -20,6 +22,11 @@ const DeveluperPage = ({ route, navigation }) => {
     const selectedChecker = async () => {
       if (route.params.selected) {
         setSelected(true);
+      }
+    };
+    const resolverChecker = async () => {
+      if (route.params.resolver) {
+        setResolver(true);
       }
     };
     getDeveluperProfile();
@@ -97,6 +104,7 @@ const DeveluperPage = ({ route, navigation }) => {
           </Text>
         </CardItem>
       </Card>
+      
       {currentUser.role === "client" && !selected && (
         <Button
           testID="selectDeveluperButton"
@@ -120,6 +128,22 @@ const DeveluperPage = ({ route, navigation }) => {
         >
           <Text>
             {develuperProfile.name} is currently working on "
+            {route.params.assignmentTitle}"
+          </Text>
+        </Button>
+      )}
+      {currentUser.role === "client" && resolver && (
+        <Button
+          success
+          block
+          onPress={() => {
+            navigation.navigate("singleAssignment", {
+              assignmentId: route.params.assignmentId,
+            });
+          }}
+        >
+          <Text>
+            {develuperProfile.name} has successfully resolved "
             {route.params.assignmentTitle}"
           </Text>
         </Button>
