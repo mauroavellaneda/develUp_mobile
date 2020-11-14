@@ -12,6 +12,7 @@ import {
   Input,
   Label,
   Text,
+  Right,
 } from "native-base";
 
 const Login = (props) => {
@@ -80,14 +81,19 @@ const Login = (props) => {
           </Item>
         </Form>
 
-        <Button testID="submitButton" full onPress={() => loginHandler()}>
+        <Button
+          testID="submitButton"
+          onPress={() => loginHandler()}
+          style={styles.loginButton}
+        >
           <Text>Log in</Text>
         </Button>
         <Text style={styles.paddingBottom}></Text>
         <Button
-          full
-          light
+          bordered
+          info
           onPress={() => props.navigation.navigate("clientSignUp")}
+          style={styles.button}
         >
           <Text>I want to register as a client</Text>
         </Button>
@@ -107,5 +113,12 @@ const styles = StyleSheet.create({
   },
   paddingTop: {
     paddingTop: 60,
+  },
+  loginButton: {
+    marginLeft: 20,
+  },
+  button: {
+    margin: 3,
+    marginLeft: 20,
   },
 });
